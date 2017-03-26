@@ -1,0 +1,7 @@
+SRCS = main topological topological_ordering_enumeration enum_naive graph swap_and_stack
+TARGET = enum
+
+CXXFLAGS += -std=c++11 -Wall -Wno-sign-compare -pthread -fdiagnostics-color -O3 -g -I../include
+LDFLAGS += -L../src # -lUnitTest++
+
+.DEFAULT: $(CXXProgram $(TARGET), $(SRCS))
