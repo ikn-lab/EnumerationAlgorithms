@@ -22,9 +22,7 @@ std::vector<bigint> EIMMain(Graph &g) {
   std::cout << res << std::endl;
   return ans;
 }
-
-
-bigint RecIM(Graph &g, int size, int marge) {
+bigint RecIM(Graph &g, int size, int marge) { 
   ans[size] += marge;
   int cnt = 0;
   res += marge;
@@ -42,7 +40,6 @@ bigint RecIM(Graph &g, int size, int marge) {
   g.RestoreVertex(cnt);
   //return res;
 }
-
 bigint CallOneChildren(Graph &g, int v, int size, int marge) {
   //for bfs, vertex, distance
   int vssize = vs.size();

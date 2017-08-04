@@ -13,14 +13,12 @@ void EdgeList::print(){
   }
   std::cout << std::endl;
 }
-
 void EdgeList::RemoveEdge(int id){
   st.push(id);
   elist[elist[id].prev].next = elist[id].next;
   elist[elist[id].next].prev = elist[id].prev;
   --s;
 }
-
 void EdgeList::RestoreEdge(){
 #ifdef DEBUG
   if(st.empty()){
@@ -33,7 +31,6 @@ void EdgeList::RestoreEdge(){
   st.pop();
   elist[elist[id].prev].next = elist[elist[id].next].prev = id;    
 }
-
 void EdgeList::push_back(edge e){
   ++s;
   elist.push_back(e);
@@ -42,7 +39,6 @@ void EdgeList::push_back(edge e){
     st.resize(ss);
   }
 }
-
 Graph::Graph(int n){
   g.resize(n);
   st.resize(n + 10);
@@ -51,7 +47,6 @@ Graph::Graph(int n){
     g[i].push_back(edge(-1, -1, 1e9, 0));
   }
 }
-
 void Graph::MakeVlist(){
   int n = g.size();
   deg = 0;
@@ -76,7 +71,6 @@ void Graph::MakeVlist(){
   }
   vlist.emplace_back(vertex(-1, 0, vlist.size() + 1, vlist.size() - 1));  
 }
-
 void Graph::AddEdge(int from, int to){
   int prev = g[from][1].prev;
   g[from][1].prev    = g[from].size() + 2;
@@ -88,13 +82,11 @@ void Graph::AddEdge(int from, int to){
   g[to][prev].next = g[to].size() + 2;
   g[to].push_back(edge(from, g[from].size() + 1, 1, prev));
 }
-
 inline void Graph::Detach(int id){
   int pos = id_to_pos[id];
   vlist[vlist[pos].prev].next = vlist[pos].next;
   vlist[vlist[pos].next].prev = vlist[pos].prev;
 }
-
 inline void Graph::Insert(int id){
   int pos = id_to_pos[id];
   
@@ -104,7 +96,6 @@ inline void Graph::Insert(int id){
   vlist[pos].next = vlist[ipos].next;
   vlist[vlist[ipos].next].prev = vlist[ipos].next = pos;
 }
-
 void Graph::RemoveVertex(int id){
   Detach(id);
   st.push(id);
@@ -119,7 +110,6 @@ void Graph::RemoveVertex(int id){
   }
   while(deg != 0 and vlist[vlist[deg_boundary[deg]].next].id == -1)--deg;
 }
-
 void Graph::RestoreVertex(int cnt){
   for (;cnt > 0;--cnt) {
 #ifdef DEBUG
@@ -142,7 +132,6 @@ void Graph::RestoreVertex(int cnt){
     }
   }
 }
-
 void Graph::print(){
   std::cout << "Graph:" << std::endl;
   std::cout << "--------------------" << std::endl;

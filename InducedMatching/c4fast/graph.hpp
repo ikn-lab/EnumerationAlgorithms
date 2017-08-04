@@ -26,10 +26,11 @@ public:
     next = n;
     prev = p;
   };
-  void print(){printf("id:%3d deg:%3d next:%3d prev:%3d\n", id, deg, next, prev);}  
+  void print(){
+    printf("id:%3d deg:%3d next:%3d prev:%3d\n", id, deg, next, prev);
+  }  
   int id, deg, next, prev;
 };
-  
 class EdgeList{
 public:
   EdgeList(){}
@@ -45,8 +46,6 @@ private:
   std::vector<edge> elist;
   FixedStack<int> st;
 };
-
-
 class Graph{
 public:
   Graph(int n);
