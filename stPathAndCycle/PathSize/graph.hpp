@@ -26,11 +26,10 @@ public:
     next = n;
     prev = p;
   };
-  void print(){
-    printf("id:%3d deg:%3d next:%3d prev:%3d\n", id, deg, next, prev);
-  }  
+  void print(){printf("id:%3d deg:%3d next:%3d prev:%3d\n", id, deg, next, prev);}
   int id, deg, next, prev;
 };
+  
 class EdgeList{
 public:
   EdgeList(){}
@@ -46,25 +45,21 @@ private:
   std::vector<edge> elist;
   FixedStack<int> st;
 };
+
+
 class Graph{
 public:
   Graph(int n);
-  void MakeVlist();
+  void init(int n);
   void AddEdge(int from, int v);
   void RemoveVertex(int id);
   void RestoreVertex(int cnt = 1);
-  inline vertex MaximumDeg(){return vlist[vlist[deg_boundary[deg]].next];}
   inline int size(){return g.size();}
   void print();
   inline EdgeList& operator[](int id){return g[id];}
 private:
-  int deg;  
   std::vector<EdgeList> g;
-  std::vector<int> deg_boundary, id_to_pos;
-  std::vector<vertex> vlist;
   FixedStack<int> st;
-  inline void Detach(int id);
-  inline void Insert(int id);
 };
 
 #endif
