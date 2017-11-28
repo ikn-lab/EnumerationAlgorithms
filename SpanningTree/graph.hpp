@@ -1,61 +1,73 @@
 #ifndef __GRAPH__
 #define __GRAPH__
 #include<vector>
+#include<stack>
 
-class UnionFind{
-public:
-  UnionFind();
-  UnionFind(int _n){init(_n);}
-  void init(int _n){
-    n = _n;
-    rank.resize(n);
-    parent.resize(n);
-    for (int i = 0; i < n; i++) {
-      rank[i] = 0;
-      parent[i] = i;
-    }
-  }
-  int find(int x){
-    if(x == parent[x])return x;
-    else return parent[x] = find(parent[x]);
-  }
-  
-  void unite(int x, int y){
-    x = find(x);
-    y = find(y);
-    if(x == y)return;
-    if(rank[x] < rank[y]){
-      parent[x] = y;
-    }else{
-      parent[y] = x;
-      if(rank[x] == rank[y])rank[x]++;
-    }
-  }
-  bool same(int x, int y){
-    return find(x) == find(y);
-  }
-  int size(){
-    int res = 0;
-    for (int i = 0; i < n; i++) {
-      if(parent[i] == i)res++;
-    }
-    return res;
-  }
-private:
-  int n;
-  std::vector<int> rank, parent;
+typedef std::pair<int, int> pii;
+struct Node{
+  int ord, low;
 };
+
+class edge{
+public:
+  edge():to(-1), rev(-1), next(1), prev(-1){};
+  edge(int t, int r, int n, int p){
+    to   = t;
+    rev  = r;
+    next = n;
+    prev = p;
+  }
+  int to, rev, next, prev;
+};
+
+  
+class EdgeList{
+public:
+  EdgeList(){
+    s = 2;
+    elist.push_back(edge(-1, -1, 1, -1));
+    elist.push_back(edge(-1, -1, 1e9, 0));
+  }
+  void push_back(edge e){s++, elist.push_back(e);};
+  void RemoveEdge(int id);
+  void RestoreEdge();
+  void print();
+  inline int size(){return s - 2;}
+  inline int end(){return 1;}
+  inline edge& operator[](const int id){return elist[id];}
+private:
+  int s;
+  std::vector<edge> elist;
+  std::stack<int> st;
+};
+
 
 class Graph{
 public:
   Graph(){};
-  Graph(int n){uf.init(n), g.resize(n);}
-  void AddEdge(int u, int v){
-    g[u].push_back(u), g[v].push_back(v);
+  Graph(int n_):n(n_), g_tail(n_ - 1){
+    g.resize(2*n);
+    node.resize(2*n, Node{-1, (int)1e9});
+    m = 0;
   }
+  void AddEdge(int u, int v);
+  int Contract(int u, int v);
+  void Uncontract();
+  int EnumBridgeAndContract();
+  int GetNode(){return g_tail;};
+  int BridgeSize(){return bridge_size;};
+  bool empty(){return n == 1;};
+  int size(){return n;}
+  EdgeList& operator[](int i){return g[i];};
+  std::vector<pii> bridge;
 private:
-  UnionFind uf;
-  std::vector<std::vector<int> > g;
-}
+  bool Dfs(int v, int previous);//whether contracted or not
+  int n, m;
+  int v_ord = 0, g_tail, bridge_size = 0, history_size = 0;
+  std::vector<EdgeList> g;
+  std::vector<Node> node;
+  std::vector<pii> history;
+  
+};
 
 #endif // __GRAPH__
