@@ -8,7 +8,7 @@ void Graph::AddEdge(int u, int v){
 };
 
 void Graph::NextCand(int v){
-  s.insert(v);
+  // s.insert(v);
   stv.push(v);
   solution_size++;
   used[v] = true;
@@ -86,7 +86,7 @@ int Graph::findSecondMininum(int from, int to){
 
 void Graph::restore(int v){
   used[v] = false;
-  s.erase(v);
+  // s.erase(v);
   solution_size--;
   int u, w, cost;
   while(std::get<0>(st1.top()) != -1){

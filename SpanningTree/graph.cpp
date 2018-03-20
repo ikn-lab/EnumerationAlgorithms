@@ -7,9 +7,8 @@
 using pii = std::pair<int, int>;
 
 void EdgeList::print(){
-  std::cout << std::endl;
   std::cout << "print elist" << std::endl;
-  for (int i = elist[0].next; i < (int)elist.size() - 1; i=elist[i].next) {
+  for (int i = elist[0].next; i != end(); i=elist[i].next) {
     std::cout << "from:" << i << " to:" << elist[i].to << std::endl;
   }
   std::cout << std::endl;
@@ -62,6 +61,7 @@ int Graph::Contract(int u, int v){
     for (int i = g[w][0].next; i != g[w].end(); i = g[w][i].next) {
       // std::cout << "i:" << i << std::endl;
       int to = g[w][i].to, rev = g[w][i].rev;
+      std::cout << to  << " ";
 #ifdef DEBUG
       if(i == 0){
         std::cerr << "error: i do not become 0 in Contract" << std::endl;
@@ -81,6 +81,7 @@ int Graph::Contract(int u, int v){
       //   g[x][x_size] = edge(to, rev, next, prev);
       // }
       g[to][rev].to = x;
+      g[to][rev].rev = g[x].size() + 2;
     }
     std::cout << std::endl;
   }
@@ -96,11 +97,12 @@ void Graph::Uncontract(){
   while(history[--history_size] != pii(-1, -1)){
     m--;
     int w  = history[history_size].first;
-    std::cout << history[history_size].second << std::endl;
+    std::cout << "history:" << history[history_size].second << std::endl;
     edge& e = g[w][history[history_size].second];
     std::cout << "w  in uncotract:" << w    << std::endl;
     std::cout << "to in uncotract:" << e.to << std::endl;
     g[e.to][e.rev].to = w;
+    g[e.to][e.rev].rev = history[history_size].second;
   }
   history_size--;
   std::cout << "end uncotract" << std::endl;
@@ -117,27 +119,39 @@ int Graph::EnumBridgeAndContract(){
   return bridge_size;
 }
 
-bool Graph::Dfs(int v, int previous){
+int Graph::Dfs(int v, int previous){
   node[v].ord = node[v].low = v_ord++;
   std::cout << "bridge_size:" << bridge_size << std::endl;
   std::cout << "v:" << v << " previous:" << previous << std::endl;
+  bool first = true;
   for (int i = g[v][0].next; i != g[v].end(); i = g[v][i].next) {
     int to = g[v][i].to;
     printf("to: %d, i: %d\n", to, i);
-    if(previous == to) {
+    if(previous == to and first) {
+      first = false;
       continue; 
     }else if(node[to].ord == -1){
-      if(Dfs(to, v)) v = g_tail, i = g[v][0].next;
+      if(Dfs(to, v) != -1){
+        v = g_tail, i = g[v][0].next;
+      }
+      to = g[v][i].to; 
     }
     node[v].low = std::min(node[v].low, node[to].low);
   }
-  if(node[v].low <= node[v].ord and previous != -1){
+  if(node[v].low == node[v].ord and previous != -1){
     // bridge[bridge_size++] = pii(previous, v);
     bridge_size++;
     Contract(v, previous);
     node[g_tail] = node[previous];
-    return true;
+    std::cout << "low:" << node[previous].low << std::endl;
+    std::cout << "ord:" << node[previous].ord << std::endl;
+    std::cout << "low:" << node[v].low << std::endl;
+    std::cout << "ord:" << node[v].ord << std::endl;
+  std::cout << "backtracking v:" << v << " previous:" << previous << std::endl;
+
+    std::cout << v_ord << std::endl;
+    return g_tail;
   }
-  return false;
+  return -1;
 }
 

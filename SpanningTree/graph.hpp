@@ -60,10 +60,10 @@ public:
   int size(){return n;}
   EdgeList& operator[](int i){return g[i];};
   std::vector<pii> bridge;
-private:
-  bool Dfs(int v, int previous);//whether contracted or not
-  int n, m;
   int v_ord = 0, g_tail, bridge_size = 0, history_size = 0;
+private:
+  int Dfs(int v, int previous);//whether contracted or not
+  int n, m;
   std::vector<EdgeList> g;
   std::vector<Node> node;
   std::vector<pii> history;

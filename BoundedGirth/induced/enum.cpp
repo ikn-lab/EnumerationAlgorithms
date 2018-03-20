@@ -36,4 +36,3 @@ std::vector<bigint> ELGMain(Graph &g){
   }
   return ans;
 }
-

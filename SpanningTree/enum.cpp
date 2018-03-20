@@ -7,8 +7,8 @@
 #include"enum.hpp"
 
 int RecEST(Graph &g, int v){
-  if(g.empty())return 1;
   std::cout << "start RecEST" << std::endl;
+  if(g.empty())return 1;
   edge &e = g[v][g[v][0].next];
   int to = g[v][g[v][0].next].to, res = 0, parallel = 0;
   for (int i = g[v][0].next; i < g[v].end(); i = g[v][i].next) {
@@ -55,7 +55,7 @@ int EnumSpanningTree(Graph &g){
   g.EnumBridgeAndContract();
   std::cout << "the number of vertices:" << g.size() << std::endl;
   std::cout << std::endl;
-  for (int i = 0; i < g.size(); i++) {
+  for (int i = 0; i < g.g_tail; i++) {
     std::cout << "id:" << i << std::endl;
     g[i].print();
   }
