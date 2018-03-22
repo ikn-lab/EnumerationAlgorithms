@@ -4,10 +4,19 @@
 #include"graph.hpp"
 #include"edgelist.hpp"
 
-// #define DEBUG
+#define DEBUG
 
 // Tail: 0, Head:1
 void Graph::AddEdge(int from, int to, int cost){
+  Cin.push_back(edge{from, to, G[to].size(), G[from].size(), cost});
+  Cout.push_back(edge{from, to, G[to].size(), G[from].size(), cost});
+  Cin[0].next = Cout[0].next = 1;
+  Cin[1].prev = Cout[1].prev = 0;
+
+  edge_id[from].push_back(m + 2);
+  edge_id[to].push_back(m + 2);
+  m++;
+  
   G[from].push_back(edge{from, to, G[to].size(), G[from].size(), cost});
   G[to].push_back(edge{to, from, G[from].size() - 1, G[to].size(), cost});
 }
@@ -15,56 +24,99 @@ void Graph::AddEdge(int from, int to, int cost){
 
 void Graph::NextCand(edge e){
 #ifdef DEBUG
-  std::cerr << "start NextCand" << std::endl;
+  std::cout << "start NextCand" << std::endl;
 #endif // DEBUG
   solution_size++;
   updateCand(e);
   updateDistance(e);
 #ifdef DEBUG
-  std::cerr << "end NextCand" << std::endl;
+  std::cout << "end NextCand" << std::endl;
 #endif // DEBUG
 }
 
+void Graph::updateDistance(edge e){
+  int u = e.from, v = e.to;
+  dist.push(std::tuple<int, int, int>(-1, -1, -1));
+  std::vector<int> A;
+  for (int i = Cin[0].next; i != Cin.end(); i=Cin[i].next) {
+    if(tmp[Cin[i].from] == 0) A.push_back(Cin[i].from);
+    if(tmp[Cin[i].to] == 0) A.push_back(Cin[i].to);
+    tmp[Cin[i].from]++, tmp[Cin[i].to]++;
+  }
+  for (int i = Cout[0].next; i != Cout.end(); i=Cout[i].next) {
+    edge &f = Cout[i];
+    if(deg[f.from] > 0 and tmp[f.from] == 0)A.push_back(f.from);
+    if(deg[f.to] > 0 and tmp[f.to] == 0)A.push_back(f.to);
+    tmp[f.from]++, tmp[f.to]++;
+  }
+  for (int i = 0; i < (int)Cin.size(); i++) 
+    tmp[Cin[i].from]--, tmp[Cin[i].to]--;
+  for (int i = 0; i < (int)Cout.size(); i++) 
+    tmp[Cout[i].from]--, tmp[Cout[i].to]--;
+  for (int x: A){
+    for (int y: A){
+      int val = std::min(D[x][v] + D[u][y], D[x][u] + D[v][y]);
+      dist.push(std::tuple<int, int, int>(x, y, D[x][y]));
+      D[x][y] = D[y][x] = std::min(D[x][y], val + e.cost);
+    }
+  }
+}
+
+
 void Graph::updateCand(edge e){
-  out2in.push(e), in2del.push(e), out2del.push(e);
+  stack.push(element(-1, e));
   int u = e.from, v = e.to;
   if(deg[u] > 0 and deg[v] > 0){
 #ifdef DEBUG
-    std::cerr << "inner edge" << std::endl;
+    std::cout << "inner edge" << std::endl;
 #endif
-    int tail = 0;
-    for (int i = 0; i < (int)Cin.size(); i++) {
+    for (int i = Cin[0].next; i != Cin.end(); i=Cin[i].next) {
       edge &f = Cin[i];
-      if(D[f.from][f.to] >= k){
-        Cin[tail++] = Cin[i];
-        continue;
-      }
-      int rev = G[f.from][f.pos].rev;
+      if(D[f.from][f.to] >= k)continue;
+      Cin.RemoveEdge(i);
       G[f.from].RemoveEdge(f.pos);
-      G[f.to].RemoveEdge(rev);
-      in2del.push(f);
+      G[f.to].RemoveEdge(f.rev);
+      stack.push(element(0, f));
     }
-    Cin.erase(Cin.begin() + tail, Cin.end());
+  }else if(deg[u] == 0 and deg[v] == 0){
+#ifdef DEBUG
+    std::cout << "first edge" << std::endl;
+#endif    
+    for (int i = G[v][0].next; i != G[v].end(); i = G[v][i].next) {
+      edge &f = G[v][i];
+      int w = f.to;
+      if(u == w)continue;
+      Cout.push_back(edge_id[f.from][f.pos]);
+      stack.push(element(3, f));
+    }
+    for (int i = G[u][0].next; i != G[u].end(); i = G[u][i].next) {
+      edge &f = G[u][i];
+      int w = f.to;
+      if(v == w)continue;
+      Cout.push_back(edge_id[f.from][f.pos]);
+      stack.push(element(3, f));
+    }
   }else{
 #ifdef DEBUG
-    std::cerr << "outer edge" << std::endl;
+    std::cout << "outer edge" << std::endl;
 #endif
     if(deg[v] != 0) std::swap(u, v);
     for (int i = G[v][0].next; i != G[v].end(); i = G[v][i].next) {
       edge &f = G[v][i];
       int w = f.to;
-      if(u == w)continue; 
+      if(u == w)continue;
       if(D[u][v] < k){
-        int rev = G[v][i].rev;
         G[v].RemoveEdge(i);
-        G[w].RemoveEdge(rev);
-        out2del.push(f);
+        G[w].RemoveEdge(f.rev);
+        Cout.RemoveEdge(edge_id[f.from][f.pos]);
+        stack.push(element(1, f));
       }else if(deg[w] > 0){
-        Cin.push_back(f);
-        out2in.push(f);
+        Cin.push_back(edge_id[f.from][f.to]);
+        Cout.RemoveEdge(edge_id[f.from][f.pos]);        
+        stack.push(element(2, f));
       }else{
-        Cout.push_back(f);
-        out2del.push(f);
+        Cout.push_back(edge_id[f.from][f.pos]);
+        stack.push(element(3, f));
       }
     }
   }
@@ -72,71 +124,34 @@ void Graph::updateCand(edge e){
 }
 
 
-void Graph::updateDistance(edge e){
-  int u = e.from, v = e.to;
-  dist.push(std::tuple<int, int, int>(-1, -1, -1));
-  std::vector<int> A;
-  for (int i = 0; i < (int)Cin.size(); i++) {
-    if(tmp[Cin[i].from] == 0) A.push_back(Cin[i].from);
-    if(tmp[Cin[i].to] == 0) A.push_back(Cin[i].to);
-    tmp[Cin[i].from]++, tmp[Cin[i].to]++;
-  }
-  int tail = 0;
-  for (int i = 0; i < (int)Cout.size(); i++) {
-    edge &f = Cout[i];
-    if(deg[f.from] > 0 and deg[f.to] > 0)continue;
-    Cout[tail++] = Cout[i];
-    if(deg[f.from] > 0 and tmp[f.from] == 0)A.push_back(f.from);
-    if(deg[f.to] > 0 and tmp[f.to] == 0)A.push_back(f.to);
-    tmp[f.from]++, tmp[f.to]++;
-  }
-  Cout.erase(Cout.begin() + tail, Cout.end());
-  for (int i = 0; i < (int)Cin.size(); i++) 
-    tmp[Cin[i].from]--, tmp[Cin[i].to]--;
-
-  for (int i = 0; i < (int)Cout.size(); i++) 
-    tmp[Cout[i].from]--, tmp[Cout[i].to]--;
-
-  for (int x: A){
-    for (int y: A){
-      int val = std::min(D[x][v] + D[u][y], D[x][u] + D[v][y]);
-      D[x][y] = D[y][x] = std::min(D[x][y], val + e.cost);
-      dist.push(std::tuple<int, int, int>(x, y, D[x][y]));
-    }
-  }
-}
-
 
 void Graph::restore(edge e){
+  std::cout << "restore1" << std::endl;
   int u = e.from, v = e.to, cost;
   solution_size--;
-  if(deg[u] == 1 or deg[v] == 1){//outer edge
-    Cin = std::vector<edge>{};
-    while(out2in.top() != e){
-      Cout.push_back(out2in.top());
-      out2in.pop();
-    }
-    out2in.pop();
-    while(out2del.top() != e){
-      edge f = out2del.top();
-      out2del.pop();
-      Cout.push_back(f);
+  while(stack.top().first != -1){
+    int mode = stack.top().first;
+    edge f = stack.top().second;
+    stack.pop();
+    if(mode == 0){// in2del
+      Cin.RestoreEdge();
       G[f.from].RestoreEdge();
       G[f.to].RestoreEdge();
-    }
-    out2del.pop();
-    Cout.push_back(e);
-  }else{//inner edge
-    while(in2del.top() != e){
-      edge f = in2del.top();
-      in2del.pop();
-      Cin.push_back(f);
+    }else if(mode == 1){//out2del
+      Cout.RestoreEdge();
       G[f.from].RestoreEdge();
       G[f.to].RestoreEdge();
+    }else if(mode == 2){//out2in
+      Cout.RestoreEdge();
+      Cin.UndoAdd();
+    }else if(mode == 3){
+      Cout.UndoAdd();
+    }else{
+      std::cerr << "error" << std::endl;
+      std::exit(1);
     }
-    in2del.pop();
-    Cin.push_back(e);
   }
+  stack.pop();
   while(std::get<0>(dist.top()) != -1){
     u    = std::get<0>(dist.top());
     v    = std::get<1>(dist.top());
@@ -145,19 +160,21 @@ void Graph::restore(edge e){
     D[u][v] = D[v][u] = cost;
   }
   dist.pop();
+  std::cout << "restore1" << std::endl;
 }
 
+  
 edge Graph::GetCand(){
 #ifdef DEBUG
   std::cout << "start GetCand" << std::endl;
 #endif
   edge res;
   if(not Cin.empty()){
-    res = Cin.back();
-    Cin.erase(Cin.end() - 1, Cin.end());
+    res = Cin[Cin[1].prev];
+    Cin.RemoveEdge(Cin[1].prev);
   }else{
-    res = Cout.back();
-    Cout.erase(Cout.end() - 1, Cout.end());
+    res = Cout[Cout[1].prev];
+    Cout.RemoveEdge(Cout[1].prev);
   }
 #ifdef DEBUG
   std::cout << "end GetCand" << std::endl;
@@ -166,4 +183,12 @@ edge Graph::GetCand(){
 }
 
 void Graph::print(){
+}
+
+
+void Graph::addCandidateSet(edge e, EdgeList &cand){
+  cand[cand[1].prev].next = edge_id[e.from][e.pos];
+  cand[edge_id[e.from][e.pos]].next = 1;
+  cand[edge_id[e.from][e.pos]].prev = cand[1].prev;
+  cand[1].prev = edge_id[e.from][e.pos];
 }

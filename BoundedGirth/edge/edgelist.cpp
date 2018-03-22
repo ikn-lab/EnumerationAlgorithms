@@ -1,7 +1,7 @@
 #include<iostream>
 #include<cstdio>
 
-#include"edgelist.hpp"
+#include"EdgeList.hpp"
 
 
 EdgeList::EdgeList(){
@@ -15,6 +15,25 @@ void EdgeList::push_back(edge e){
   elist.back().next = 1;
   elist.back().prev = elist.size() - 2;
 }
+
+void EdgeList::push_back(int id){
+  add.push(id);
+  elist[id].prev = elist[1].prev;
+  elist[elist[1].prev].next = elist[1].prev = id;
+  elist[id].next = 1;
+}
+
+void EdgeList::UndoAdd(){
+  if(add.empty()){
+    std::cerr << "add is empty(edge)" << std::endl;
+    exit(1);
+  }
+  int id = add.top();
+  add.pop();
+  elist[elist[id].prev].next = elist[id].next;
+  elist[elist[id].next].prev = elist[id].prev;
+}
+
 
 void EdgeList::print(){
   std::cout << std::endl;

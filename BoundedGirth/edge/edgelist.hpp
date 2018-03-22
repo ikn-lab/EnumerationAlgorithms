@@ -29,15 +29,18 @@ class EdgeList{
 public:
   EdgeList();
   void push_back(edge e);
+  void push_back(int id);
   void RemoveEdge(int id);
   void RestoreEdge();
+  void UndoAdd();
   void print();
+  bool empty(){return elist[0].next == 1;}
   inline int size(){return elist.size();}
   inline int end(){return 1;}
   inline edge& operator[](const int id){return elist[id];}
 private:
   std::vector<edge> elist;
-  std::stack<int> st;
+  std::stack<int> st, add;
 };
 
 #endif // __EDGELIST__

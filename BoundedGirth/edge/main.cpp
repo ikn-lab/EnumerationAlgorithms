@@ -14,7 +14,7 @@
 #include"graph.hpp"
 #include"enum.hpp"
 #include"edgelist.hpp"
-// #define DEBUG
+#define DEBUG
 
 using bigint = long long int;
 
