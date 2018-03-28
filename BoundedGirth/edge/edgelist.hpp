@@ -34,6 +34,8 @@ public:
   void RestoreEdge();
   void UndoAdd();
   void print();
+  void AllUsed();
+  void NotUsed();
   bool empty(){return elist[0].next == 1;}
   inline int size(){return elist.size();}
   inline int end(){return 1;}
@@ -41,6 +43,7 @@ public:
 private:
   std::vector<edge> elist;
   std::stack<int> st, add;
+  std::vector<bool> used;
 };
 
 #endif // __EDGELIST__

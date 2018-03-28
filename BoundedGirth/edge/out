@@ -1,927 +1,721 @@
-n:20
-edge:0 14
+push_back edge
+
+
+4->1 
+
+push_back edge
+
+
+4->1 
+
+push_back edge
+
+
+4->1 
+
+push_back edge
+
+
+1->4 
+
+push_back edge
+
+
+3->5 
+
+push_back edge
+
+
+3->5 
+
+push_back edge
+
+
+3->5 
+
+push_back edge
+
+
+5->3 
+
+push_back edge
+
+
+6->5 
+
+push_back edge
+
+
+6->5 
+
+push_back edge
+
+
+6->5 
+
+push_back edge
+5->3 
+
+5->3 5->6 
+
+push_back edge
+
+
+2->6 
+
+push_back edge
+
+
+2->6 
+
+push_back edge
+
+
+2->6 
+
+push_back edge
+6->5 
+
+6->5 6->2 
+
+push_back edge
+
+
+0->5 
+
+push_back edge
+
+
+0->5 
+
+push_back edge
+
+
+0->5 
+
+push_back edge
+5->3 5->6 
+
+5->3 5->6 5->0 
+
+push_back edge
+
+
+2->4 
+
+push_back edge
+
+
+2->4 
+
+push_back edge
+2->6 
+
+2->6 2->4 
+
+push_back edge
+4->1 
+
+4->1 4->2 
+
+push_back edge
+
+
+0->4 
+
+push_back edge
+
+
+0->4 
+
+push_back edge
+0->5 
+
+0->5 0->4 
+
+push_back edge
+4->1 4->2 
+
+4->1 4->2 4->0 
+
+push_back edge
+
+
+8->1 
+
+push_back edge
+
+
+8->1 
+
+push_back edge
+
+
+8->1 
+
+push_back edge
+1->4 
+
+1->4 1->8 
+
+push_back edge
+
+
+8->5 
+
+push_back edge
+
+
+8->5 
+
+push_back edge
+8->1 
+
+8->1 8->5 
+
+push_back edge
+5->3 5->6 5->0 
+
+5->3 5->6 5->0 5->8 
+
+push_back edge
+
+
+9->1 
+
+push_back edge
+
+
+9->1 
+
+push_back edge
+
+
+9->1 
+
+push_back edge
+1->4 1->8 
+
+1->4 1->8 1->9 
+
+push_back edge
+
+
+7->9 
+
+push_back edge
+
+
+7->9 
+
+push_back edge
+
+
+7->9 
+
+push_back edge
+9->1 
+
+9->1 9->7 
+
+n:10
+edge:0 5
 start NextCand
+first edge
+push_back int
+
+
+3->5 
+
+push_back int
+3->5 
+
+3->5 6->5 
+
+push_back int
+3->5 6->5 
+
+3->5 6->5 8->5 
+
+push_back int
+3->5 6->5 8->5 
+
+3->5 6->5 8->5 0->4 
+
 end NextCand
+sol size:1
 Cin:
 Cout:
-14 11
-16 14
-0 8
-11 0
+3 5
+6 5
+8 5
+0 4
 
 start GetCand
+Cout prev8
+3 -1 0
+4 0 3
+10 3 4
+8 4 10
+1 10 8
+-1 8 1
+Cout size:4
+remove edge
+3->5 6->5 8->5 0->4 
+
+0->4 next:1 prev:10
+8->5 next:8 prev:4
+6->5 next:10 prev:3
+3->5 next:4 prev:0
+
+
+3->5 6->5 8->5 
+
 end GetCand
+next cand
+start NextCand
+outer edge
+3
+push_back int
+3->5 6->5 8->5 
+
+3->5 6->5 8->5 4->1 
+
+3
+push_back int
+3->5 6->5 8->5 4->1 
+
+3->5 6->5 8->5 4->1 2->4 
+
+end NextCand
+sol size:2
 Cin:
 Cout:
-14 11
-16 14
-0 8
+3 5
+6 5
+8 5
+4 1
+2 4
 
 start GetCand
+Cout prev7
+3 -1 0
+4 0 3
+10 3 4
+2 4 10
+7 10 2
+1 2 7
+-1 7 1
+Cout size:5
+remove edge
+3->5 6->5 8->5 4->1 2->4 
+
+2->4 next:1 prev:2
+4->1 next:7 prev:10
+8->5 next:2 prev:4
+6->5 next:10 prev:3
+3->5 next:4 prev:0
+
+
+3->5 6->5 8->5 4->1 
+
 end GetCand
+next cand
+start NextCand
+outer edge
+3
+push_back int
+3->5 6->5 8->5 4->1 
+
+3->5 6->5 8->5 4->1 2->6 
+
+end NextCand
+sol size:3
 Cin:
 Cout:
-14 11
-16 14
+3 5
+6 5
+8 5
+4 1
+2 6
 
 start GetCand
+Cout prev5
+3 -1 0
+4 0 3
+10 3 4
+2 4 10
+5 10 2
+1 2 5
+-1 5 1
+Cout size:5
+remove edge
+3->5 6->5 8->5 4->1 2->6 
+
+2->6 next:1 prev:2
+4->1 next:5 prev:10
+8->5 next:2 prev:4
+6->5 next:10 prev:3
+3->5 next:4 prev:0
+
+
+3->5 6->5 8->5 4->1 
+
 end GetCand
+next cand
+start NextCand
+outer edge
+2
+push_back int
+
+
+6->5 
+
+remove edge
+3->5 6->5 8->5 4->1 
+
+4->1 next:1 prev:10
+8->5 next:2 prev:4
+6->5 next:10 prev:3
+3->5 next:4 prev:0
+
+
+3->5 8->5 4->1 
+
+end NextCand
+sol size:4
 Cin:
+6 5
 Cout:
-14 11
+3 5
+8 5
+4 1
 
 start GetCand
+remove edge
+6->5 
+
+6->5 next:1 prev:0
+
+
+
+
 end GetCand
+next cand
+start NextCand
+inner edge
+end NextCand
+sol size:5
 Cin:
 Cout:
+3 5
+8 5
+4 1
 
+start GetCand
+Cout prev2
+3 -1 0
+10 0 3
+2 3 10
+1 10 2
+-1 2 1
+Cout size:3
+remove edge
+3->5 8->5 4->1 
+
+4->1 next:1 prev:10
+8->5 next:2 prev:3
+3->5 next:10 prev:0
+
+
+3->5 8->5 
+
+end GetCand
+next cand
+start NextCand
+outer edge
+3
+push_back int
+3->5 8->5 
+
+3->5 8->5 8->1 
+
+3
+push_back int
+3->5 8->5 8->1 
+
+3->5 8->5 8->1 9->1 
+
+end NextCand
+sol size:6
+Cin:
+Cout:
+3 5
+8 5
+8 1
+9 1
+
+start GetCand
+Cout prev11
+3 -1 0
+10 0 3
+9 3 10
+11 10 9
+1 9 11
+-1 11 1
+Cout size:4
+remove edge
+3->5 8->5 8->1 9->1 
+
+9->1 next:1 prev:9
+8->1 next:11 prev:10
+8->5 next:9 prev:3
+3->5 next:10 prev:0
+
+
+3->5 8->5 8->1 
+
+end GetCand
+next cand
+start NextCand
+outer edge
+3
+push_back int
+3->5 8->5 8->1 
+
+3->5 8->5 8->1 7->9 
+
+end NextCand
+sol size:7
+Cin:
+Cout:
+3 5
+8 5
+8 1
+7 9
+
+start GetCand
+Cout prev12
+3 -1 0
+10 0 3
+9 3 10
+12 10 9
+1 9 12
+-1 12 1
+Cout size:4
+remove edge
+3->5 8->5 8->1 7->9 
+
+7->9 next:1 prev:9
+8->1 next:12 prev:10
+8->5 next:9 prev:3
+3->5 next:10 prev:0
+
+
+3->5 8->5 8->1 
+
+end GetCand
 next cand
 start NextCand
 outer edge
 end NextCand
+sol size:8
 Cin:
 Cout:
-11 6
-11 8
-17 11
+3 5
+8 5
+8 1
 
 start GetCand
+Cout prev9
+3 -1 0
+10 0 3
+9 3 10
+1 10 9
+-1 9 1
+Cout size:3
+remove edge
+3->5 8->5 8->1 
+
+8->1 next:1 prev:10
+8->5 next:9 prev:3
+3->5 next:10 prev:0
+
+
+3->5 8->5 
+
 end GetCand
+next cand
+start NextCand
+outer edge
+2
+push_back int
+
+
+8->5 
+
+remove edge
+3->5 8->5 
+
+8->5 next:1 prev:3
+3->5 next:10 prev:0
+
+
+3->5 
+
+end NextCand
+sol size:9
 Cin:
+8 5
 Cout:
-11 6
-11 8
+3 5
 
 start GetCand
+remove edge
+8->5 
+
+8->5 next:1 prev:0
+
+
+
+
 end GetCand
+next cand
+start NextCand
+inner edge
+end NextCand
+sol size:10
 Cin:
 Cout:
-11 6
+3 5
 
 start GetCand
-end GetCand
-Cin:
-Cout:
+Cout prev3
+3 -1 0
+1 0 3
+-1 3 1
+Cout size:1
+remove edge
+3->5 
 
+3->5 next:1 prev:0
+
+
+
+
+end GetCand
 next cand
 start NextCand
 outer edge
 end NextCand
-Cin:
-Cout:
-6 8
-3 6
-13 6
-6 10
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-6 8
-3 6
-13 6
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-6 8
-3 6
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-6 8
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-5 8
-12 8
-3 8
-8 4
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-5 8
-12 8
-3 8
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-5 8
-12 8
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-5 8
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-19 12
-16 12
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-19 12
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-19 13
-4 19
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-19 13
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-13 10
-7 13
-17 13
-13 18
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-13 10
-7 13
-17 13
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-13 10
-7 13
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-13 10
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-10 15
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-restore1
-restore1
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-7 18
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-4 18
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-restore1
-restore1
-restore1
-restore1
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-2 17
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-2 16
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-restore1
-restore1
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-restore1
-restore1
-next cand
-start NextCand
-outer edge
-end NextCand
-Cin:
-3 6
-Cout:
-
-start GetCand
-end GetCand
-Cin:
-Cout:
-
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-next cand
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-restore1
-restore1
-end Rec
-restore1
-restore1
-edge:0 8
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:0 11
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:1 3
-start NextCand
-outer edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:2 16
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:2 17
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:3 6
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:3 8
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:4 18
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:4 19
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:4 8
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:5 8
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:6 8
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:6 11
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:6 13
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:6 10
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:7 13
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:7 18
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:8 6
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:8 11
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:8 12
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:10 13
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:10 15
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:11 6
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:11 14
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:11 17
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:12 19
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:12 16
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:13 10
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:13 19
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:13 17
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:13 18
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:14 11
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:14 16
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:15 10
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:16 2
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:16 14
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:17 2
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:17 11
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:17 13
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:18 4
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:18 7
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:18 13
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-edge:19 13
-start NextCand
-inner edge
-end NextCand
-Cin:
-Cout:
-
-end Rec
-restore1
-restore1
-elapsed time = 12 msec.
-74
- 0 1
- 1 44
- 2 4
- 3 3
- 4 4
- 5 4
- 6 3
- 7 2
- 8 4
- 9 3
-10 2
-11 0
-12 0
-13 0
-14 0
-15 0
-16 0
-17 0
-18 0
-19 0
-20 0
+sol size:11
+Cin:
+Cout:
+
+restore1
+restore1
+remove edge
+3->5 
+
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2
+3->5 next:1 prev:1
+-1->-1 next:-1 prev:2

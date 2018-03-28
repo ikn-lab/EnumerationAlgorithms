@@ -13,12 +13,19 @@ void Graph::AddEdge(int from, int to, int cost){
   Cin[0].next = Cout[0].next = 1;
   Cin[1].prev = Cout[1].prev = 0;
 
+  Cin.NotUsed();
+  Cout.NotUsed();
+
   edge_id[from].push_back(m + 2);
   edge_id[to].push_back(m + 2);
   m++;
   
   G[from].push_back(edge{from, to, G[to].size(), G[from].size(), cost});
   G[to].push_back(edge{to, from, G[from].size() - 1, G[to].size(), cost});
+
+
+  G[from].AllUsed();
+  G[to].AllUsed();
 }
         
 
@@ -49,9 +56,9 @@ void Graph::updateDistance(edge e){
     if(deg[f.to] > 0 and tmp[f.to] == 0)A.push_back(f.to);
     tmp[f.from]++, tmp[f.to]++;
   }
-  for (int i = 0; i < (int)Cin.size(); i++) 
+  for (int i = Cin[0].next; i != Cin.end(); i=Cin[i].next) 
     tmp[Cin[i].from]--, tmp[Cin[i].to]--;
-  for (int i = 0; i < (int)Cout.size(); i++) 
+  for (int i = Cout[0].next; i != Cout.end(); i=Cout[i].next)
     tmp[Cout[i].from]--, tmp[Cout[i].to]--;
   for (int x: A){
     for (int y: A){
@@ -104,17 +111,21 @@ void Graph::updateCand(edge e){
     for (int i = G[v][0].next; i != G[v].end(); i = G[v][i].next) {
       edge &f = G[v][i];
       int w = f.to;
+      // std::cout << "edge:" << f.from << " " << w << std::endl;
       if(u == w)continue;
       if(D[u][v] < k){
+        std::cout << "1" << std::endl;
         G[v].RemoveEdge(i);
         G[w].RemoveEdge(f.rev);
         Cout.RemoveEdge(edge_id[f.from][f.pos]);
         stack.push(element(1, f));
       }else if(deg[w] > 0){
-        Cin.push_back(edge_id[f.from][f.to]);
+        std::cout << "2" << std::endl;
+        Cin.push_back(edge_id[f.from][f.pos]);
         Cout.RemoveEdge(edge_id[f.from][f.pos]);        
         stack.push(element(2, f));
       }else{
+        std::cout << "3" << std::endl;
         Cout.push_back(edge_id[f.from][f.pos]);
         stack.push(element(3, f));
       }
@@ -132,6 +143,7 @@ void Graph::restore(edge e){
   while(stack.top().first != -1){
     int mode = stack.top().first;
     edge f = stack.top().second;
+    std::cout << "mode:" << mode << std::endl;
     stack.pop();
     if(mode == 0){// in2del
       Cin.RestoreEdge();
@@ -173,6 +185,15 @@ edge Graph::GetCand(){
     res = Cin[Cin[1].prev];
     Cin.RemoveEdge(Cin[1].prev);
   }else{
+    std::cout << "Cout prev" << Cout[1].prev << std::endl;
+    int size = 0;
+      std::cout << Cout[0].next << " " << Cout[0].prev << " " << 0 << std::endl;    
+    for (int i = Cout[0].next; i != Cout.end(); i=Cout[i].next) {
+      std::cout << Cout[i].next << " " << Cout[i].prev << " " << i << std::endl;
+      size++;
+    }
+    std::cout << Cout[1].next << " " << Cout[1].prev << " " << 1 << std::endl;        
+    std::cout << "Cout size:" << size << std::endl;
     res = Cout[Cout[1].prev];
     Cout.RemoveEdge(Cout[1].prev);
   }

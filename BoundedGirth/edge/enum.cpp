@@ -12,7 +12,7 @@ std::vector<bigint> ans;
 void RecELG(Graph &G){
   // g.print();
 #ifdef DEBUG
-  std::cerr << "sol size:" << G.CurrentSolutionSize() << std::endl;
+  std::cout << "sol size:" << G.CurrentSolutionSize() << std::endl;
   std::cout << "Cin:" << std::endl;
   for (int i = G.Cin[0].next; i != G.Cin.end(); i=G.Cin[i].next) {
     std::cout << G.Cin[i].from << " " << G.Cin[i].to << std::endl;
@@ -28,15 +28,16 @@ void RecELG(Graph &G){
     return;
   }
   edge e = G.GetCand();
+  std::cout << "next cand" << std::endl;
+  G.NextCand(e);
+  RecELG(G);
+  G.restore(e);
+
   G[e.from].RemoveEdge(e.pos);
   G[e.to].RemoveEdge(e.rev);
   RecELG(G);
   G[e.from].RestoreEdge();
   G[e.to].RestoreEdge();
-  std::cout << "next cand" << std::endl;
-  G.NextCand(e);
-  RecELG(G);
-  G.restore(e);
 }
 
 std::vector<bigint> ELGMain(Graph &G){
@@ -53,8 +54,12 @@ std::vector<bigint> ELGMain(Graph &G){
 #endif
       G.restore(e);
       // G.print();
+      std::cout << "hoge:" << e.pos << " " << j << std::endl;
       G[e.from].RemoveEdge(e.pos);
       G[e.to].RemoveEdge(e.rev);
+      std::cout << G.stack.size() << std::endl;
+      std::cout << G.Cin[0].next << " " << G.Cin[1].prev << std::endl;
+      std::cout << G.Cout[0].next << " " << G.Cout[1].prev << std::endl;
     }
   }
   return ans;

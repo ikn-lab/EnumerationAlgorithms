@@ -33,6 +33,7 @@ public:
   int CurrentSolutionSize(){return solution_size;};
   void print();
   EdgeList Cin, Cout;
+  std::stack<element> stack;
 private:
   void updateDistance(edge e);
   void updateCand(edge e);
@@ -44,7 +45,6 @@ private:
   std::vector<int> deg, tmp;
   std::stack<std::tuple<int, int, int> > dist;
   //0:in2del, 1:out2del, 2:out2in, 3:newedge
-  std::stack<element> stack;
   // std::vector<bool> used;
 };
 
