@@ -1,51 +1,36 @@
 #ifndef __GRAPH__
 #define __GRAPH__
-
 #include<vector>
-#include<stack>
-#include<tuple>
-#include<set>
 
-#include"edgelist.hpp"
-using bigint = long long int;
-using element = std::pair<int, edge>;
+#include"List.hpp"
+#include"Element.hpp"
+
+using pii = std::pair<int, int>;
+
 class Graph{
 public:
-  Graph(int n, int _k){
-    G.resize(n), deg.resize(n, 0), tmp.resize(n, 0);
-    edge_id.resize(n), k = _k, m = 0;
-    solution_size = 0;
-    D.resize(n, std::vector<int>(n, 1e9));
-    for (int i = 0; i < n; i++) {
-      edge_id[i].push_back(0);
-      edge_id[i].push_back(0);
-      D[i][i] = 0; 
-    }
-  }
-  Graph(){};
-  void AddEdge(int from, int to, int cost = 1);
-  void NextCand(edge e);
-  void restore(edge e);
-  int size(){return G.size();};
-  inline EdgeList& operator[](int id){return G[id];}
-  bool candEmpty(){return (Cin.empty() and Cout.empty());}
-  edge GetCand();
-  int CurrentSolutionSize(){return solution_size;};
+  Graph(std::vector<std::vector<edge> > _G);
+  int size(){return n;}
+  int edgeSize(){return m;}
+  List<edge>& operator[](const int id){return G[id];}
+  int RemoveEdge(int id, int x = -1);
+  int RemoveVertex(int id);
+  void undo();
+  int begin(){return vlist.GetNext(n);}
+  int end(){return n;}
+  int GetNext(int id){return vlist.GetNext(id);};
+  int GetPrev(int id){return vlist.GetPrev(id);};
+  int GetDeg(int id){return deg[id];};
   void print();
-  EdgeList Cin, Cout;
-  std::stack<element> stack;
+  // int begin(){return G[n]}
 private:
-  void updateDistance(edge e);
-  void updateCand(edge e);
-  void addCandidateSet(edge e, EdgeList &cand);
-  void removeCandidateSet(int id, int mode);
-  int k, solution_size, m;
-  std::vector<EdgeList> G;
-  std::vector<std::vector<int> > D, edge_id;
-  std::vector<int> deg, tmp;
-  std::stack<std::tuple<int, int, int> > dist;
-  //0:in2del, 1:out2del, 2:out2in, 3:newedge
-  // std::vector<bool> used;
+  int n, m;
+  std::vector<List<edge> > G;
+  List<int> vlist;
+  List<edge> elist;
+  std::vector<pii> edge2vertex;//u: first, v:second
+  int head;
+  std::vector<int> next, deg;
 };
 
 #endif // __GRAPH__

@@ -5,16 +5,18 @@
 /* writer: kazuhiro kurita                                       */
 /*                                                               */
 ///////////////////////////////////////////////////////////////////
+// #define DEBUG
 
 #include<iostream>
 #include<vector>
 #include<fstream>
 #include<chrono>
 
-#include"graph.hpp"
-#include"enum.hpp"
-#include"edgelist.hpp"
-#define DEBUG
+#include"Graph.hpp"
+#include"Enum.hpp"
+#include"List.hpp"
+#include"Element.hpp"
+#include"AddibleList.hpp"
 
 using bigint = long long int;
 
@@ -32,22 +34,22 @@ int main(int argc, char *argv[]){
     std::cerr << "can't open input file: " << argv[1] << std::endl;
     return 0;
   }
-  int n, m = 0, k = std::stoi(argv[2]);
+  int n, m, k = std::stoi(argv[2]), id = 0;
   std::string tmp;
   getline(ist, tmp);
-  sscanf(tmp.data(), "%d", &n);
-  Graph G(n, k);
+  sscanf(tmp.data(), "%d %d", &n, &m);
+  std::vector<std::vector<edge> > _G(n);
   while(getline(ist, tmp)){
     int u, v;
     sscanf(tmp.data(), "%d %d", &u, &v);
-    G.AddEdge(u, v);
-    m++;
+    _G[u].push_back(edge(u, v, id));
+    _G[v].push_back(edge(v, u, id++));
   }
-  // g.print();
+  Graph G(_G);
   std::cout << "n:" << G.size() << std::endl;
   
   auto start = std::chrono::system_clock::now();
-  std::vector<bigint> ans = ELGMain(G);
+  std::vector<bigint> ans = EBGMain(G, k);
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
   printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());

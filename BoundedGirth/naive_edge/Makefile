@@ -1,13 +1,13 @@
-SRCS	 = main.cpp enum.cpp graph.cpp
-CXX		 = g++-6
-CXXFLAGS = -Wall -O3 -std=c++11 -fdiagnostics-color
-EXE		 = ELG
+SRCS	 = main.cpp Enum.cpp Graph.cpp
+CXX		 = g++
+CXXFLAGS = -Wall -std=c++11 -fdiagnostics-color -O3
+EXE		 = EBG
 
-ELG:$(SRCS)
+EBG:$(SRCS)
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $@
 
 debug:$(SRCS)
-	$(CXX) $(CXXFLAGS) -D_GLIBCXX_DEBUG $(SRCS) -o $@
+	$(CXX) $(CXXFLAGS) $(SRCS) -o $@
 
 clean:
-	-rm -f ELG
+	-rm -f EBG

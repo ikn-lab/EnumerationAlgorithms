@@ -1,19 +1,21 @@
 #ifndef __ADDIBLELIST__
 #define __ADDIBLELIST__
-
+#include<vector>
 #define DEBUG
+
 template<typename T>
 class AddibleList{
 public:
   AddibleList(){};
-  AddibleList(std::vector<T> _elem){init(_elem);};
-  AddibleList(int size);
+  AddibleList(std::vector<T> elem){init(elem);};
+  AddibleList(int size){init(size);};
   ~AddibleList();
-  void init(std::vector<T> _elem);
+  void init(std::vector<T> elem);
+  void init(int size);
   T& operator[](const int id){return list[id];};
   int GetNext(int id){return next[id];};
   int GetPrev(int id){return prev[id];};
-  void set(T _elem, int id){elem[id] = _elem;}
+  void set(T elem, int id){list[id] = elem;}
   void remove(int id);
   void add(int id);
   void undo();
@@ -21,7 +23,7 @@ public:
   int end(){return tail;};
   int begin(){return next[tail];};
 private:
-  T *list, *elem;
+  T *list;
   int *next, *prev, *s_next;
   int tail, head = -1, s;
   bool *removed;
@@ -30,17 +32,17 @@ private:
 
 //n-th element is sentinel
 template<typename T>
-void AddibleList<T>::init(std::vector<T> _elem){
-  s    = tail = _elem.size();
-  list = new T[tail];
-  elem = new T[tail];
-  next = new int[tail + 1];
-  prev = new int[tail + 1];
+void AddibleList<T>::init(std::vector<T> elem){
+  s      = tail = elem.size();
+  list   = new T[tail];
+  next   = new int[tail + 1];
+  prev   = new int[tail + 1];
+  s_next = new int[tail + 1];
 #ifdef DEBUG
   removed = new bool[tail];
 #endif
   for (int i = 0; i < tail; i++) {
-    elem[i] = _elem[i];
+    list[i] = elem[i];
 #ifdef DEBUG    
     removed[i] = true;
 #endif    
@@ -50,15 +52,14 @@ void AddibleList<T>::init(std::vector<T> _elem){
 
 //n-th element is sentinel
 template<typename T>
-AddibleList<T>::AddibleList(int size) {
+void AddibleList<T>::init(int size) {
   s    = tail = size;
   list = new T[tail];
-  elem = new T[tail];
   next = new int[tail + 1];
   prev = new int[tail + 1];
 #ifdef DEBUG
   removed = new bool[tail];
-  for (int i = 0; i < size; i++) removed[i] = true;
+  std::fill(removed, removed + tail, true);
 #endif    
   next[tail] = prev[tail] = tail;
 }

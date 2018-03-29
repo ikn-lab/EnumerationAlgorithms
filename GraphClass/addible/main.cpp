@@ -8,17 +8,22 @@ int main(){
   int n, m;
   std::cin >> n >> m;
   std::vector<std::vector<edge> > G(n);
-  std::cout << G.size() << std::endl;
   for (int i = 0; i < m; i++) {
     edge e;
     std::cin >> e.u >> e.v;
     e.cost = 1;
     e.id = i;
     G[e.u].push_back(e);
-    G[e.v].push_back(edge(e.v, e.u, i, e.cost));
+    G[e.v].push_back(e);
   }
   Graph H(G);
-  H.VertexRemove(3);
-  H.undo();
+  for (int i = 0; i < 8; i++) {
+    H.AddVertex(i);
+  }
+  // H.print();
+  for (int i = 0; i < 3; i++) {
+    H.undo();    
+  }
+  // H.print();
   return 0;
 }
