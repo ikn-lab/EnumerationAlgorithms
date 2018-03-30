@@ -17,8 +17,11 @@ public:
   void RemoveVertex(int id);
   void AddVertex(int id);
   void undo();
+  int begin(){return vlist.GetNext(n);}
+  int end(){return n;}
   int GetNext(int id){return vlist.GetNext(id);};
   int GetPrev(int id){return vlist.GetPrev(id);};
+  int GetDeg(int id){return deg[id];};
   void print();
   // int begin(){return G[n]}
 private:
@@ -28,12 +31,12 @@ private:
   AddibleList<edge> elist;
   std::vector<pii> edge2vertex;//u: first, v:second
   int head = -10;
-  std::vector<int> next;
+  std::vector<int> next, deg;
 };
 
 Graph::Graph(std::vector<std::vector<edge> > _G) {
   n = _G.size();
-  G.resize(n);
+  G.resize(n), deg.resize(n, 0);
   std::vector<int> tmp(n);
   for (int i = 0; i < n; i++) tmp[i] = i;
   vlist.init(tmp);
@@ -61,6 +64,7 @@ void Graph::RemoveEdge(int id){
   G[u].remove(edge2vertex[id].first);
   G[v].remove(edge2vertex[id].second);
   elist.remove(id);
+  deg[u]--, deg[v]--;
   next[id + m + n] = head;
   head = id + m + n;
 }
@@ -71,6 +75,7 @@ void Graph::AddEdge(int id){
   G[u].add(edge2vertex[id].first);
   G[v].add(edge2vertex[id].second);
   elist.add(id);
+  deg[u]++, deg[v]++;
   next[id] = head;
   head = id;
 }
@@ -83,6 +88,7 @@ void Graph::RemoveVertex(int id){
     if(u > v)G[v].remove(edge2vertex[eid].second);
     else G[v].remove(edge2vertex[eid].first);
     elist.remove(eid);
+    deg[u]--, deg[v]--;
   }
   vlist.remove(id);
   next[id + 2*m + n] = head;
@@ -97,6 +103,7 @@ void Graph::AddVertex(int id){
     G[u].add(edge2vertex[eid].first);
     G[v].add(edge2vertex[eid].second);
     elist.add(eid);
+    deg[u]++, deg[v]++;
   }
   vlist.add(id);
   next[id + 2*m + n] = head;
@@ -106,34 +113,38 @@ void Graph::AddVertex(int id){
 
 void Graph::undo(){
   int u, v, id;
-  if(2*m + n <= head){//undo add vertex
+  if(2*m + n <= head){//undo add a vertex
     id = head - 2*m - n;
     int cnt = 0;
     for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
       G[G[id][i].v].undo();
       elist.undo();
+      deg[G[id][i].u]--, deg[G[id][i].v]--;
     }
     for (int i = 0; i < cnt; i++) G[id].undo();
     vlist.undo();
-  }else if(m + n <= head){//undo add edge
+  }else if(m + n <= head){//undo add an edge
     id = head - m - n;
     G[elist[id].u].undo();
     G[elist[id].v].undo();
     elist.undo();
-  }else if(m <= head){
+    deg[elist[id].u]--, deg[elist[id].v]--;
+  }else if(m <= head){//undo remove a vertex
     id = head - m;
     for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
       u = G[id][i].u, v = G[id][i].v;
       if(u == id)G[v].undo();
       else G[u].undo();
       elist.undo();
+      deg[u]++, deg[v]++;    
     }
     vlist.undo();
-  }else{
+  }else{//undo remove an edge
     u = elist[head].u, v = elist[head].v;
     G[u].undo();
     G[v].undo();
     elist.undo();
+    deg[u]++, deg[v]++;    
   }
   int tmp = head;
   head = next[head];

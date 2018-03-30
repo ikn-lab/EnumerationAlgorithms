@@ -19,6 +19,9 @@ int main(){
   }
   Graph H(G);
   H.print();
-  // H.undo();
+  for (int i = 0; i < 4; i++) {
+    H.RemoveEdge(i*2);
+  }
+  H.print();
   return 0;
 }

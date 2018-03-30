@@ -43,11 +43,8 @@ Graph::Graph(std::vector<std::vector<edge> > _G) {
     for (int j = 0; j < _G[i].size(); j++) {
       int id = _G[i][j].id;
       ve[id] = _G[i][j];
-      if(edge2vertex[id].first == -1){
-        edge2vertex[id].first = j;
-      }else{
-        edge2vertex[id].second = j;        
-      }
+      edge2vertex[id].first = edge2vertex[id].second;
+      edge2vertex[id].second = j;
     }
   }
   elist.init(ve);
@@ -56,8 +53,13 @@ Graph::Graph(std::vector<std::vector<edge> > _G) {
 }
 
 void Graph::RemoveEdge(int id){
+  std::cout << "id:" << id << std::endl;
   int u = elist[id].u, v = elist[id].v;
+  if(u > v)std::swap(u, v);
+  std::cout << "u:" << u << " v:" << v << std::endl;
+  std::cout << "first:" << edge2vertex[id].first << std::endl;
   G[u].remove(edge2vertex[id].first);
+  std::cout << "second:" << edge2vertex[id].second << std::endl;
   G[v].remove(edge2vertex[id].second);
   elist.remove(id);
   next[id] = head;

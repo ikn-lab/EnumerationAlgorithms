@@ -38,17 +38,15 @@ int main(int argc, char *argv[]){
   std::string tmp;
   getline(ist, tmp);
   sscanf(tmp.data(), "%d %d", &n, &m);
-  std::vector<std::vector<edge> > _G(n);
+  std::vector<std::vector<edge> > G(n);
   while(getline(ist, tmp)){
     int u, v;
     sscanf(tmp.data(), "%d %d", &u, &v);
     _G[u].push_back(edge(u, v, id));
     _G[v].push_back(edge(v, u, id++));
   }
-  Graph G(_G);
-  std::cout << "n:" << G.size() << std::endl;
-  
   auto start = std::chrono::system_clock::now();
+  EBGIterator EBG(G, k);
   std::vector<bigint> ans = EBGMain(G, k);
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;

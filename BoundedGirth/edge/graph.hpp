@@ -21,6 +21,7 @@ public:
   int GetNext(int id){return vlist.GetNext(id);};
   int GetPrev(int id){return vlist.GetPrev(id);};
   int GetDeg(int id){return deg[id];};
+  edge GetEdge(int id){return elist[id];};
   void print();
   // int begin(){return G[n]}
 private:
