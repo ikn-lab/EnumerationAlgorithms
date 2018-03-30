@@ -6,12 +6,12 @@
 #include"Graph.hpp"
 #include"AddibleList.hpp"
 #define DELIM 0
-
+// #define DEBUG
 using bigint = long long int;
 using triple = std::tuple<int, int, int>;//x, y, cost
 
-std::vector<bigint> ans;
-bigint solution_size;
+std::vector<bigint> result;
+AddibleList<edge> solution;
 
 std::vector<int> A, tmp;
 std::vector<std::vector<int> > D;
@@ -19,7 +19,7 @@ std::vector<triple> stack_D;//a stack for D
 std::vector<int> stack_G;
 int head_D = -1, head_G = -1, k;
 AddibleList<edge> Cin, Cout;
-std::vector<int> hasEdge;
+std::vector<int> deg;
 
 void print(AddibleList<edge> &list){
   
@@ -32,7 +32,7 @@ void NextCand(Graph &G, edge e, bool isInner){
 #ifdef DEBUG
   printf("start NextCand\n");
 #endif // DEBUG
-  solution_size++;
+  solution.add(e.id);
   G.RemoveEdge(e.id);
   updateCand(G, e, isInner);
   updateDistance(G, e);
@@ -61,7 +61,7 @@ void updateCand(Graph &G, edge e, bool isInner) {
 #ifdef DEBUG
   printf("outer edge\n");
 #endif
-    if(hasEdge[v] != 0) std::swap(u, v);
+    if(deg[v] != 0) std::swap(u, v);
     stack_G[++head_G] = DELIM;
     for (int i = G[v].begin(); i != G[v].end(); i = G[v].GetNext(i)) {
       edge &f = G[v][i];
@@ -73,7 +73,7 @@ void updateCand(Graph &G, edge e, bool isInner) {
         i = G.RemoveEdge(f.id, v);
         Cout.remove(f.id);
         stack_G[head_G] = -1;
-      }else if(hasEdge[f.v] > 0){
+      }else if(deg[f.v] > 0){
         // std::cout << "type 2:" << f.id << std::endl;
         Cin.add(f.id);
         Cout.remove(f.id);
@@ -85,7 +85,7 @@ void updateCand(Graph &G, edge e, bool isInner) {
       }
     }
   }
-  hasEdge[e.u]++, hasEdge[e.v]++;
+  deg[e.u]++, deg[e.v]++;
 }
 
 
@@ -98,8 +98,8 @@ void updateDistance(Graph &G, edge e) {
   }
   for (int i = Cout.begin(); i != Cout.end(); i=Cout.GetNext(i)) {
     edge &f = Cout[i];
-    if(hasEdge[f.u] > 0 and tmp[f.u] == 0)A[size++] = f.u;
-    if(hasEdge[f.v] > 0 and tmp[f.v] == 0)A[size++] = f.v;
+    if(deg[f.u] > 0 and tmp[f.u] == 0)A[size++] = f.u;
+    if(deg[f.v] > 0 and tmp[f.v] == 0)A[size++] = f.v;
     tmp[f.u]++, tmp[f.v]++;
   }
   for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i))
@@ -122,7 +122,7 @@ void updateDistance(Graph &G, edge e) {
 
 void restore(Graph &G, edge e, bool isInner){
   int u = e.u, v = e.v, cost = e.cost;
-  solution_size--;
+  solution.undo();
   if(isInner){//inner edge
     for (int i = 0; i < stack_G[head_G] - 1; i++) {
       Cin.undo();
@@ -144,7 +144,7 @@ void restore(Graph &G, edge e, bool isInner){
     cost = std::get<2>(stack_D[head_D--]);
     D[u][v] = D[v][u] = cost;
   }
-  hasEdge[e.u]--, hasEdge[e.v]--;
+  deg[e.u]--, deg[e.v]--;
 }
 
   
@@ -174,8 +174,8 @@ void NextCandFirstEdge(Graph &G, edge e){
   }
   D[e.u][e.v] = D[e.v][e.u] = 1;
   G.RemoveEdge(e.id);
-  solution_size++;
-  hasEdge[e.u]++, hasEdge[e.v]++;
+  solution.add(e.id);
+  deg[e.u]++, deg[e.v]++;
 }
 
 void restoreFirstEdge(Graph &G, edge e){
@@ -191,25 +191,25 @@ void restoreFirstEdge(Graph &G, edge e){
     Cout.undo();
   }
   D[e.u][e.v] = D[e.v][e.u] = 1e9;
-  solution_size--;
-  hasEdge[e.u]--, hasEdge[e.v]--;
+  solution.undo();
+  deg[e.u]--, deg[e.v]--;
 }
 
 
 void RecEBG(Graph &G, int k){
 #ifdef DEBUG
-  printf("sol size %lld\n", solution_size);
+  printf("sol size %d\n", solution.size());
   printf("Cin\n");
   print(Cin);
   printf("Cout\n");
   print(Cout);
   printf("degree\n");
   for (int i = 0; i < G.size(); i++)
-    printf("%d ", hasEdge[i]);
+    printf("%d ", deg[i]);
   printf("\n\n");
 #endif  
   if(Cin.empty() and Cout.empty()){
-    ans[solution_size]++;
+    result[solution.size()]++;
     return;
   }
   edge e;
@@ -227,8 +227,8 @@ void RecEBG(Graph &G, int k){
 std::vector<bigint> EBGMain(Graph &G, int _k){
   int n = G.size(), m = G.edgeSize();
   std::vector<edge> ve(m);
-  ans.resize(m + 1, 0);
-  ans[0] = 1;
+  result.resize(m + 1, 0);
+  result[0] = 1;
   k = _k;
   
   for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) 
@@ -236,7 +236,8 @@ std::vector<bigint> EBGMain(Graph &G, int _k){
       ve[G[i][j].id] = G[i][j];
   
   Cin.init(ve), Cout.init(ve);
-  D.resize(n), hasEdge.resize(n, 0);
+  solution.init(ve);
+  D.resize(n), deg.resize(n, 0);
   for (int i = 0; i < G.size(); i++) {
     D[i].resize(n, 1e9);
     D[i][i] = 0; 
@@ -255,5 +256,5 @@ std::vector<bigint> EBGMain(Graph &G, int _k){
     restoreFirstEdge(G, e);
     // G.print();
   }
-  return ans;
+  return result;
 }
