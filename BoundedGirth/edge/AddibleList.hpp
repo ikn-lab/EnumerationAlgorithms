@@ -12,8 +12,8 @@ public:
   void init(std::vector<T> elem);
   void init(int size);
   T& operator[](const int id){return list[id];};
-  int GetNext(int id){return next[id];};
-  int GetPrev(int id){return prev[id];};
+  inline int GetNext(int id){return next[id];};
+  inline int GetPrev(int id){return prev[id];};
   void set(T elem, int id){list[id] = elem;}
   int remove(int id);
   int add(int id);
@@ -21,7 +21,7 @@ public:
   int size(){return s;}
   int end(){return tail;};
   int begin(){return next[tail];};
-  bool empty(){return begin() == end();};
+  inline bool empty(){return begin() == end();};
 private:
   T *list;
   int *next, *prev, *s_next;
@@ -33,7 +33,8 @@ private:
 //n-th element is sentinel
 template<typename T>
 void AddibleList<T>::init(std::vector<T> elem){
-  s      = tail = elem.size();
+  s      = 0;
+  tail   = elem.size();
   list   = new T[tail];
   next   = new int[tail + 1];
   prev   = new int[tail + 1];
@@ -53,7 +54,8 @@ void AddibleList<T>::init(std::vector<T> elem){
 //n-th element is sentinel
 template<typename T>
 void AddibleList<T>::init(int size) {
-  s    = tail = size;
+  s      = 0;
+  tail   = size;
   list = new T[tail];
   next = new int[tail + 1];
   prev = new int[tail + 1];

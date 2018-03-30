@@ -12,14 +12,14 @@ public:
   void init(std::vector<T> elem);
   void init(int size);
   T& operator[](const int id){return list[id];};
-  int GetNext(int id){return next[id];};
-  int GetPrev(int id){return prev[id];};
+  inline int GetNext(int id){return next[id];};
+  inline int GetPrev(int id){return prev[id];};
   void set(T elem, int id){list[id] = elem;};
   void remove(int id);
   void undo();
-  int size(){return s;}
-  int end(){return tail;};
-  int begin(){return next[tail];};
+  inline int size(){return s;}
+  inline int end(){return tail;};
+  inline int begin(){return next[tail];};
 private:
   T* list;
   int *next, *prev;
