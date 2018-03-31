@@ -13,7 +13,7 @@ using bigint = long long int;
 std::vector<bigint> result;
 AddibleList<edge> solution;
 
-std::vector<int> A, tmp;
+std::vector<int> A;
 std::vector<std::vector<int> > D;
 std::vector<int> stack_D;//a stack for D
 std::vector<int> stack_G;
@@ -97,22 +97,22 @@ void updateCand(Graph &G, edge e, bool isInner) {
 
 
 void updateDistance(Graph &G, edge e) {
-  int u = e.u, v = e.v, size = 0;
+  int u = e.u, v = e.v, size = 0, n = G.size();
   for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i)){
-    if(tmp[Cin[i].u] == 0) A[size++] = Cin[i].u;
-    if(tmp[Cin[i].v] == 0) A[size++] = Cin[i].v;
-    tmp[Cin[i].u]++, tmp[Cin[i].v]++;
+    if(A[n + Cin[i].u] == 0) A[size++] = Cin[i].u;
+    if(A[n + Cin[i].v] == 0) A[size++] = Cin[i].v;
+    A[n + Cin[i].u]++, A[n + Cin[i].v]++;
   }
   for (int i = Cout.begin(); i != Cout.end(); i=Cout.GetNext(i)) {
     edge &f = Cout[i];
-    if(deg[f.u] > 0 and tmp[f.u] == 0)A[size++] = f.u;
-    if(deg[f.v] > 0 and tmp[f.v] == 0)A[size++] = f.v;
-    tmp[f.u]++, tmp[f.v]++;
+    if(deg[f.u] > 0 and A[n + f.u] == 0)A[size++] = f.u;
+    if(deg[f.v] > 0 and A[n + f.v] == 0)A[size++] = f.v;
+    A[n + f.u]++, A[n + f.v]++;
   }
   for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i))
-    tmp[Cin[i].u]--, tmp[Cin[i].v]--;
+    A[n + Cin[i].u]--, A[n + Cin[i].v]--;
   for (int i = Cout.begin(); i != Cout.end(); i=Cout.GetNext(i))
-    tmp[Cout[i].u]--, tmp[Cout[i].v]--;
+    A[n + Cout[i].u]--, A[n + Cout[i].v]--;
   int cnt = 0;
   for (int i = 0; i < size; i++){
     for (int j = i + 1; j < size; j++){
@@ -219,7 +219,7 @@ std::vector<bigint> EBGMain(Graph &G, int _k){
   }
   stack_D.resize(3*n*n*n);
   stack_G.resize(2*m, 1e9);
-  A.resize(n, 0), tmp.resize(n, 0);
+  A.resize(2*n, 0);
   for (int i = 0; i < m; i++) {
     printf("now %d\n", i);
     edge &e = ve[i];
