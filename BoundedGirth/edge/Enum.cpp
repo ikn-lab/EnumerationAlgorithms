@@ -71,6 +71,7 @@ void EBGIterator::updateCand(edge e, bool isInner) {
       }
     }
   }
+  sol_size += (deg[e.u] == 0) + (deg[e.v] == 0);
   deg[e.u]++, deg[e.v]++;
 }
 
@@ -133,6 +134,11 @@ void EBGIterator::restore(edge e, bool isInner){
     D[u][v] = D[v][u] = cost;
   }
   deg[e.u]--, deg[e.v]--;
+  sol_size -= (deg[e.u] == 0) + (deg[e.v] == 0);
+}
+
+bool EBGIterator::prune(){
+  return (dentist*sol_size > Cin.size() + Cout.size() + solution.size());
 }
 
 edge EBGIterator::GetCand(){
@@ -151,38 +157,48 @@ edge EBGIterator::GetCand(){
 
 
 bool EBGIterator::next(bool isBackTrack) {
-  if(solution.size() == 0 and loop == G.edgeSize())return false;//end
-  // leaf iteration
-  if(solution.size() != 0 and not isBackTrack and
-     Cin.empty() and Cout.empty()){
-    return next(true);    
+  dentist = std::max(dentist, (double)solution.size()/sol_size);
+  if(solution.size() == 0 ){
+    if(loop == G.edgeSize())return false;//end 
+  }else{
+    // leaf iteration
+    if(not isBackTrack and
+       Cin.empty() and Cout.empty())return next(true);    
   }
-  if(head_E == -1)return traverse();
+  
   edge e = stack_E[head_E];
   int x = (stack_P[head_P] != 1);
   bool isInner = (deg[e.u] > x and deg[e.v] > x);
-  
-  if(isBackTrack and head_E == 0){
-    restore(stack_E[0], isInner);
+  if(prune()){
+    if(stack_P[head_P] == 0){//down right
+      restore(e, isInner);
+      stack_P[head_P] = 1;
+    }
+    if(head_E > 0){
+      G.undo();
+      if(isInner)Cin.undo();
+      else Cout.undo();
+    }
     head_E--, head_P--;
-    return next();
+    return next(true);
   }
-  
+  //down left
   if(isBackTrack){
     if(stack_P[head_P] == 0){//down right
       restore(e, isInner);
       stack_P[head_P] = 1;
       return next();
-    }else{//back tracking
+    }
+    //back tracking
+    if(head_E > 0){
       G.undo();
       if(isInner)Cin.undo();
       else Cout.undo();
-      head_E--, head_P--;
-      return next(true);
     }
+    head_E--, head_P--;
+    return next(true);
   }
-  //down left
-  return traverse();
+  return traverse();  
 }
 
 bool EBGIterator::traverse(){
