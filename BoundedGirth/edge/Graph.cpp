@@ -5,7 +5,7 @@
 #include"List.hpp"
 #include"Element.hpp"
 
-Graph::Graph(std::vector<std::vector<edge> > _G) {
+void Graph::init(std::vector<std::vector<edge> > _G){
   n = _G.size(), m = 0;
   G.resize(n), deg.resize(n);
   std::vector<int> tmp(n);
@@ -28,6 +28,7 @@ Graph::Graph(std::vector<std::vector<edge> > _G) {
   for (int i = 0; i < n; i++) G[i].init(_G[i]);
   next.resize(n + m);
 }
+
 
 int Graph::RemoveEdge(int id, int x){
   int u = elist[id].u, v = elist[id].v, res;

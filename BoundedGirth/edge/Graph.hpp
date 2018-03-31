@@ -9,7 +9,9 @@ using pii = std::pair<int, int>;
 
 class Graph{
 public:
-  Graph(std::vector<std::vector<edge> > _G);
+  Graph(){};
+  Graph(std::vector<std::vector<edge> > _G){init(_G);};
+  void init(std::vector<std::vector<edge> > _G);
   int size(){return n;}
   int edgeSize(){return m;}
   List<edge>& operator[](const int id){return G[id];}
@@ -25,12 +27,11 @@ public:
   void print();
   // int begin(){return G[n]}
 private:
-  int n, m;
+  int n, m, head;
   std::vector<List<edge> > G;
   List<int> vlist;
   List<edge> elist;
   std::vector<pii> edge2vertex;//u: first, v:second
-  int head;
   std::vector<int> next, deg;
 };
 

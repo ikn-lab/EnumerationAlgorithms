@@ -42,12 +42,15 @@ int main(int argc, char *argv[]){
   while(getline(ist, tmp)){
     int u, v;
     sscanf(tmp.data(), "%d %d", &u, &v);
-    _G[u].push_back(edge(u, v, id));
-    _G[v].push_back(edge(v, u, id++));
+    G[u].push_back(edge(u, v, id));
+    G[v].push_back(edge(v, u, id++));
   }
   auto start = std::chrono::system_clock::now();
+  std::vector<bigint> ans(m, 0);
   EBGIterator EBG(G, k);
-  std::vector<bigint> ans = EBGMain(G, k);
+  std::cout << "run" << std::endl;
+  while(EBG.next())
+    ans[EBG.solution.size()]++;
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
   printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
@@ -61,6 +64,5 @@ int main(int argc, char *argv[]){
     std::cout << ans[i] << std::endl;
     sum += ans[i];
   }
-  // g.print();
   return 0;
 }

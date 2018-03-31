@@ -221,7 +221,8 @@ std::vector<bigint> EBGMain(Graph &G, int _k){
     printf("now %d\n", i);
     edge &e = ve[i];
     NextCand(G, e, false);
-    RecEBG(G, k);
+    
+    RecEBG(G, k); // back track:head_P == -1 
 #ifdef DEBUG
     printf("end Rec:%d/%d\n", i, m);
 #endif
