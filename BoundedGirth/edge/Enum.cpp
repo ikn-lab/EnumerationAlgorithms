@@ -151,24 +151,25 @@ edge EBGIterator::GetCand(){
 
 
 bool EBGIterator::next(bool isBackTrack) {
-  edge e;
-  if(head_E >= 0)e = stack_E[head_E];
-  int x = 0;
-  if(head_P >= 0)x = (stack_P[head_P] != 1);
-  bool isInner = (deg[e.u] > x and deg[e.v] > x);
   if(solution.size() == 0 and loop == G.edgeSize())return false;//end
   // leaf iteration
   if(solution.size() != 0 and not isBackTrack and
      Cin.empty() and Cout.empty()){
     return next(true);    
-  } 
+  }
+  if(head_E == -1)return traverse();
+  edge e = stack_E[head_E];
+  int x = (stack_P[head_P] != 1);
+  bool isInner = (deg[e.u] > x and deg[e.v] > x);
+  
+  if(isBackTrack and head_E == 0){
+    restore(stack_E[0], isInner);
+    head_E--, head_P--;
+    return next();
+  }
   
   if(isBackTrack){
-    if(head_E == 0){//first forward tracking
-      restore(e, isInner);
-      head_E--, head_P--;
-      return next();
-    }else if(stack_P[head_P] == 0){//down right
+    if(stack_P[head_P] == 0){//down right
       restore(e, isInner);
       stack_P[head_P] = 1;
       return next();
@@ -180,8 +181,12 @@ bool EBGIterator::next(bool isBackTrack) {
       return next(true);
     }
   }
-    
   //down left
+  return traverse();
+}
+
+bool EBGIterator::traverse(){
+  edge e;
   e = GetCand();
   nextCand(e, (deg[e.u] > 0 and deg[e.v] > 0));
   head_E++, head_P++;
@@ -190,6 +195,7 @@ bool EBGIterator::next(bool isBackTrack) {
   result[solution.size()]++;
   return true;
 }
+
 
 EBGIterator::EBGIterator(std::vector<std::vector<edge> > _G, int _k):k(_k){
   G.init(_G);

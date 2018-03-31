@@ -30,7 +30,14 @@ private:
   void nextCand(edge e, bool isInner);
   void updateCand(edge e, bool isInner);
   void updateDistance(edge e);
+  bool traverse();
 };
 
 
 #endif // __ENUM__
+
+
+
+
+
+
