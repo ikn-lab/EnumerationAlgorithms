@@ -1,6 +1,6 @@
 SRCS	 = main.cpp Enum.cpp Graph.cpp
 CXX		 = g++
-CXXFLAGS = -Wall -std=c++11 -fdiagnostics-color -g
+CXXFLAGS = -Wall -std=c++11 -fdiagnostics-color -O3
 EXE		 = EBG
 
 EBG:$(SRCS)
