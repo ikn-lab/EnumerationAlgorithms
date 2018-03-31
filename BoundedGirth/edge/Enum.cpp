@@ -8,14 +8,14 @@
 #define DELIM 0
 // #define DEBUG
 using bigint = long long int;
-using triple = std::tuple<int, int, int>;//x, y, cost
+// using triple = std::tuple<int, int, int>;//x, y, cost
 
 std::vector<bigint> result;
 AddibleList<edge> solution;
 
 std::vector<int> A, tmp;
 std::vector<std::vector<int> > D;
-std::vector<triple> stack_D;//a stack for D
+std::vector<int> stack_D;//a stack for D
 std::vector<int> stack_G;
 int head_D = -1, head_G = -1, k;
 AddibleList<edge> Cin, Cout;
@@ -119,12 +119,15 @@ void updateDistance(Graph &G, edge e) {
       int x = A[i], y = A[j];
       int val = std::min(D[x][v] + D[u][y], D[x][u] + D[v][y]) + e.cost;
       if(val >= D[x][y])continue;
-      stack_D[++head_D] = triple(x, y, D[x][y]);
+      stack_D[head_D + 1] = x;
+      stack_D[head_D + 2] = y;
+      stack_D[head_D + 3] = D[x][y];
+      head_D += 3;
       D[x][y] = D[y][x] = val;
       cnt++;
     }
   }
-  stack_D[++head_D] = triple(-1, -1, cnt);
+  stack_D[++head_D] = cnt;
 }
 
 void restore(Graph &G, edge e, bool isInner){
@@ -144,11 +147,11 @@ void restore(Graph &G, edge e, bool isInner){
     }
     head_G--;
   }
-  int cnt = std::get<2>(stack_D[head_D--]);
-  for (int i = 0; i < cnt; i++) {
-    u    = std::get<0>(stack_D[head_D]);
-    v    = std::get<1>(stack_D[head_D]);
-    cost = std::get<2>(stack_D[head_D--]);
+  int cnt = stack_D[head_D--];
+  for (int i = 0; i < cnt; i++, head_D -= 3) {
+    u    = stack_D[head_D - 2];
+    v    = stack_D[head_D - 1];
+    cost = stack_D[head_D    ];
     D[u][v] = D[v][u] = cost;
   }
   deg[e.u]--, deg[e.v]--;
@@ -214,7 +217,7 @@ std::vector<bigint> EBGMain(Graph &G, int _k){
     D[i].resize(n, 1e9);
     D[i][i] = 0; 
   }
-  stack_D.resize(n*n*n);
+  stack_D.resize(3*n*n*n);
   stack_G.resize(2*m, 1e9);
   A.resize(n, 0), tmp.resize(n, 0);
   for (int i = 0; i < m; i++) {
