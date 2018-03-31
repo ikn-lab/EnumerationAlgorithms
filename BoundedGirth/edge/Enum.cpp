@@ -21,8 +21,16 @@ int head_D = -1, head_G = -1, k;
 AddibleList<edge> Cin, Cout;
 std::vector<int> deg;
 
+void print(std::vector<std::vector<int> > dist){
+  for (int i = 0; i < dist.size(); i++) {
+    for (int j = 0; j < dist[i].size(); j++) {
+      if(dist[i][j] != 1e9)printf("%2d ", dist[i][j]);
+      else printf("-1 ");
+    }
+    std::cout << std::endl;
+  }
+}
 void print(AddibleList<edge> &list){
-  
   for (int i = list.begin(); i != list.end(); i = list.GetNext(i)) {
     printf("%d %d %d\n", list[i].u, list[i].v, list[i].id);
   }
@@ -64,22 +72,22 @@ void updateCand(Graph &G, edge e, bool isInner) {
     int V[2] = {u, v};
     stack_G[++head_G] = DELIM;
     for (int i = 0; i < 2; i++) {
-      int x = V[i], y = V[(i + 1)&1];
-      for (int j = G[x].begin(); j != G[x].end() and deg[x] == 0; j = G[x].GetNext(i)) {
-        edge &f = G[x][i];
+      int x = V[i], y = V[((i + 1)&1)];
+      if(deg[x] != 0)continue;
+      for (int j = G[x].begin(); j != G[x].end(); j = G[x].GetNext(j)) {
+        edge &f = G[x][j];
         if(y == f.v)continue;
-        head_G++;
         if(D[y][f.v] + e.cost + f.cost < k){
-          i = G.RemoveEdge(f.id, x);
+          j = G.RemoveEdge(f.id, x);
           Cout.remove(f.id);
-          stack_G[head_G] = -1;
+          stack_G[++head_G] = -1;
         }else if(deg[f.v] > 0){
           Cin.add(f.id);
           Cout.remove(f.id);
-          stack_G[head_G] = -2;
+          stack_G[++head_G] = -2;
         }else{
           Cout.add(f.id);
-          stack_G[head_G] = -3;
+          stack_G[++head_G] = -3;
         }
       }
     }
@@ -112,7 +120,7 @@ void updateDistance(Graph &G, edge e) {
       int val = std::min(D[x][v] + D[u][y], D[x][u] + D[v][y]) + e.cost;
       if(val >= D[x][y])continue;
       stack_D[++head_D] = triple(x, y, D[x][y]);
-      D[x][y] = D[y][x] = val + e.cost;
+      D[x][y] = D[y][x] = val;
       cnt++;
     }
   }
@@ -212,14 +220,13 @@ std::vector<bigint> EBGMain(Graph &G, int _k){
   for (int i = 0; i < m; i++) {
     printf("now %d\n", i);
     edge &e = ve[i];
-    NextCand(G, e);
+    NextCand(G, e, false);
     RecEBG(G, k);
 #ifdef DEBUG
     printf("end Rec:%d/%d\n", i, m);
 #endif
-    restoreFirstEdge(G, e);
+    restore(G, e, false);
     // G.print();
   }
   return result;
 }
-

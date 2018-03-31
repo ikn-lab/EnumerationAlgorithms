@@ -5,7 +5,7 @@
 /* writer: kazuhiro kurita                                       */
 /*                                                               */
 ///////////////////////////////////////////////////////////////////
-// #define DEBUG
+#define DEBUG
 
 #include<iostream>
 #include<vector>
