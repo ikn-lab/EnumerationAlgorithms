@@ -26,7 +26,6 @@ private:
   int loop = 0, k;
   AddibleList<edge> Cin, Cout;
   edge GetCand();
-  void printStacks();
   void restore(edge e, bool isInner);
   void nextCand(edge e, bool isInner);
   void updateCand(edge e, bool isInner);

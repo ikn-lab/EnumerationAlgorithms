@@ -149,36 +149,6 @@ edge EBGIterator::GetCand(){
   return e;
 }
 
-// void EBGIterator::RecEBG(Graph &G, int k){
-//   {
-// #ifdef DEBUG
-//   printf("sol size %d\n", solution.size());
-//   printf("Cin\n");
-//   print(Cin);
-//   printf("Cout\n");
-//   print(Cout);
-//   printf("degree\n");
-//   for (int i = 0; i < G.size(); i++)
-//     printf("%d ", deg[i]);
-//   printf("\n\n");
-// #endif
-//   }
-//   if(Cin.empty() and Cout.empty()){
-//     result[solution.size()]++;
-//     return;
-//   }
-//   edge e;
-//   bool isInner = GetCand(e);
-//   nextCand(G, e, isInner);
-//   RecEBG(G, k); //back track 0
-//   restore(G, e, isInner);
-
-//   RecEBG(G, k); //back track 1
-//   G.undo();
-//   if(isInner)Cin.undo();
-//   else Cout.undo();
-// }
-
 
 bool EBGIterator::next(bool isBackTrack) {
   edge e;
@@ -186,23 +156,6 @@ bool EBGIterator::next(bool isBackTrack) {
   int x = 0;
   if(head_P >= 0)x = (stack_P[head_P] != 1);
   bool isInner = (deg[e.u] > x and deg[e.v] > x);
-  {
-#ifdef DEBUG
-  printf("sol size %d\n", solution.size());
-  printSolution();
-  // printStacks();
-  std::cout << "heads:" << std::endl;
-  std::cout << head_E << " " << head_P << std::endl;
-  printf("(%d, %d) isInner: %d\n", e.u, e.v, isInner);
-  printf("Cin\n");
-  print(Cin);
-  printf("Cout\n");
-  print(Cout);
-  printf("degree\n");
-  for (int i = 0; i < G.size(); i++) printf("%d ", deg[i]);
-  printf("\n");
-#endif
-  }
   if(solution.size() == 0 and loop == G.edgeSize())return false;//end
   // leaf iteration
   if(solution.size() != 0 and not isBackTrack and
@@ -286,16 +239,4 @@ void EBGIterator::printSolution(){
   for (int i = solution.begin(); i != solution.end(); i = solution.GetNext(i)) {
     std::cout << solution[i].u << " " << solution[i].v << std::endl;
   }
-}
-
-void EBGIterator::printStacks(){
-  std::cout << "Stacks:" << std::endl;
-  for (int i = head_E; i >= 0; i--) {
-    std::cout << stack_E[i].u << " " << stack_E[i].v << std::endl;
-  }
-  std::cout << "stack: position" << std::endl;
-  for (int i = head_E; i >= 0; i--) {
-    std::cout << stack_P[i] << std::endl;
-  }
-
 }
