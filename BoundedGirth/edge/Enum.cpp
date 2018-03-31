@@ -128,7 +128,7 @@ void EBGIterator::restore(edge e, bool isInner){
     }
     head_G--;
   }
-  int cnt = stack_D[head_D];
+  int cnt = stack_D[head_D--];
   for (int i = 0; i < cnt; i++, head_D -= 3) {
     cost = stack_D[head_D    ];
     v    = stack_D[head_D - 1];
