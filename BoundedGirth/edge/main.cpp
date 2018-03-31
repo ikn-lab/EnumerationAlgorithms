@@ -5,7 +5,7 @@
 /* writer: kazuhiro kurita                                       */
 /*                                                               */
 ///////////////////////////////////////////////////////////////////
-// #define DEBUG
+#define DEBUG
 
 #include<iostream>
 #include<vector>
@@ -46,11 +46,18 @@ int main(int argc, char *argv[]){
     G[v].push_back(edge(v, u, id++));
   }
   auto start = std::chrono::system_clock::now();
+  
   std::vector<bigint> ans(m, 0);
   EBGIterator EBG(G, k);
   std::cout << "run" << std::endl;
-  while(EBG.next())
+  while(EBG.next()) {
+    // EBG.printSolution();
     ans[EBG.solution.size()]++;
+  }
+  // while(EBG.next() and (getchar() == '\n')){
+  //   EBG.printSolution();
+  //   ans[EBG.solution.size()]++;
+  // }
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
   printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
