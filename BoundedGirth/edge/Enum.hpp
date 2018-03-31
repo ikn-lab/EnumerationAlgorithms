@@ -17,8 +17,8 @@ public:
   AddibleList<edge> solution;
 private:
   Graph G;
-  std::vector<bigint> result;
-  std::vector<std::vector<int> > D;
+  bigint *result;
+  int **D;
   //G:Graph, L:Loop, D:Distance, I:Inner, E:Edge
   int *stack_G, *stack_D, *stack_P, *A, *deg;
   edge *stack_E;

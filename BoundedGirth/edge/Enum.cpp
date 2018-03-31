@@ -6,7 +6,7 @@
 #include"Graph.hpp"
 #include"AddibleList.hpp"
 #define DELIM 0
-#define DEBUG
+// #define DEBUG
 using bigint = long long int;
 
 void print(AddibleList<edge> &list){
@@ -105,10 +105,7 @@ void EBGIterator::updateDistance(edge e) {
       cnt++;
     }
   }
-  stack_D[head_D + 1] = -1;
-  stack_D[head_D + 2] = -1;
-  stack_D[head_D + 3] = cnt;
-  head_D += 3;
+  stack_D[++head_D] = cnt;
 }
 
 void EBGIterator::restore(edge e, bool isInner){
@@ -184,7 +181,6 @@ edge EBGIterator::GetCand(){
 
 
 bool EBGIterator::next(bool isBackTrack) {
-  printf("\n");
   edge e;
   if(head_E >= 0)e = stack_E[head_E];
   int x = 0;
@@ -194,7 +190,7 @@ bool EBGIterator::next(bool isBackTrack) {
 #ifdef DEBUG
   printf("sol size %d\n", solution.size());
   printSolution();
-  printStacks();
+  // printStacks();
   std::cout << "heads:" << std::endl;
   std::cout << head_E << " " << head_P << std::endl;
   printf("(%d, %d) isInner: %d\n", e.u, e.v, isInner);
@@ -211,18 +207,15 @@ bool EBGIterator::next(bool isBackTrack) {
   // leaf iteration
   if(solution.size() != 0 and not isBackTrack and
      Cin.empty() and Cout.empty()){
-    printf("leaf iteration. \n");
     return next(true);    
   } 
   
   if(isBackTrack){
     if(head_E == 0){//first forward tracking
-      std::cout << "back to a root iteration" << std::endl;
       restore(e, isInner);
       head_E--, head_P--;
-      return next(true);
+      return next();
     }else if(stack_P[head_P] == 0){//down right
-      std::cout << "down right" << std::endl;
       restore(e, isInner);
       stack_P[head_P] = 1;
       return next();
@@ -231,7 +224,6 @@ bool EBGIterator::next(bool isBackTrack) {
       if(isInner)Cin.undo();
       else Cout.undo();
       head_E--, head_P--;
-      printf("back track\n");
       return next(true);
     }
   }
@@ -243,7 +235,6 @@ bool EBGIterator::next(bool isBackTrack) {
   stack_E[head_E] = e;
   stack_P[head_P] = 0;
   result[solution.size()]++;
-  std::cout << "down left" << std::endl;
   return true;
 }
 
@@ -251,8 +242,9 @@ EBGIterator::EBGIterator(std::vector<std::vector<edge> > _G, int _k):k(_k){
   G.init(_G);
   int n = G.size(), m = G.edgeSize();
   std::vector<edge> ve(m);
-  result.resize(m + 1, 0);
-  D.resize(n);
+  result = new bigint[m + 1];
+  result[0] = 1;
+  D = new int*[n];
   stack_D = new int[3*n*n*n];
   stack_G = new int[2*m];
   stack_P = new int[m];
@@ -260,19 +252,21 @@ EBGIterator::EBGIterator(std::vector<std::vector<edge> > _G, int _k):k(_k){
   deg = new int[n];
   A = new int[2*n];
   
+  for (int i = 1; i < m; i++) result[i] = 0;
+  
   for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) 
     for (int j = G[i].begin(); j != G[i].end(); j = G[i].GetNext(j)) 
       ve[G[i][j].id] = G[i][j];
-  
+
   Cin.init(ve), Cout.init(ve);
   solution.init(ve);
   
   for (int i = 0; i < n; i++) {
+    D[i] = new int[n];
+    for (int j = 0; j < n; j++) D[i][j] = 1e9;
     deg[i] = A[i] = A[i + n] = 0;
-    D[i].resize(n, 1e9);
     D[i][i] = 0; 
   }
-  result[0] = 1;
 }
 
 EBGIterator::~EBGIterator(){
@@ -282,6 +276,9 @@ EBGIterator::~EBGIterator(){
   delete stack_P;
   delete A;
   delete deg;
+  for (int i = 0; i < G.size(); i++)delete D[i];
+  delete D;
+  delete result;
 }
 
 void EBGIterator::printSolution(){

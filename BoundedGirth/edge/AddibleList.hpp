@@ -1,7 +1,7 @@
 #ifndef __ADDIBLELIST__
 #define __ADDIBLELIST__
 #include<vector>
-#define DEBUG
+// #define DEBUG
 template<typename T>
 class AddibleList{
 public:
