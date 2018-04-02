@@ -13,13 +13,10 @@ using bigint = long long int;
 std::vector<bigint> result;
 AddibleList<edge> solution;
 
-std::vector<int> A, tmp;
-std::vector<std::vector<int> > D;
-std::vector<int> stack_D;//a stack for D
-std::vector<int> stack_G;
+int *D;
+int *A, *stack_D, *stack_G, *deg;
 int head_D = -1, head_G = -1, k;
 AddibleList<edge> Cin, Cout;
-std::vector<int> deg;
 
 void print(std::vector<std::vector<int> > dist){
   for (int i = 0; i < dist.size(); i++) {
@@ -50,7 +47,7 @@ void NextCand(Graph &G, edge e, bool isInner){
 }
 
 void updateCand(Graph &G, edge e, bool isInner) {
-  int u = e.u, v = e.v;
+  int u = e.u, v = e.v, n = G.size();
   if(isInner) {
 #ifdef DEBUG
     printf("inner edge\n");
@@ -58,8 +55,8 @@ void updateCand(Graph &G, edge e, bool isInner) {
     stack_G[++head_G] = 1;
     for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i)) {
       edge &f = Cin[i];
-      int girth = std::min(D[f.u][u] + D[v][f.v], D[f.u][v] + D[u][f.v]) + e.cost + f.cost;
-      girth = std::min(girth, D[f.u][f.v] + f.cost);
+      int girth = std::min(D[f.u*n + u] + D[v*n + f.v], D[f.u*n + v] + D[u*n + f.v]) + e.cost + f.cost;
+      girth = std::min(girth, D[f.u*n + f.v] + f.cost);
       if(girth >= k)continue;
       i = Cin.remove(f.id);
       G.RemoveEdge(f.id);
@@ -77,7 +74,7 @@ void updateCand(Graph &G, edge e, bool isInner) {
       for (int j = G[x].begin(); j != G[x].end(); j = G[x].GetNext(j)) {
         edge &f = G[x][j];
         if(y == f.v)continue;
-        if(D[y][f.v] + e.cost + f.cost < k){
+        if(D[y*n + f.v] + e.cost + f.cost < k){
           j = G.RemoveEdge(f.id, x);
           Cout.remove(f.id);
           stack_G[++head_G] = -1;
@@ -97,33 +94,33 @@ void updateCand(Graph &G, edge e, bool isInner) {
 
 
 void updateDistance(Graph &G, edge e) {
-  int u = e.u, v = e.v, size = 0;
+  int u = e.u, v = e.v, size = 0, n = G.size();
   for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i)){
-    if(tmp[Cin[i].u] == 0) A[size++] = Cin[i].u;
-    if(tmp[Cin[i].v] == 0) A[size++] = Cin[i].v;
-    tmp[Cin[i].u]++, tmp[Cin[i].v]++;
+    if(A[n + Cin[i].u] == 0) A[size++] = Cin[i].u;
+    if(A[n + Cin[i].v] == 0) A[size++] = Cin[i].v;
+    A[n + Cin[i].u]++, A[n + Cin[i].v]++;
   }
   for (int i = Cout.begin(); i != Cout.end(); i=Cout.GetNext(i)) {
     edge &f = Cout[i];
-    if(deg[f.u] > 0 and tmp[f.u] == 0)A[size++] = f.u;
-    if(deg[f.v] > 0 and tmp[f.v] == 0)A[size++] = f.v;
-    tmp[f.u]++, tmp[f.v]++;
+    if(deg[f.u] > 0 and A[n + f.u] == 0)A[size++] = f.u;
+    if(deg[f.v] > 0 and A[n + f.v] == 0)A[size++] = f.v;
+    A[n + f.u]++, A[n + f.v]++;
   }
   for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i))
-    tmp[Cin[i].u]--, tmp[Cin[i].v]--;
+    A[n + Cin[i].u]--, A[n + Cin[i].v]--;
   for (int i = Cout.begin(); i != Cout.end(); i=Cout.GetNext(i))
-    tmp[Cout[i].u]--, tmp[Cout[i].v]--;
+    A[n + Cout[i].u]--, A[n + Cout[i].v]--;
   int cnt = 0;
   for (int i = 0; i < size; i++){
     for (int j = i + 1; j < size; j++){
       int x = A[i], y = A[j];
-      int val = std::min(D[x][v] + D[u][y], D[x][u] + D[v][y]) + e.cost;
-      if(val >= D[x][y])continue;
+      int val = std::min(D[x*n + v] + D[u*n + y], D[x*n + u] + D[v*n + y]) + e.cost;
+      if(val >= D[x*n + y])continue;
       stack_D[head_D + 1] = x;
       stack_D[head_D + 2] = y;
-      stack_D[head_D + 3] = D[x][y];
+      stack_D[head_D + 3] = D[x*n + y];
       head_D += 3;
-      D[x][y] = D[y][x] = val;
+      D[x*n + y] = D[y*n + x] = val;
       cnt++;
     }
   }
@@ -131,7 +128,7 @@ void updateDistance(Graph &G, edge e) {
 }
 
 void restore(Graph &G, edge e, bool isInner){
-  int u = e.u, v = e.v, cost = e.cost;
+  int u = e.u, v = e.v, cost = e.cost, n = G.size();
   solution.undo();
   if(isInner){//inner edge
     for (int i = 0; i < stack_G[head_G] - 1; i++) {
@@ -152,7 +149,7 @@ void restore(Graph &G, edge e, bool isInner){
     u    = stack_D[head_D - 2];
     v    = stack_D[head_D - 1];
     cost = stack_D[head_D    ];
-    D[u][v] = D[v][u] = cost;
+    D[u*n + v] = D[v*n + u] = cost;
   }
   deg[e.u]--, deg[e.v]--;
 }
@@ -212,14 +209,16 @@ std::vector<bigint> EBGMain(Graph &G, int _k){
   
   Cin.init(ve), Cout.init(ve);
   solution.init(ve);
-  D.resize(n), deg.resize(n, 0);
-  for (int i = 0; i < G.size(); i++) {
-    D[i].resize(n, 1e9);
-    D[i][i] = 0; 
+  D = new int[n*n];
+  deg = new int[n];
+  A = new int[2*n];
+  for (int i = 0; i < n; i++) {
+    deg[i] = A[i] = A[i + n] = 0;
+    for (int j = 0; j < n; j++)D[i*n + j] = 1e9;
+    D[i*n + i] = 0; 
   }
-  stack_D.resize(3*n*n*n);
-  stack_G.resize(2*m, 1e9);
-  A.resize(n, 0), tmp.resize(n, 0);
+  stack_D = new int[3*n*n*n];
+  stack_G = new int[2*m];
   for (int i = 0; i < m; i++) {
     printf("now %d\n", i);
     edge &e = ve[i];
