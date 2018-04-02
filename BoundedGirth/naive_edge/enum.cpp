@@ -39,8 +39,6 @@ bool Connectivity(Graph &g){
     }
     if(f) res &= used[i];
   }
-  // if(res)std::cout << "connect :-)" << std::endl;
-  // else std::cout << "not connect :-(" << std::endl;
   return res;
 }
 

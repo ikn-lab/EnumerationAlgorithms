@@ -4,8 +4,9 @@
 #include"Graph.hpp"
 #include"List.hpp"
 #include"Element.hpp"
+#define DEBUG
 
-Graph::Graph(std::vector<std::vector<edge> > _G) {
+void Graph::init(std::vector<std::vector<edge> > _G){
   n = _G.size(), m = 0;
   G.resize(n), deg.resize(n);
   std::vector<int> tmp(n);
@@ -29,7 +30,14 @@ Graph::Graph(std::vector<std::vector<edge> > _G) {
   next.resize(n + m);
 }
 
+
 int Graph::RemoveEdge(int id, int x){
+#ifdef DEBUG
+  if(id != elist.GetNext(elist.GetPrev(id))){
+    printf("%d is already removed. \n", id);
+    exit(1);
+  }
+#endif
   int u = elist[id].u, v = elist[id].v, res;
   if(u > v)std::swap(u, v);
   if(x == u)res = G[u].GetPrev(edge2vertex[id].first);

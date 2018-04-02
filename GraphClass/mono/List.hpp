@@ -42,7 +42,9 @@ void List<T>::init(std::vector<T> elem){
     list[i] = elem[i];
     next[i] = i + 1;
     prev[i] = i - 1;
+#ifdef DEBUG
     removed[i] = false;
+#endif
   }
   next[tail] = 0;
   prev[0] = tail;
@@ -61,7 +63,9 @@ void List<T>::init(int size) {
   for (int i = 0; i <= tail; i++) {
     next[i] = i + 1;
     prev[i] = i - 1;
+#ifdef DEBUG
     removed[i] = false;
+#endif
   }
   next[tail] = 0;
   prev[0] = tail;
@@ -81,7 +85,7 @@ template<typename T>
 void List<T>::remove(int id){
 #ifdef DEBUG
   if(removed[id]){
-    printf("%d is alredy removed.\n", id);
+    printf("%d is already removed.\n", id);
     std::exit(1);
   }
   removed[id] = true;

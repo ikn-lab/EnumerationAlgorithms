@@ -38,18 +38,26 @@ int main(int argc, char *argv[]){
   std::string tmp;
   getline(ist, tmp);
   sscanf(tmp.data(), "%d %d", &n, &m);
-  std::vector<std::vector<edge> > _G(n);
+  std::vector<std::vector<edge> > G(n);
   while(getline(ist, tmp)){
     int u, v;
     sscanf(tmp.data(), "%d %d", &u, &v);
-    _G[u].push_back(edge(u, v, id));
-    _G[v].push_back(edge(v, u, id++));
+    G[u].push_back(edge(u, v, id));
+    G[v].push_back(edge(v, u, id++));
   }
-  Graph G(_G);
-  std::cout << "n:" << G.size() << std::endl;
-  
   auto start = std::chrono::system_clock::now();
-  std::vector<bigint> ans = EBGMain(G, k);
+  
+  std::vector<bigint> ans(m, 0);
+  EBGIterator EBG(G, k);
+  std::cout << "run" << std::endl;
+  while(EBG.next()) {
+    // EBG.printSolution();
+    ans[EBG.solution.size()]++;
+  }
+  // while(EBG.next() and (getchar() == '\n')){
+  //   EBG.printSolution();
+  //   ans[EBG.solution.size()]++;
+  // }
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
   printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
@@ -63,6 +71,5 @@ int main(int argc, char *argv[]){
     std::cout << ans[i] << std::endl;
     sum += ans[i];
   }
-  // g.print();
   return 0;
 }
