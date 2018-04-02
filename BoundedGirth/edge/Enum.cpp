@@ -6,7 +6,7 @@
 #include"Graph.hpp"
 #include"AddibleList.hpp"
 #define DELIM 0
-// #define DEBUG
+#define DEBUG
 using bigint = long long int;
 
 void print(AddibleList<edge> &list){
@@ -16,24 +16,15 @@ void print(AddibleList<edge> &list){
 }
 
 void EBGIterator::nextCand(edge e, bool isInner){
-#ifdef DEBUG
-  printf("start nextCand\n");
-#endif // DEBUG
   solution.add(e.id);
   G.RemoveEdge(e.id);
   updateCand(e, isInner);
   updateDistance(e);
-#ifdef DEBUG
-  printf("end nextCand\n");
-#endif // DEBUG
 }
 
 void EBGIterator::updateCand(edge e, bool isInner) {
   int u = e.u, v = e.v;
   if(isInner) {
-#ifdef DEBUG
-    printf("inner edge\n");
-#endif
     stack_G[++head_G] = 1;
     for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i)) {
       edge &f = Cin[i];
@@ -45,9 +36,6 @@ void EBGIterator::updateCand(edge e, bool isInner) {
       stack_G[head_G]++;
     }
   }else{
-#ifdef DEBUG
-    printf("outer edge\n");
-#endif
     int V[2] = {u, v};
     stack_G[++head_G] = DELIM;
     for (int i = 0; i < 2; i++) {
@@ -155,48 +143,51 @@ edge EBGIterator::GetCand(){
   return e;
 }
 
-
 bool EBGIterator::next(bool isBackTrack) {
-  dentist = std::max(dentist, (double)solution.size()/sol_size);
-  if(solution.size() == 0){
-    if(loop == G.edgeSize())return false;//end 
-  }else{
-    // leaf iteration
-    if(not isBackTrack and
-       Cin.empty() and Cout.empty())return next(true);    
+  // dentist = std::max(dentist, (double)solution.size()/sol_size);
+  //root iteration
+  std::cout << "sol size:" << solution.size() << std::endl;
+  if(head - isBackTrack == -1){
+    if(loop == G.edgeSize())return false;//end
+    if(isBackTrack)restore(stack_E[head], false);
+    return traverse();
   }
-  
-  edge e = stack_E[head_E];
-  int x = (stack_P[head_P] != 1);
-  bool isInner = (deg[e.u] > x and deg[e.v] > x);
   // if(prune() and not isBackTrack)return next(true);
 
-  //down left
   if(isBackTrack){
-    if(stack_P[head_P] == 0){//down right
-      restore(e, isInner);
-      stack_P[head_P] = 1;
+    edge &e = stack_E[head];
+    printf("Cin\n"),  print(Cin);
+    printf("Cout\n"), print(Cout);
+    printSolution();
+    std::cout << "e:" << e.u << " " << e.v << std::endl;
+    std::cout << "stack_P:"<< stack_P[head] << std::endl;
+    std::cout << "deg: ";
+    for (int i = 0; i < G.size(); i++) 
+      std::cout << deg[i] << " ";
+    std::cout << std::endl;
+    if(stack_P[head] == 0){//down right
+      restore(e, (deg[e.u] > 1 and deg[e.v] > 1));
+      stack_P[head] = 1;
       return next();
     }
     //back tracking
-    if(head_E > 0){
-      G.undo();
-      if(isInner)Cin.undo();
-      else Cout.undo();
-    }
-    head_E--, head_P--;
+    head--;
+    G.undo();
+    if(deg[e.u] > 0 and deg[e.v] > 0)Cin.undo();
+    else Cout.undo();
     return next(true);
   }
+  // leaf iteration
+  if(Cin.empty() and Cout.empty()) return next(true);
   return traverse();  
 }
 
 bool EBGIterator::traverse(){
-  edge e;
-  e = GetCand();
+  edge e = GetCand();
+  head++;
+  stack_E[head] = e;
+  stack_P[head] = 0;
   nextCand(e, (deg[e.u] > 0 and deg[e.v] > 0));
-  head_E++, head_P++;
-  stack_E[head_E] = e;
-  stack_P[head_P] = 0;
   result[solution.size()]++;
   return true;
 }
@@ -216,7 +207,7 @@ EBGIterator::EBGIterator(std::vector<std::vector<edge> > _G, int _k):k(_k){
   deg = new int[n];
   A = new int[2*n];
   
-  for (int i = 1; i < m; i++) result[i] = 0;
+  for (int i = 1; i < m; i++) result[i] = 0, stack_P[i] = 1e9;
   
   for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) 
     for (int j = G[i].begin(); j != G[i].end(); j = G[i].GetNext(j)) 

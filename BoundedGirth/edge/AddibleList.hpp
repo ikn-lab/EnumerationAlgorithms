@@ -1,7 +1,7 @@
 #ifndef __ADDIBLELIST__
 #define __ADDIBLELIST__
 #include<vector>
-// #define DEBUG
+#define DEBUG
 template<typename T>
 class AddibleList{
 public:
@@ -117,7 +117,7 @@ void AddibleList<T>::undo(){
   int id = head;
 #ifdef DEBUG
   if(head == -1){
-    printf("stack is empty. ");
+    printf("addble:stack is empty. ");
     std::exit(1);
   }
   removed[id] = not removed[id];

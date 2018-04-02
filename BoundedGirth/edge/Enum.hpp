@@ -23,7 +23,7 @@ private:
   //G:Graph, L:Loop, D:Distance, I:Inner, E:Edge
   int *stack_G, *stack_D, *stack_P, *A, *deg;
   edge *stack_E;
-  int head_D = -1, head_G = -1,head_E = -1, head_P = -1;
+  int head_D = -1, head_G = -1, head = -1;
   int loop = 0, k, sol_size = 0;
   AddibleList<edge> Cin, Cout;
   edge GetCand();

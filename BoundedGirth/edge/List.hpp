@@ -1,6 +1,7 @@
 #ifndef __LIST__
 #define __LIST__
 #include<vector>
+#define DEBUG
 
 template<typename T>
 class List{
