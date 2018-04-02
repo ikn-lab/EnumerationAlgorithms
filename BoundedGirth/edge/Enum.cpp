@@ -6,66 +6,36 @@
 #include"Graph.hpp"
 #include"AddibleList.hpp"
 #define DELIM 0
-// #define DEBUG
+#define DEBUG
 using bigint = long long int;
-// using triple = std::tuple<int, int, int>;//x, y, cost
 
-std::vector<bigint> result;
-AddibleList<edge> solution;
-
-int *D;
-int *A, *stack_D, *stack_G, *deg;
-int head_D = -1, head_G = -1, k;
-AddibleList<edge> Cin, Cout;
-
-void print(std::vector<std::vector<int> > dist){
-  for (int i = 0; i < dist.size(); i++) {
-    for (int j = 0; j < dist[i].size(); j++) {
-      if(dist[i][j] != 1e9)printf("%2d ", dist[i][j]);
-      else printf("-1 ");
-    }
-    std::cout << std::endl;
-  }
-}
 void print(AddibleList<edge> &list){
   for (int i = list.begin(); i != list.end(); i = list.GetNext(i)) {
     printf("%d %d %d\n", list[i].u, list[i].v, list[i].id);
   }
 }
 
-void NextCand(Graph &G, edge e, bool isInner){
-#ifdef DEBUG
-  printf("start NextCand\n");
-#endif // DEBUG
+void EBGIterator::nextCand(edge e, bool isInner){
   solution.add(e.id);
   G.RemoveEdge(e.id);
-  updateCand(G, e, isInner);
-  updateDistance(G, e);
-#ifdef DEBUG
-  printf("end NextCand\n");
-#endif // DEBUG
+  updateCand(e, isInner);
+  updateDistance(e);
 }
 
-void updateCand(Graph &G, edge e, bool isInner) {
-  int u = e.u, v = e.v, n = G.size();
+void EBGIterator::updateCand(edge e, bool isInner) {
+  int u = e.u, v = e.v;
   if(isInner) {
-#ifdef DEBUG
-    printf("inner edge\n");
-#endif
     stack_G[++head_G] = 1;
     for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i)) {
       edge &f = Cin[i];
-      int girth = std::min(D[f.u*n + u] + D[v*n + f.v], D[f.u*n + v] + D[u*n + f.v]) + e.cost + f.cost;
-      girth = std::min(girth, D[f.u*n + f.v] + f.cost);
+      int girth = std::min(D[f.u][u] + D[v][f.v], D[f.u][v] + D[u][f.v]) + e.cost + f.cost;
+      girth = std::min(girth, D[f.u][f.v] + f.cost);
       if(girth >= k)continue;
       i = Cin.remove(f.id);
       G.RemoveEdge(f.id);
       stack_G[head_G]++;
     }
   }else{
-#ifdef DEBUG
-    printf("outer edge\n");
-#endif
     int V[2] = {u, v};
     stack_G[++head_G] = DELIM;
     for (int i = 0; i < 2; i++) {
@@ -74,7 +44,7 @@ void updateCand(Graph &G, edge e, bool isInner) {
       for (int j = G[x].begin(); j != G[x].end(); j = G[x].GetNext(j)) {
         edge &f = G[x][j];
         if(y == f.v)continue;
-        if(D[y*n + f.v] + e.cost + f.cost < k){
+        if(D[y][f.v] + e.cost + f.cost < k){
           j = G.RemoveEdge(f.id, x);
           Cout.remove(f.id);
           stack_G[++head_G] = -1;
@@ -89,11 +59,11 @@ void updateCand(Graph &G, edge e, bool isInner) {
       }
     }
   }
+  sol_size += (deg[e.u] == 0) + (deg[e.v] == 0);
   deg[e.u]++, deg[e.v]++;
 }
 
-
-void updateDistance(Graph &G, edge e) {
+void EBGIterator::updateDistance(edge e) {
   int u = e.u, v = e.v, size = 0, n = G.size();
   for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i)){
     if(A[n + Cin[i].u] == 0) A[size++] = Cin[i].u;
@@ -114,21 +84,21 @@ void updateDistance(Graph &G, edge e) {
   for (int i = 0; i < size; i++){
     for (int j = i + 1; j < size; j++){
       int x = A[i], y = A[j];
-      int val = std::min(D[x*n + v] + D[u*n + y], D[x*n + u] + D[v*n + y]) + e.cost;
-      if(val >= D[x*n + y])continue;
+      int val = std::min(D[x][v] + D[u][y], D[x][u] + D[v][y]) + e.cost;
+      if(val >= D[x][y])continue;
       stack_D[head_D + 1] = x;
       stack_D[head_D + 2] = y;
-      stack_D[head_D + 3] = D[x*n + y];
+      stack_D[head_D + 3] = D[x][y];
       head_D += 3;
-      D[x*n + y] = D[y*n + x] = val;
+      D[x][y] = D[y][x] = val;
       cnt++;
     }
   }
   stack_D[++head_D] = cnt;
 }
 
-void restore(Graph &G, edge e, bool isInner){
-  int u = e.u, v = e.v, cost = e.cost, n = G.size();
+void EBGIterator::restore(edge e, bool isInner){
+  int u = e.u, v = e.v, cost = e.cost;
   solution.undo();
   if(isInner){//inner edge
     for (int i = 0; i < stack_G[head_G] - 1; i++) {
@@ -146,89 +116,120 @@ void restore(Graph &G, edge e, bool isInner){
   }
   int cnt = stack_D[head_D--];
   for (int i = 0; i < cnt; i++, head_D -= 3) {
-    u    = stack_D[head_D - 2];
-    v    = stack_D[head_D - 1];
     cost = stack_D[head_D    ];
-    D[u*n + v] = D[v*n + u] = cost;
+    v    = stack_D[head_D - 1];
+    u    = stack_D[head_D - 2];
+    D[u][v] = D[v][u] = cost;
   }
   deg[e.u]--, deg[e.v]--;
+  sol_size -= (deg[e.u] == 0) + (deg[e.v] == 0);
 }
 
-  
-bool GetCand(edge &e){
-  if(not Cin.empty()){
+bool EBGIterator::prune(){
+  return (dentist*sol_size > Cin.size() + Cout.size() + solution.size());
+}
+
+edge EBGIterator::GetCand(){
+  edge e;
+  if(solution.size() == 0) {
+    return G.GetEdge(loop++);
+  }else if(not Cin.empty()){
     e = Cin[Cin.begin()];
     Cin.remove(e.id);
-    return true;
   }else{
     e = Cout[Cout.begin()];
     Cout.remove(e.id);
-    return false;
   }
+  return e;
 }
 
-
-void RecEBG(Graph &G, int k){
-#ifdef DEBUG
-  printf("sol size %d\n", solution.size());
-  printf("Cin\n");
-  print(Cin);
-  printf("Cout\n");
-  print(Cout);
-  printf("degree\n");
-  for (int i = 0; i < G.size(); i++)
-    printf("%d ", deg[i]);
-  printf("\n\n");
-#endif  
-  if(Cin.empty() and Cout.empty()){
-    result[solution.size()]++;
-    return;
-  }
-  edge e;
-  bool isInner = GetCand(e);
-  NextCand(G, e, isInner);
-  RecEBG(G, k);
-  restore(G, e, isInner);
+bool EBGIterator::next(bool isBackTrack) {
+  // dentist = std::max(dentist, (double)solution.size()/sol_size);
+  //root iteration
+  if(head == -1)return traverse();
+  edge &e = stack_E[head];
   
-  RecEBG(G, k);
-  G.undo();
-  if(isInner)Cin.undo();
-  else Cout.undo();
+  if(isBackTrack){
+    if(head == 0){
+      if(loop == G.edgeSize())return false;//end
+      restore(stack_E[head--], false);
+      return traverse();
+    }
+    if(stack_P[head] == 0){//down right
+      restore(e, (deg[e.u] > 1 and deg[e.v] > 1));
+      stack_P[head] = 1;
+      return next();
+    }
+    //back tracking
+    head--;
+    G.undo();
+    if(deg[e.u] > 0 and deg[e.v] > 0)Cin.undo();
+    else Cout.undo();
+    return next(true);
+  }
+  // if(prune() and not isBackTrack)return next(true);
+
+  // leaf iteration
+  if(Cin.empty() and Cout.empty()) return next(true);
+  return traverse();  
 }
 
-std::vector<bigint> EBGMain(Graph &G, int _k){
+bool EBGIterator::traverse(){
+  edge e = GetCand();
+  head++;
+  stack_E[head] = e;
+  stack_P[head] = 0;
+  nextCand(e, (deg[e.u] > 0 and deg[e.v] > 0));
+  result[solution.size()]++;
+  return true;
+}
+
+EBGIterator::EBGIterator(std::vector<std::vector<edge> > _G, int _k):k(_k){
+  G.init(_G);
   int n = G.size(), m = G.edgeSize();
   std::vector<edge> ve(m);
-  result.resize(m + 1, 0);
+  result = new bigint[m + 1];
   result[0] = 1;
-  k = _k;
+  D = new int*[n];
+  stack_D = new int[3*n*n*n];
+  stack_G = new int[2*m];
+  stack_P = new int[m];
+  stack_E = new edge[m];
+  deg = new int[n];
+  A = new int[2*n];
+  
+  for (int i = 1; i < m; i++) result[i] = 0, stack_P[i] = 1e9;
   
   for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) 
     for (int j = G[i].begin(); j != G[i].end(); j = G[i].GetNext(j)) 
       ve[G[i][j].id] = G[i][j];
-  
+
   Cin.init(ve), Cout.init(ve);
   solution.init(ve);
-  D = new int[n*n];
-  deg = new int[n];
-  A = new int[2*n];
+  
   for (int i = 0; i < n; i++) {
+    D[i] = new int[n];
+    for (int j = 0; j < n; j++) D[i][j] = 1e9;
     deg[i] = A[i] = A[i + n] = 0;
-    for (int j = 0; j < n; j++)D[i*n + j] = 1e9;
-    D[i*n + i] = 0; 
+    D[i][i] = 0; 
   }
-  stack_D = new int[3*n*n*n];
-  stack_G = new int[2*m];
-  for (int i = 0; i < m; i++) {
-    printf("now %d\n", i);
-    edge &e = ve[i];
-    NextCand(G, e, false);
-    RecEBG(G, k);
-#ifdef DEBUG
-    printf("end Rec:%d/%d\n", i, m);
-#endif
-    restore(G, e, false);
-    // G.print();
+}
+
+EBGIterator::~EBGIterator(){
+  delete stack_G;
+  delete stack_D;
+  delete stack_E;
+  delete stack_P;
+  delete A;
+  delete deg;
+  for (int i = 0; i < G.size(); i++)delete D[i];
+  delete D;
+  delete result;
+}
+
+void EBGIterator::printSolution(){
+  std::cout << "solution:" << std::endl;
+  for (int i = solution.begin(); i != solution.end(); i = solution.GetNext(i)) {
+    std::cout << solution[i].u << " " << solution[i].v << std::endl;
   }
-  return result;
 }

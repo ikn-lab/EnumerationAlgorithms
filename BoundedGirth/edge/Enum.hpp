@@ -7,11 +7,33 @@
 #include"Element.hpp"
 using bigint = long long int;
 
-void NextCand(Graph &G, edge e, bool isInner);
-void updateCand(Graph &G, edge e, bool isInner);
-void updateDistance(Graph &G, edge e);
-void restore(Graph &G, edge e, bool isInner);
-edge GetCand();
-std::vector<bigint> EBGMain(Graph &G, int _k);
+class EBGIterator{
+public:
+  EBGIterator(std::vector<std::vector<edge> > _G, int _k);
+  ~EBGIterator();
+  bool next(bool isBackTrack = false);
+  void playOut(){while(next());};
+  void printSolution();
+  AddibleList<edge> solution;
+private:
+  Graph G;
+  bigint *result;
+  double dentist = 0;
+  int **D;
+  //G:Graph, L:Loop, D:Distance, I:Inner, E:Edge
+  int *stack_G, *stack_D, *stack_P, *A, *deg;
+  edge *stack_E;
+  int head_D = -1, head_G = -1, head = -1;
+  int loop = 0, k, sol_size = 0;
+  AddibleList<edge> Cin, Cout;
+  edge GetCand();
+  void restore(edge e, bool isInner);
+  void nextCand(edge e, bool isInner);
+  void updateCand(edge e, bool isInner);
+  void updateDistance(edge e);
+  bool traverse();
+  bool prune();
+};
+
 
 #endif // __ENUM__
