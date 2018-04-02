@@ -41,7 +41,7 @@ int Graph::RemoveEdge(int id, int x){
   int u = elist[id].u, v = elist[id].v, res;
   if(u > v)std::swap(u, v);
   if(x == u)res = G[u].GetPrev(edge2vertex[id].first);
-  else res = G[v].GetPrev(edge2vertex[id].second);
+  if(x == v)res = G[v].GetPrev(edge2vertex[id].second);
   G[u].remove(edge2vertex[id].first);
   G[v].remove(edge2vertex[id].second);
   elist.remove(id);
