@@ -147,23 +147,14 @@ bool EBGIterator::next(bool isBackTrack) {
   // dentist = std::max(dentist, (double)solution.size()/sol_size);
   //root iteration
   if(head == -1)return traverse();
+  edge &e = stack_E[head];
   
   if(isBackTrack){
-    edge &e = stack_E[head];
     if(head == 0){
       if(loop == G.edgeSize())return false;//end
-      restore(stack_E[head], false);
+      restore(stack_E[head--], false);
       return traverse();
     }
-    // printf("Cin\n"),  print(Cin);
-    // printf("Cout\n"), print(Cout);
-    // printSolution();
-    // std::cout << "e:" << e.u << " " << e.v << std::endl;
-    // std::cout << "stack_P:"<< stack_P[head] << std::endl;
-    // std::cout << "deg: ";
-    // for (int i = 0; i < G.size(); i++) 
-    //   std::cout << deg[i] << " ";
-    // std::cout << std::endl;
     if(stack_P[head] == 0){//down right
       restore(e, (deg[e.u] > 1 and deg[e.v] > 1));
       stack_P[head] = 1;
