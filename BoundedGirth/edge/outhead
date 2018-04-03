@@ -1,0 +1,7000 @@
+1 0 0
+1 2 7
+1 3 8
+1 4 9
+1 5 10
+1 6 11
+1 7 12
+run
+ee:-1 -1
+head:-1 isBackTrack:0 stack_P:-1
+traverse
+hgoe:1 0
+solution:
+e:1 0
+Cin:
+Cout:
+deg:
+0 0 0 0 0 0 0 0 
+solution:
+1 0
+size:1
+ee:-1 -1
+head:0 isBackTrack:0 stack_P:0
+traverse
+hgoe:2 1
+solution:
+1 0
+e:2 1
+Cin:
+Cout:
+3 1 8
+4 1 9
+5 1 10
+6 1 11
+7 1 12
+2 0 1
+3 0 2
+4 0 3
+5 0 4
+6 0 5
+7 0 6
+deg:
+1 1 0 0 0 0 0 0 
+solution:
+1 0
+2 1
+size:2
+ee:2 1
+head:1 isBackTrack:0 stack_P:0
+traverse
+hgoe:3 1
+solution:
+1 0
+2 1
+e:3 1
+Cin:
+Cout:
+4 1 9
+5 1 10
+6 1 11
+7 1 12
+3 0 2
+4 0 3
+5 0 4
+6 0 5
+7 0 6
+3 2 13
+4 2 14
+5 2 15
+6 2 16
+7 2 17
+deg:
+1 2 1 0 0 0 0 0 
+solution:
+1 0
+2 1
+3 1
+size:3
+ee:2 1
+head:2 isBackTrack:0 stack_P:0
+traverse
+hgoe:4 1
+solution:
+1 0
+2 1
+3 1
+e:4 1
+Cin:
+Cout:
+5 1 10
+6 1 11
+7 1 12
+4 0 3
+5 0 4
+6 0 5
+7 0 6
+4 2 14
+5 2 15
+6 2 16
+7 2 17
+4 3 18
+5 3 19
+6 3 20
+7 3 21
+deg:
+1 3 1 1 0 0 0 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+size:4
+ee:2 1
+head:3 isBackTrack:0 stack_P:0
+traverse
+hgoe:5 1
+solution:
+1 0
+2 1
+3 1
+4 1
+e:5 1
+Cin:
+Cout:
+6 1 11
+7 1 12
+5 0 4
+6 0 5
+7 0 6
+5 2 15
+6 2 16
+7 2 17
+5 3 19
+6 3 20
+7 3 21
+5 4 22
+6 4 23
+7 4 24
+deg:
+1 4 1 1 1 0 0 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+size:5
+ee:2 1
+head:4 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 1
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+e:6 1
+Cin:
+Cout:
+7 1 12
+6 0 5
+7 0 6
+6 2 16
+7 2 17
+6 3 20
+7 3 21
+6 4 23
+7 4 24
+6 5 25
+7 5 26
+deg:
+1 5 1 1 1 1 0 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+size:6
+ee:2 1
+head:5 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 1
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+e:7 1
+Cin:
+Cout:
+7 0 6
+7 2 17
+7 3 21
+7 4 24
+7 5 26
+7 6 27
+deg:
+1 6 1 1 1 1 1 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 1
+size:7
+ee:2 1
+head:6 isBackTrack:0 stack_P:0
+ee:2 1
+head:6 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 1
+e:7 1 12
+ee:2 1
+head:6 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+e:7 0
+Cin:
+Cout:
+7 2 17
+7 3 21
+7 4 24
+7 5 26
+7 6 27
+deg:
+1 6 1 1 1 1 1 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+size:8
+ee:2 1
+head:7 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 2
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+e:7 2
+Cin:
+7 3 21
+7 4 24
+7 5 26
+7 6 27
+Cout:
+deg:
+2 6 1 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+size:9
+ee:2 1
+head:8 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+e:7 3
+Cin:
+7 4 24
+7 5 26
+7 6 27
+Cout:
+deg:
+2 6 2 1 1 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+size:10
+ee:2 1
+head:9 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+e:7 4
+Cin:
+7 5 26
+7 6 27
+Cout:
+deg:
+2 6 2 2 1 1 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+size:11
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 2 2 2 1 1 4 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+7 5
+size:12
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 2 2 2 1 5 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+7 5
+7 6
+size:13
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 2 2 1 1 4 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+7 6
+size:14
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 4
+e:7 4 24
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 2 2 1 1 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 5
+size:15
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 2 1 2 1 4 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 5
+7 6
+size:16
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 2 1 1 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 6
+size:17
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 3
+e:7 3 21
+ee:2 1
+head:9 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+e:7 4
+Cin:
+7 5 26
+7 6 27
+Cout:
+deg:
+2 6 2 1 1 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+size:18
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 2 1 2 1 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+7 5
+size:19
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 1 2 2 1 4 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+7 5
+7 6
+size:20
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 1 2 1 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+7 6
+size:21
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 4
+e:7 4 24
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 2 1 1 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 5
+size:22
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 1 1 2 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 5
+7 6
+size:23
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 1 1 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 6
+size:24
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:1
+ee:2 1
+head:8 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 2
+e:7 2 17
+ee:2 1
+head:8 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+e:7 3
+Cin:
+7 4 24
+7 5 26
+7 6 27
+Cout:
+deg:
+2 6 1 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+size:25
+ee:2 1
+head:9 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+e:7 4
+Cin:
+7 5 26
+7 6 27
+Cout:
+deg:
+2 6 1 2 1 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+size:26
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 1 2 2 1 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+7 5
+size:27
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 2 2 2 1 4 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+7 5
+7 6
+size:28
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 2 2 1 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+7 6
+size:29
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 4
+e:7 4 24
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 1 2 1 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 5
+size:30
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 2 1 2 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 5
+7 6
+size:31
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 2 1 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 6
+size:32
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 3
+e:7 3 21
+ee:2 1
+head:9 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+e:7 4
+Cin:
+7 5 26
+7 6 27
+Cout:
+deg:
+2 6 1 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+size:33
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 1 1 2 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+7 5
+size:34
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 1 2 2 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+7 5
+7 6
+size:35
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 1 2 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+7 6
+size:36
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 4
+e:7 4 24
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 1 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 5
+size:37
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 1 1 2 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 5
+7 6
+size:38
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 6
+size:39
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:1
+ee:2 1
+head:8 isBackTrack:1 stack_P:1
+ee:2 1
+head:7 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 0
+e:7 0 6
+ee:2 1
+head:7 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 2
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+e:7 2
+Cin:
+Cout:
+7 3 21
+7 4 24
+7 5 26
+7 6 27
+deg:
+1 6 1 1 1 1 1 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+size:40
+ee:2 1
+head:8 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+e:7 3
+Cin:
+7 4 24
+7 5 26
+7 6 27
+Cout:
+deg:
+1 6 2 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+size:41
+ee:2 1
+head:9 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+e:7 4
+Cin:
+7 5 26
+7 6 27
+Cout:
+deg:
+1 6 2 2 1 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+size:42
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 2 2 2 1 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+7 5
+size:43
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 2 2 2 1 4 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+7 5
+7 6
+size:44
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 2 2 1 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+7 6
+size:45
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 4
+e:7 4 24
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 2 2 1 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 5
+size:46
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 2 1 2 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 5
+7 6
+size:47
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 2 1 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 6
+size:48
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 3
+e:7 3 21
+ee:2 1
+head:9 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+e:7 4
+Cin:
+7 5 26
+7 6 27
+Cout:
+deg:
+1 6 2 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+size:49
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 2 1 2 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+7 5
+size:50
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 1 2 2 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+7 5
+7 6
+size:51
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 1 2 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+7 6
+size:52
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 4
+e:7 4 24
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 2 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 5
+size:53
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 1 1 2 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 5
+7 6
+size:54
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 6
+size:55
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:1
+ee:2 1
+head:8 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 2
+e:7 2 17
+ee:2 1
+head:8 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+e:7 3
+Cin:
+Cout:
+7 4 24
+7 5 26
+7 6 27
+deg:
+1 6 1 1 1 1 1 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+size:56
+ee:2 1
+head:9 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+e:7 4
+Cin:
+7 5 26
+7 6 27
+Cout:
+deg:
+1 6 1 2 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+size:57
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 1 2 2 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+7 5
+size:58
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 2 2 2 1 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+7 5
+7 6
+size:59
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 2 2 1 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+7 6
+size:60
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 4
+e:7 4 24
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 1 2 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 5
+size:61
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 2 1 2 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 5
+7 6
+size:62
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 2 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 6
+size:63
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 3
+e:7 3 21
+ee:2 1
+head:9 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+e:7 4
+Cin:
+Cout:
+7 5 26
+7 6 27
+deg:
+1 6 1 1 1 1 1 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+size:64
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+e:7 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 1 1 2 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+7 5
+size:65
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 1 2 2 1 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+7 5
+7 6
+size:66
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 1 2 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+7 6
+size:67
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 4
+e:7 4 24
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+e:7 5
+Cin:
+Cout:
+7 6 27
+deg:
+1 6 1 1 1 1 1 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 5
+size:68
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 1 1 2 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 5
+7 6
+size:69
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 5
+e:7 5 26
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 1 1 1 1 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 6
+size:70
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:1
+ee:2 1
+head:8 isBackTrack:1 stack_P:1
+ee:2 1
+head:7 isBackTrack:1 stack_P:1
+ee:2 1
+head:6 isBackTrack:1 stack_P:1
+ee:2 1
+head:5 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 1
+e:6 1 11
+ee:2 1
+head:5 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 1
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+e:7 1
+Cin:
+Cout:
+6 0 5
+7 0 6
+6 2 16
+7 2 17
+6 3 20
+7 3 21
+6 4 23
+7 4 24
+6 5 25
+7 5 26
+deg:
+1 5 1 1 1 1 0 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+size:71
+ee:2 1
+head:6 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+e:6 0
+Cin:
+Cout:
+6 2 16
+6 3 20
+6 4 23
+6 5 25
+7 6 27
+deg:
+1 6 1 1 1 1 0 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+size:72
+ee:2 1
+head:7 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 2
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+e:6 2
+Cin:
+6 3 20
+6 4 23
+6 5 25
+7 6 27
+Cout:
+deg:
+2 6 1 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+size:73
+ee:2 1
+head:8 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+e:6 3
+Cin:
+6 4 23
+6 5 25
+7 6 27
+Cout:
+deg:
+2 6 2 1 1 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+size:74
+ee:2 1
+head:9 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+e:6 4
+Cin:
+6 5 25
+7 6 27
+Cout:
+deg:
+2 6 2 2 1 1 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+size:75
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 2 2 2 1 4 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+6 5
+size:76
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 2 2 2 5 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 6
+size:77
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 2 2 1 4 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+7 6
+size:78
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 4
+e:6 4 23
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 2 2 1 1 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 5
+size:79
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 2 1 2 4 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 5
+7 6
+size:80
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 2 1 1 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+7 6
+size:81
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 3
+e:6 3 20
+ee:2 1
+head:9 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+e:6 4
+Cin:
+6 5 25
+7 6 27
+Cout:
+deg:
+2 6 2 1 1 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+size:82
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 2 1 2 1 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+6 5
+size:83
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 1 2 2 4 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+6 5
+7 6
+size:84
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 1 2 1 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+7 6
+size:85
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 4
+e:6 4 23
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 2 1 1 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 5
+size:86
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 1 1 2 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 5
+7 6
+size:87
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 2 1 1 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+7 6
+size:88
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:1
+ee:2 1
+head:8 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 2
+e:6 2 16
+ee:2 1
+head:8 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+e:6 3
+Cin:
+6 4 23
+6 5 25
+7 6 27
+Cout:
+deg:
+2 6 1 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+size:89
+ee:2 1
+head:9 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+e:6 4
+Cin:
+6 5 25
+7 6 27
+Cout:
+deg:
+2 6 1 2 1 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+size:90
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 1 2 2 1 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+6 5
+size:91
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 2 2 2 4 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+6 5
+7 6
+size:92
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 2 2 1 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+7 6
+size:93
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 4
+e:6 4 23
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 1 2 1 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 5
+size:94
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 2 1 2 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 5
+7 6
+size:95
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 2 1 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+7 6
+size:96
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 3
+e:6 3 20
+ee:2 1
+head:9 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+e:6 4
+Cin:
+6 5 25
+7 6 27
+Cout:
+deg:
+2 6 1 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+size:97
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 1 1 2 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+6 5
+size:98
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 1 2 2 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+6 5
+7 6
+size:99
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 1 2 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+7 6
+size:100
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 4
+e:6 4 23
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+2 6 1 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 5
+size:101
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 1 1 2 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 5
+7 6
+size:102
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+e:7 6
+Cin:
+Cout:
+deg:
+2 6 1 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+7 6
+size:103
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:1
+ee:2 1
+head:8 isBackTrack:1 stack_P:1
+ee:2 1
+head:7 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 0
+e:6 0 5
+ee:2 1
+head:7 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 2
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+e:6 2
+Cin:
+Cout:
+6 3 20
+6 4 23
+6 5 25
+7 6 27
+deg:
+1 6 1 1 1 1 0 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+size:104
+ee:2 1
+head:8 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+e:6 3
+Cin:
+6 4 23
+6 5 25
+7 6 27
+Cout:
+deg:
+1 6 2 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+size:105
+ee:2 1
+head:9 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+e:6 4
+Cin:
+6 5 25
+7 6 27
+Cout:
+deg:
+1 6 2 2 1 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+size:106
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 2 2 2 1 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+6 5
+size:107
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 2 2 2 4 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+6 5
+7 6
+size:108
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 2 2 1 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+7 6
+size:109
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 4
+e:6 4 23
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 2 2 1 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 5
+size:110
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 2 1 2 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 5
+7 6
+size:111
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 2 1 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+7 6
+size:112
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 3
+e:6 3 20
+ee:2 1
+head:9 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+e:6 4
+Cin:
+6 5 25
+7 6 27
+Cout:
+deg:
+1 6 2 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+size:113
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 2 1 2 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+6 5
+size:114
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 1 2 2 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+6 5
+7 6
+size:115
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 1 2 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+7 6
+size:116
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 4
+e:6 4 23
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 2 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 5
+size:117
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 1 1 2 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 5
+7 6
+size:118
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 2 1 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+7 6
+size:119
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:1
+ee:2 1
+head:8 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 2
+e:6 2 16
+ee:2 1
+head:8 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+e:6 3
+Cin:
+Cout:
+6 4 23
+6 5 25
+7 6 27
+deg:
+1 6 1 1 1 1 0 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+size:120
+ee:2 1
+head:9 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+e:6 4
+Cin:
+6 5 25
+7 6 27
+Cout:
+deg:
+1 6 1 2 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+size:121
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 1 2 2 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+6 5
+size:122
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 2 2 2 3 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+6 5
+7 6
+size:123
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 2 2 1 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+7 6
+size:124
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 4
+e:6 4 23
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 1 2 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 5
+size:125
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 2 1 2 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 5
+7 6
+size:126
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 2 1 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+7 6
+size:127
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 3
+e:6 3 20
+ee:2 1
+head:9 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+e:6 4
+Cin:
+Cout:
+6 5 25
+7 6 27
+deg:
+1 6 1 1 1 1 0 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+size:128
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+e:6 5
+Cin:
+7 6 27
+Cout:
+deg:
+1 6 1 1 2 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+6 5
+size:129
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 1 2 2 2 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+6 5
+7 6
+size:130
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 1 2 1 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+7 6
+size:131
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 4
+e:6 4 23
+ee:2 1
+head:10 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+e:6 5
+Cin:
+Cout:
+7 6 27
+deg:
+1 6 1 1 1 1 0 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 5
+size:132
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 5
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 1 1 2 1 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 5
+7 6
+size:133
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 5
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+6 5
+e:6 5 25
+ee:2 1
+head:11 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 6
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+e:7 6
+Cin:
+Cout:
+deg:
+1 6 1 1 1 1 0 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+7 6
+size:134
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+ee:2 1
+head:12 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+7 6
+e:7 6 27
+ee:2 1
+head:12 isBackTrack:0 stack_P:1
+ee:2 1
+head:12 isBackTrack:1 stack_P:1
+ee:2 1
+head:11 isBackTrack:1 stack_P:1
+ee:2 1
+head:10 isBackTrack:1 stack_P:1
+ee:2 1
+head:9 isBackTrack:1 stack_P:1
+ee:2 1
+head:8 isBackTrack:1 stack_P:1
+ee:2 1
+head:7 isBackTrack:1 stack_P:1
+ee:2 1
+head:6 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+7 1
+e:7 1 12
+ee:2 1
+head:6 isBackTrack:0 stack_P:1
+traverse
+hgoe:6 0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+e:6 0
+Cin:
+Cout:
+7 0 6
+6 2 16
+7 2 17
+6 3 20
+7 3 21
+6 4 23
+7 4 24
+6 5 25
+7 5 26
+deg:
+1 5 1 1 1 1 0 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+size:135
+ee:2 1
+head:7 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 2
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+e:6 2
+Cin:
+6 3 20
+6 4 23
+6 5 25
+Cout:
+7 0 6
+7 2 17
+7 3 21
+7 4 24
+7 5 26
+7 6 27
+deg:
+2 5 1 1 1 1 1 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+size:136
+ee:2 1
+head:8 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+e:6 3
+Cin:
+6 4 23
+6 5 25
+Cout:
+7 0 6
+7 2 17
+7 3 21
+7 4 24
+7 5 26
+7 6 27
+deg:
+2 5 2 1 1 1 2 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+size:137
+ee:2 1
+head:9 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+e:6 4
+Cin:
+6 5 25
+Cout:
+7 0 6
+7 2 17
+7 3 21
+7 4 24
+7 5 26
+7 6 27
+deg:
+2 5 2 2 1 1 3 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+size:138
+ee:2 1
+head:10 isBackTrack:0 stack_P:0
+traverse
+hgoe:6 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+e:6 5
+Cin:
+Cout:
+7 0 6
+7 2 17
+7 3 21
+7 4 24
+7 5 26
+7 6 27
+deg:
+2 5 2 2 2 1 4 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+size:139
+ee:2 1
+head:11 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+e:7 0
+Cin:
+Cout:
+7 2 17
+7 3 21
+7 4 24
+7 5 26
+7 6 27
+deg:
+2 5 2 2 2 2 5 0 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+size:140
+ee:2 1
+head:12 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 2
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+e:7 2
+Cin:
+7 3 21
+7 4 24
+7 5 26
+Cout:
+deg:
+3 5 2 2 2 2 5 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+size:141
+ee:2 1
+head:13 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+e:7 3
+Cin:
+7 4 24
+7 5 26
+Cout:
+deg:
+3 5 3 2 2 2 5 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+size:142
+ee:2 1
+head:14 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+e:7 4
+Cin:
+7 5 26
+Cout:
+deg:
+3 5 3 3 2 2 5 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+7 4
+size:143
+ee:2 1
+head:15 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+7 4
+e:7 5
+Cin:
+Cout:
+deg:
+3 5 3 3 3 2 5 4 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+7 4
+7 5
+size:144
+ee:2 1
+head:16 isBackTrack:0 stack_P:0
+ee:2 1
+head:16 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+7 4
+7 5
+e:7 5 26
+ee:2 1
+head:16 isBackTrack:0 stack_P:1
+ee:2 1
+head:16 isBackTrack:1 stack_P:1
+ee:2 1
+head:15 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+7 4
+e:7 4 24
+ee:2 1
+head:15 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+e:7 5
+Cin:
+Cout:
+deg:
+3 5 3 3 2 2 5 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+7 5
+size:145
+ee:2 1
+head:16 isBackTrack:0 stack_P:0
+ee:2 1
+head:16 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+7 5
+e:7 5 26
+ee:2 1
+head:16 isBackTrack:0 stack_P:1
+ee:2 1
+head:16 isBackTrack:1 stack_P:1
+ee:2 1
+head:15 isBackTrack:1 stack_P:1
+ee:2 1
+head:14 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 3
+e:7 3 21
+ee:2 1
+head:14 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+e:7 4
+Cin:
+7 5 26
+Cout:
+deg:
+3 5 3 2 2 2 5 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 4
+size:146
+ee:2 1
+head:15 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 4
+e:7 5
+Cin:
+Cout:
+deg:
+3 5 3 2 3 2 5 3 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 4
+7 5
+size:147
+ee:2 1
+head:16 isBackTrack:0 stack_P:0
+ee:2 1
+head:16 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 4
+7 5
+e:7 5 26
+ee:2 1
+head:16 isBackTrack:0 stack_P:1
+ee:2 1
+head:16 isBackTrack:1 stack_P:1
+ee:2 1
+head:15 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 4
+e:7 4 24
+ee:2 1
+head:15 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+e:7 5
+Cin:
+Cout:
+deg:
+3 5 3 2 2 2 5 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 5
+size:148
+ee:2 1
+head:16 isBackTrack:0 stack_P:0
+ee:2 1
+head:16 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+7 5
+e:7 5 26
+ee:2 1
+head:16 isBackTrack:0 stack_P:1
+ee:2 1
+head:16 isBackTrack:1 stack_P:1
+ee:2 1
+head:15 isBackTrack:1 stack_P:1
+ee:2 1
+head:14 isBackTrack:1 stack_P:1
+ee:2 1
+head:13 isBackTrack:1 stack_P:0
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 2
+e:7 2 17
+ee:2 1
+head:13 isBackTrack:0 stack_P:1
+traverse
+hgoe:7 3
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+e:7 3
+Cin:
+7 4 24
+7 5 26
+Cout:
+deg:
+3 5 2 2 2 2 5 1 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 3
+size:149
+ee:2 1
+head:14 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 4
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 3
+e:7 4
+Cin:
+7 5 26
+Cout:
+deg:
+3 5 2 3 2 2 5 2 
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 3
+7 4
+size:150
+ee:2 1
+head:15 isBackTrack:0 stack_P:0
+traverse
+hgoe:7 5
+solution:
+1 0
+2 1
+3 1
+4 1
+5 1
+6 0
+6 2
+6 3
+6 4
+6 5
+7 0
+7 3
+7 4
+e:7 5
+Cin:

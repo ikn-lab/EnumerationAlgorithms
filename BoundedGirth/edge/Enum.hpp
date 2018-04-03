@@ -12,13 +12,20 @@ public:
   EBGIterator(std::vector<std::vector<edge> > _G, int _k);
   ~EBGIterator();
   bool next(bool isBackTrack = false);
+  bool skip();
   void playOut(){while(next());};
   void printSolution();
+  void printG(int x);
+  int solutionSizeV(){return sol_size;};
+  int solutionSizeE(){return solution.size();};
+  int candSize(){return G.edgeSize() - head + solution.size();};
   AddibleList<edge> solution;
+  edge* dentist_solution;
+  int dense_solution_size = 0;
+  double density = 0;
 private:
   Graph G;
   bigint *result;
-  double dentist = 0;
   int **D;
   //G:Graph, L:Loop, D:Distance, I:Inner, E:Edge
   int *stack_G, *stack_D, *stack_P, *A, *deg;
@@ -32,14 +39,6 @@ private:
   void updateCand(edge e, bool isInner);
   void updateDistance(edge e);
   bool traverse();
-  bool prune();
 };
 
-
 #endif // __ENUM__
-
-
-
-
-
-
