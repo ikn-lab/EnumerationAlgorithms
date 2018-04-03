@@ -17,7 +17,7 @@
 #include"List.hpp"
 #include"Element.hpp"
 #include"AddibleList.hpp"
-
+#include"Fraction.hpp"
 using bigint = long long int;
 
 int main(int argc, char *argv[]){
@@ -60,20 +60,19 @@ int main(int argc, char *argv[]){
   for (int i = 0; i <= m; i++) ans[i] = 0;
   EBGIterator EBG(G, k);
   std::cout << "run" << std::endl;
-  // while(EBG.next() and (getchar() == '\n')){
-  //   while((prune == "-p") and (EBG.density*EBG.solutionSizeV() > EBG.candSize())){
-  //     if(EBG.skip() == false)break;
-  //   }
-  //   ans[EBG.solution.size()]++;
-  // }
-  while(EBG.next()) {
-    while((prune == "-p") and (EBG.density*EBG.solutionSizeV() > EBG.upperBound())){
-      if(EBG.skip() == false)break;
+  if(prune == "-p"){
+    while(EBG.next()) {
+      while(EBG.density.GetNume()*EBG.solutionSizeV() >
+            EBG.density.GetDeno()*EBG.upperBound()){
+        if(EBG.skip() == false)break;
+      }
+      ans[EBG.solution.size()]++;
     }
-    ans[EBG.solution.size()]++;
+  }else{
+    while(EBG.next()) ans[EBG.solution.size()]++;
   }
   std::cout << "dentist solution" << std::endl;
-  std::cout << "density:" << EBG.density << std::endl;
+  EBG.density.print();
   for (int i = 0; i < EBG.dense_solution_size; i++) {
     std::cout << EBG.dentist_solution[i].u << " " <<
               EBG.dentist_solution[i].v << std::endl;

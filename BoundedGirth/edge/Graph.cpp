@@ -4,7 +4,7 @@
 #include"Graph.hpp"
 #include"List.hpp"
 #include"Element.hpp"
-#define DEBUG
+// #define DEBUG
 
 void Graph::init(std::vector<std::vector<edge> > _G){
   n = _G.size(), m = 0;

@@ -11,16 +11,16 @@ public:
   ~AddibleList();
   void init(std::vector<T> elem);
   void init(int size);
-  T& operator[](const int id){return list[id];};
+  inline T& operator[](const int id){return list[id];};
   inline int GetNext(int id){return next[id];};
   inline int GetPrev(int id){return prev[id];};
   void set(T elem, int id){list[id] = elem;}
   int remove(int id);
   int add(int id);
   void undo();
-  int size(){return s;}
-  int end(){return tail;};
-  int begin(){return next[tail];};
+  inline int size(){return s;}
+  inline int end(){return tail;};
+  inline int begin(){return next[tail];};
   inline bool empty(){return begin() == end();};
 private:
   T *list;

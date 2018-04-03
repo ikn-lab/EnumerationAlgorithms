@@ -7,19 +7,9 @@
 #include"AddibleList.hpp"
 #define DELIM 0
 // #define DEBUG
-using bigint = long long int;
+// using bigint = long long int;
 
-void print(AddibleList<edge> &list){
-  for (int i = list.begin(); i != list.end(); i = list.GetNext(i)) {
-    printf("%d %d %d\n", list[i].u, list[i].v, list[i].id);
-  }
-}
 
-void EBGIterator::printG(int x){
-  for (int i = G[x].begin(); i != G[x].end(); i = G[x].GetNext(i)) {
-    printf("%d %d %d\n", G[x][i].u, G[x][i].v, G[x][i].id);
-  }
-}
 
 void EBGIterator::nextCand(edge e, bool isInner){
   solution.add(e.id);
@@ -158,8 +148,8 @@ bool EBGIterator::skip(){
 }
 
 bool EBGIterator::next(bool isBackTrack) {
-  if(density < (double)solution.size()/sol_size){
-    density = (double)solution.size()/sol_size;
+  if(density.GetNume()*sol_size < solution.size()*density.GetDeno()){
+    density = Fraction{solution.size(), sol_size};
     dense_solution_size = 0;
     for (int i = solution.begin(); i != solution.end(); i = solution.GetNext(i))
       dentist_solution[dense_solution_size++] = solution[i];

@@ -12,7 +12,7 @@ public:
   ~List();
   void init(std::vector<T> elem);
   void init(int size);
-  T& operator[](const int id){return list[id];};
+  inline T& operator[](const int id){return list[id];};
   inline int GetNext(int id){return next[id];};
   inline int GetPrev(int id){return prev[id];};
   void set(T elem, int id){list[id] = elem;};

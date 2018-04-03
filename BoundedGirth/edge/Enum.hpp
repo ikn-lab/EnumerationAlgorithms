@@ -5,6 +5,7 @@
 #include"Graph.hpp"
 #include"AddibleList.hpp"
 #include"Element.hpp"
+#include"Fraction.hpp"
 using bigint = long long int;
 
 class EBGIterator{
@@ -15,14 +16,13 @@ public:
   bool skip();
   void playOut(){while(next());};
   void printSolution();
-  void printG(int x);
-  int solutionSizeV(){return sol_size;};
-  int solutionSizeE(){return solution.size();};
-  int upperBound(){return G.edgeSize() + solution.size();};
+  inline int solutionSizeV(){return sol_size;};
+  inline int solutionSizeE(){return solution.size();};
+  inline int upperBound(){return G.edgeSize() + solution.size();};
   AddibleList<edge> solution;
   edge* dentist_solution;
   int dense_solution_size = 0;
-  double density = 0;
+  Fraction density;
 private:
   Graph G;
   bigint *result;

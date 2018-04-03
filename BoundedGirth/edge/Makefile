@@ -1,5 +1,5 @@
-SRCS	 = main.cpp Enum.cpp Graph.cpp
-CXX		 = g++
+SRCS	 = main.cpp Enum.cpp Graph.cpp Fraction.cpp
+CXX		 = g++-6
 CXXFLAGS = -Wall -std=c++11 -fdiagnostics-color -O3
 EXE		 = EBG
 
