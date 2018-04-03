@@ -1,4 +1,4 @@
-#README
+# README
 
 The implementation of enumeration algorithm for subgraphs with bounded girth. 
 
