@@ -36,11 +36,11 @@ int main(int argc, char *argv[]){
   }
   std::string prune = "";
   if(argc == 4){
-    if(std::string(argv[3]) != "p"){
+    if(std::string(argv[3]) != "-p"){
       std::cerr << "error. " << std::endl;
       exit(1);
     }
-    prune = "p";
+    prune = "-p";
   }
   int n, m, k = std::stoi(argv[2]), id = 0;
   std::string tmp;
