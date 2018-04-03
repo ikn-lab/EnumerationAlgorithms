@@ -14,6 +14,7 @@ void Graph::init(std::vector<std::vector<edge> > _G){
   vlist.init(tmp);
   for (int i = 0; i < n; i++) m += _G[i].size(), deg[i] = _G[i].size();
   m /= 2;
+  current_edge_size = m;
   std::vector<edge> ve(m);
   edge2vertex.resize(m);
   for (int i = 0; i < n; i++) {
@@ -45,6 +46,7 @@ int Graph::RemoveEdge(int id, int x){
   G[u].remove(edge2vertex[id].first);
   G[v].remove(edge2vertex[id].second);
   elist.remove(id);
+  current_edge_size--;
   deg[u]--, deg[v]--;
   next[id] = head;
   head = id;
@@ -60,6 +62,7 @@ int Graph::RemoveVertex(int id){
     if(u == id)G[v].remove(maxi);
     else G[u].remove(mini);
     elist.remove(eid);
+    current_edge_size--;
     deg[u]--, deg[v]--;
   }
   vlist.remove(id);
@@ -77,6 +80,7 @@ void Graph::undo(){
       if(u == id)G[v].undo();
       else G[u].undo();
       elist.undo();
+      current_edge_size++;
       deg[u]++, deg[v]++;
     }
   }else{
@@ -84,6 +88,7 @@ void Graph::undo(){
     G[u].undo();
     G[v].undo();
     elist.undo();
+    current_edge_size++;
     deg[u]++, deg[v]++;
   }
   head = next[head];

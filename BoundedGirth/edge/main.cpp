@@ -60,8 +60,14 @@ int main(int argc, char *argv[]){
   for (int i = 0; i <= m; i++) ans[i] = 0;
   EBGIterator EBG(G, k);
   std::cout << "run" << std::endl;
+  // while(EBG.next() and (getchar() == '\n')){
+  //   while((prune == "-p") and (EBG.density*EBG.solutionSizeV() > EBG.candSize())){
+  //     if(EBG.skip() == false)break;
+  //   }
+  //   ans[EBG.solution.size()]++;
+  // }
   while(EBG.next()) {
-    while((prune == "p") and (EBG.density*EBG.solutionSizeV() > EBG.candSize())){
+    while((prune == "-p") and (EBG.density*EBG.solutionSizeV() > EBG.upperBound())){
       if(EBG.skip() == false)break;
     }
     ans[EBG.solution.size()]++;
@@ -72,10 +78,6 @@ int main(int argc, char *argv[]){
     std::cout << EBG.dentist_solution[i].u << " " <<
               EBG.dentist_solution[i].v << std::endl;
   }
-  // while(EBG.next() and (getchar() == '\n')){
-  //   EBG.printSolution();
-  //   ans[EBG.solution.size()]++;
-  // }
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
   printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());

@@ -13,7 +13,7 @@ public:
   Graph(std::vector<std::vector<edge> > _G){init(_G);};
   void init(std::vector<std::vector<edge> > _G);
   int size(){return n;}
-  int edgeSize(){return m;}
+  int edgeSize(){return current_edge_size;}
   List<edge>& operator[](const int id){return G[id];}
   int RemoveEdge(int id, int x = -1);
   int RemoveVertex(int id);
@@ -27,7 +27,7 @@ public:
   void print();
   // int begin(){return G[n]}
 private:
-  int n, m, head;
+  int n, m, current_edge_size = 0, head;
   std::vector<List<edge> > G;
   List<int> vlist;
   List<edge> elist;

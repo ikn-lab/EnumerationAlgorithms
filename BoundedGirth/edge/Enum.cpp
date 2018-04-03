@@ -70,7 +70,7 @@ void EBGIterator::updateCand(edge e, bool isInner) {
 }
 
 void EBGIterator::updateDistance(edge e) {
-  int u = e.u, v = e.v, size = 0, n = G.size();
+  int u = e.u, v = e.v, size = 0;
   for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i)){
     if(A[n + Cin[i].u] == 0) A[size++] = Cin[i].u;
     if(A[n + Cin[i].v] == 0) A[size++] = Cin[i].v;
@@ -150,6 +150,7 @@ bool EBGIterator::skip(){
   if(head == 0){
     restore(stack_E[0], false);
     loop++;
+    if(loop >= m)return false;
     head--;
     return traverse();
   }
@@ -157,13 +158,13 @@ bool EBGIterator::skip(){
 }
 
 bool EBGIterator::next(bool isBackTrack) {
-            
   if(density < (double)solution.size()/sol_size){
     density = (double)solution.size()/sol_size;
     dense_solution_size = 0;
-    for (int i = solution.begin(); i != solution.end(); i = solution.GetNext(i)) dentist_solution[dense_solution_size++] = solution[i];
+    for (int i = solution.begin(); i != solution.end(); i = solution.GetNext(i))
+      dentist_solution[dense_solution_size++] = solution[i];
   }
-  if(loop == G.edgeSize())return false;//end
+  if(loop >= m)return false;//end
   //root iteration
   if(isBackTrack){
     edge &e = stack_E[head];
@@ -203,7 +204,7 @@ bool EBGIterator::traverse(){
 
 EBGIterator::EBGIterator(std::vector<std::vector<edge> > _G, int _k):k(_k){
   G.init(_G);
-  int n = G.size(), m = G.edgeSize();
+  n = G.size(), m = G.edgeSize();
   std::vector<edge> ve(m);
   result = new bigint[m + 1];
   result[0] = 1;
@@ -240,7 +241,7 @@ EBGIterator::~EBGIterator(){
   delete stack_P;
   delete A;
   delete deg;
-  for (int i = 0; i < G.size(); i++)delete D[i];
+  for (int i = 0; i < n; i++)delete D[i];
   delete D;
   delete result;
 }

@@ -18,7 +18,7 @@ public:
   void printG(int x);
   int solutionSizeV(){return sol_size;};
   int solutionSizeE(){return solution.size();};
-  int candSize(){return G.edgeSize() - head + solution.size();};
+  int upperBound(){return G.edgeSize() + solution.size();};
   AddibleList<edge> solution;
   edge* dentist_solution;
   int dense_solution_size = 0;
@@ -31,7 +31,7 @@ private:
   int *stack_G, *stack_D, *stack_P, *A, *deg;
   edge *stack_E;
   int head_D = -1, head_G = -1, head = -1;
-  int loop = 0, k, sol_size = 0;
+  int n, m, loop = 0, k, sol_size = 0;
   AddibleList<edge> Cin, Cout;
   edge GetCand();
   void restore(edge e, bool isInner);
