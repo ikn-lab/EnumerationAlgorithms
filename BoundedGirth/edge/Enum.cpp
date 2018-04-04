@@ -9,8 +9,6 @@
 // #define DEBUG
 // using bigint = long long int;
 
-
-
 void EBGIterator::nextCand(edge e, bool isInner){
   solution.add(e.id);
   G.RemoveEdge(e.id);

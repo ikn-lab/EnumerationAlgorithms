@@ -26,8 +26,8 @@ n: the number of vertices, m: the number of edges.
 	...
 	u_k v_k
 	elapsed time = execution time msec. 
-	the number of solution. 
-	i the number of solution with i edges. 
+	the number of solutions. 
+	i the number of solutions with i edges. 
 
 	
 
