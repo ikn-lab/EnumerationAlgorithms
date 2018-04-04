@@ -64,7 +64,8 @@ int main(int argc, char *argv[]){
     while(EBG.next()) {
       while(EBG.density.GetNume()*EBG.solutionSizeV() >
             EBG.density.GetDeno()*EBG.upperBound()){
-        if(EBG.skip() == false)break;
+        ans[EBG.solution.size()]++;
+        if(EBG.skip() == false) break;
       }
       ans[EBG.solution.size()]++;
     }
