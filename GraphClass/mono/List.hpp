@@ -1,7 +1,8 @@
 #ifndef __LIST__
 #define __LIST__
 #include<vector>
-#define DEBUG
+#include<memory>
+// #define DEBUG
 
 template<typename T>
 class List{
@@ -9,42 +10,40 @@ public:
   List(){};
   List(std::vector<T> elem){init(elem);};
   List(int size){init(size);};
-  ~List();
+  ~List(){};
+  List(List&& x){};
   void init(std::vector<T> elem);
   void init(int size);
-  T& operator[](const int id){return list[id];};
-  int GetNext(int id){return next[id];};
-  int GetPrev(int id){return prev[id];};
+  inline T& operator[](const int id){return list[id];};
+  inline int GetNext(int id){return next[id];};
+  inline int GetPrev(int id){return prev[id];};
   void set(T elem, int id){list[id] = elem;};
   void remove(int id);
   void undo();
-  int size(){return s;}
-  int end(){return tail;};
-  int begin(){return next[tail];};
+  inline int size(){return _size;}
+  inline int end(){return tail;};
+  inline int begin(){return next[tail];};
 private:
-  T* list;
-  int *next, *prev;
-  int tail, s, head = -1;
-  bool *removed;
+  std::unique_ptr<T[]> list;
+  std::unique_ptr<int[]> next, prev;
+  std::unique_ptr<bool[]> removed;
+  int tail, _size, head = -1;
 };
+
 
 //n-th element is sentinel
 template<typename T>
 void List<T>::init(std::vector<T> elem){
-  s    = tail = elem.size();
-  list = new T[tail];
-  next = new int[tail + 1];
-  prev = new int[tail + 1];
-#ifdef DEBUG
-  removed = new bool[tail];
-#endif
+  _size   = tail = elem.size();
+  list    = std::make_unique<T[]>(tail);
+  next    = std::make_unique<int[]>(tail + 1);
+  prev    = std::make_unique<int[]>(tail + 1);
+  removed = std::make_unique<bool[]>(tail);
   for (int i = 0; i < tail; i++) {
     list[i] = elem[i];
     next[i] = i + 1;
     prev[i] = i - 1;
-#ifdef DEBUG
     removed[i] = false;
-#endif
   }
   next[tail] = 0;
   prev[0] = tail;
@@ -53,33 +52,20 @@ void List<T>::init(std::vector<T> elem){
 //n-th element is sentinel
 template<typename T>
 void List<T>::init(int size) {
-  s    = tail = size;
-  list = new T[tail];
-  next = new int[tail + 1];
-  prev = new int[tail + 1];
-#ifdef DEBUG
-  removed = new bool[tail];
-#endif
+  _size   = tail = size;
+  list    = std::make_unique<T[]>(tail);
+  next    = std::make_unique<int[]>(tail + 1);
+  prev    = std::make_unique<int[]>(tail + 1);
+  removed = std::make_unique<bool[]>(tail);
   for (int i = 0; i <= tail; i++) {
     next[i] = i + 1;
     prev[i] = i - 1;
-#ifdef DEBUG
     removed[i] = false;
-#endif
   }
   next[tail] = 0;
   prev[0] = tail;
 }
 
-
-template<typename T>
-List<T>::~List(){
-  delete next;
-  delete prev;
-#ifdef DEBUG
-  delete removed;
-#endif
-}
 
 template<typename T>
 void List<T>::remove(int id){
@@ -88,9 +74,9 @@ void List<T>::remove(int id){
     printf("%d is already removed.\n", id);
     std::exit(1);
   }
-  removed[id] = true;
 #endif
-  s--;
+  removed[id] = true;
+  _size--;
   prev[next[id]] = prev[id];
   next[prev[id]] = next[id];
   next[id] = head;
@@ -104,14 +90,14 @@ void List<T>::undo(){
     printf("stack is empty. ");
     std::exit(1);
   }
-  removed[head] = false;
 #endif
-  s++;
+  removed[head] = false;
+  _size++;
   int id = head;
   head = next[id];
   next[id] = next[prev[id]];
-  prev[next[prev[id]]] = next[prev[id]] = id;
+  prev[next[id]] = id;
+  next[prev[id]] = id;
 }
-
 
 #endif // __LIST__

@@ -11,11 +11,11 @@ int main(){
   std::cout << G.size() << std::endl;
   for (int i = 0; i < m; i++) {
     edge e;
-    std::cin >> e.u >> e.v;
+    std::cin >> e.from >> e.to;
     e.cost = 1;
     e.id = i;
-    G[e.u].push_back(e);
-    G[e.v].push_back(edge(e.v, e.u, i, e.cost));
+    G[e.from].push_back(e);
+    G[e.to].push_back(edge(e.to, e.from, i, e.cost));
   }
   Graph H(G);
   H.print();
@@ -25,3 +25,4 @@ int main(){
   H.print();
   return 0;
 }
+

@@ -17,13 +17,13 @@ void EBGIterator::nextCand(edge e, bool isInner){
 }
 
 void EBGIterator::updateCand(edge e, bool isInner) {
-  int u = e.u, v = e.v;
+  int u = e.from, v = e.to;
   if(isInner) {
     stack_G[++head_G] = 1;
     for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i)) {
       edge &f = Cin[i];
-      int girth = std::min(D[f.u][u] + D[v][f.v], D[f.u][v] + D[u][f.v]) + e.cost + f.cost;
-      girth = std::min(girth, D[f.u][f.v] + f.cost);
+      int girth = std::min(D[f.from][u] + D[v][f.to], D[f.from][v] + D[u][f.to]) + e.cost + f.cost;
+      girth = std::min(girth, D[f.from][f.to] + f.cost);
       if(girth >= k)continue;
       i = Cin.remove(f.id);
       G.RemoveEdge(f.id);
@@ -37,12 +37,12 @@ void EBGIterator::updateCand(edge e, bool isInner) {
       if(deg[x] != 0)continue;
       for (int j = G[x].begin(); j != G[x].end(); j = G[x].GetNext(j)) {
         edge &f = G[x][j];
-        if(y == f.v)continue;
-        if(D[y][f.v] + e.cost + f.cost < k){
+        if(y == f.to)continue;
+        if(D[y][f.to] + e.cost + f.cost < k){
           j = G.RemoveEdge(f.id, x);
           Cout.remove(f.id);
           stack_G[++head_G] = -1;
-        }else if(deg[f.v] > 0){
+        }else if(deg[f.to] > 0){
           Cin.add(f.id);
           Cout.remove(f.id);
           stack_G[++head_G] = -2;
@@ -53,27 +53,27 @@ void EBGIterator::updateCand(edge e, bool isInner) {
       }
     }
   }
-  sol_size += (deg[e.u] == 0) + (deg[e.v] == 0);
-  deg[e.u]++, deg[e.v]++;
+  sol_size += (deg[e.from] == 0) + (deg[e.to] == 0);
+  deg[e.from]++, deg[e.to]++;
 }
 
 void EBGIterator::updateDistance(edge e) {
-  int u = e.u, v = e.v, size = 0;
+  int u = e.from, v = e.to, size = 0;
   for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i)){
-    if(A[n + Cin[i].u] == 0) A[size++] = Cin[i].u;
-    if(A[n + Cin[i].v] == 0) A[size++] = Cin[i].v;
-    A[n + Cin[i].u]++, A[n + Cin[i].v]++;
+    if(A[n + Cin[i].from] == 0) A[size++] = Cin[i].from;
+    if(A[n + Cin[i].to] == 0) A[size++] = Cin[i].to;
+    A[n + Cin[i].from]++, A[n + Cin[i].to]++;
   }
   for (int i = Cout.begin(); i != Cout.end(); i=Cout.GetNext(i)) {
     edge &f = Cout[i];
-    if(deg[f.u] > 0 and A[n + f.u] == 0)A[size++] = f.u;
-    if(deg[f.v] > 0 and A[n + f.v] == 0)A[size++] = f.v;
-    A[n + f.u]++, A[n + f.v]++;
+    if(deg[f.from] > 0 and A[n + f.from] == 0)A[size++] = f.from;
+    if(deg[f.to] > 0 and A[n + f.to] == 0)A[size++] = f.to;
+    A[n + f.from]++, A[n + f.to]++;
   }
   for (int i = Cin.begin(); i != Cin.end(); i=Cin.GetNext(i))
-    A[n + Cin[i].u]--, A[n + Cin[i].v]--;
+    A[n + Cin[i].from]--, A[n + Cin[i].to]--;
   for (int i = Cout.begin(); i != Cout.end(); i=Cout.GetNext(i))
-    A[n + Cout[i].u]--, A[n + Cout[i].v]--;
+    A[n + Cout[i].from]--, A[n + Cout[i].to]--;
   int cnt = 0;
   for (int i = 0; i < size; i++){
     for (int j = i + 1; j < size; j++){
@@ -92,7 +92,7 @@ void EBGIterator::updateDistance(edge e) {
 }
 
 void EBGIterator::restore(edge e, bool isInner){
-  int u = e.u, v = e.v, cost = e.cost;
+  int u = e.from, v = e.to, cost = e.cost;
   solution.undo();
   if(isInner){//inner edge
     for (int i = 0; i < stack_G[head_G] - 1; i++) {
@@ -115,8 +115,8 @@ void EBGIterator::restore(edge e, bool isInner){
     u    = stack_D[head_D - 2];
     D[u][v] = D[v][u] = cost;
   }
-  deg[e.u]--, deg[e.v]--;
-  sol_size -= (deg[e.u] == 0) + (deg[e.v] == 0);
+  deg[e.from]--, deg[e.to]--;
+  sol_size -= (deg[e.from] == 0) + (deg[e.to] == 0);
 }
 
 edge EBGIterator::GetCand(){
@@ -162,14 +162,14 @@ bool EBGIterator::next(bool isBackTrack) {
       return traverse();
     }
     if(stack_P[head] == 0){//down right
-      restore(e, (deg[e.u] > 1 and deg[e.v] > 1));
+      restore(e, (deg[e.from] > 1 and deg[e.to] > 1));
       stack_P[head] = 1;
       return next();
     }
     head--;
     //back tracking
     G.undo();
-    if(deg[e.u] > 0 and deg[e.v] > 0)Cin.undo();
+    if(deg[e.from] > 0 and deg[e.to] > 0)Cin.undo();
     else Cout.undo();
     return next(true);
   }
@@ -185,7 +185,7 @@ bool EBGIterator::traverse(){
   head++;
   stack_E[head] = e;
   stack_P[head] = 0;
-  nextCand(e, (deg[e.u] > 0 and deg[e.v] > 0));
+  nextCand(e, (deg[e.from] > 0 and deg[e.to] > 0));
   result[solution.size()]++;
   return true;
 }
@@ -237,6 +237,6 @@ EBGIterator::~EBGIterator(){
 void EBGIterator::printSolution(){
   std::cout << "solution:" << std::endl;
   for (int i = solution.begin(); i != solution.end(); i = solution.GetNext(i)) {
-    std::cout << solution[i].u << " " << solution[i].v << std::endl;
+    std::cout << solution[i].from << " " << solution[i].to << std::endl;
   }
 }

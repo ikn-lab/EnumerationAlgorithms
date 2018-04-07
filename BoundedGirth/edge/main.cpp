@@ -75,8 +75,8 @@ int main(int argc, char *argv[]){
   std::cout << "dentist solution" << std::endl;
   EBG.density.print();
   for (int i = 0; i < EBG.dense_solution_size; i++) {
-    std::cout << EBG.dentist_solution[i].u << " " <<
-              EBG.dentist_solution[i].v << std::endl;
+    std::cout << EBG.dentist_solution[i].from << " " <<
+              EBG.dentist_solution[i].to << std::endl;
   }
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;

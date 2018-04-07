@@ -3,11 +3,17 @@
 
 class edge{
 public:
-  edge():u(-1), v(-1), id(1), cost(-1){};
-  edge(int _u, int _v, int i, int c = 1):
-    u(_u), v(_v), id(i), cost(c){}
-  int u, v, id, cost = 1;
+  edge():from(-1), to(-1), id(1), cost(-1){};
+  edge(int f, int t, int i, int c = 1):
+    from(f), to(to), id(i), cost(c){}
+  int from, to, id, cost = 1;
 };
 
 #endif // __ELEMENT__
+
+
+
+
+
+
 

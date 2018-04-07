@@ -1,14 +1,15 @@
 #include<iostream>
 #include<vector>
 
-#include"Graph.hpp"
+#include"Digraph.hpp"
 #include"List.hpp"
 #include"Element.hpp"
 // #define DEBUG
 
-void Graph::init(std::vector<std::vector<edge> > _G){
+void Digraph::init(std::vector<std::vector<edge> > _G){
   n = _G.size(), m = 0;
-  G.resize(n);
+  G.resize(n), RevG.resize(n);
+  std::vector<std::vector<edge> > _RevG(n);
   std::vector<int> tmp(n);
   for (int i = 0; i < n; i++) tmp[i] = i;
   vlist.init(tmp);
@@ -16,23 +17,23 @@ void Graph::init(std::vector<std::vector<edge> > _G){
   m /= 2;
   current_edge_size = m;
   std::vector<edge> ve(m);
-  edge2vertex.resize(m);
+  pos.resize(m);
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < _G[i].size(); j++) {
-      if(_G[i][j].from != i)std::swap(_G[i][j].from, _G[i][j].to);
-      int id = _G[i][j].id;
-      ve[id] = _G[i][j];
-      edge2vertex[id].first = edge2vertex[id].second;
-      edge2vertex[id].second = j;
+      edge e = _G[i][j].id;
+      ve[e.id] = _G[i][j];
+      pos[e.id].first  = j;
+      pos[e.id].second = _RevG[e.to].size();
+      _RevG[e.to].push_back(edge(e.to, e.from, e.id));
     }
   }
   elist.init(ve);
-  for (int i = 0; i < n; i++) G[i].init(_G[i]);
+  for (int i = 0; i < n; i++) G[i].init(_G[i]), RevG[i].init(_RevG[i]);
   next.resize(n + m);
 }
 
 
-int Graph::RemoveEdge(int id, int x){
+int Digraph::RemoveEdge(int id){
 #ifdef DEBUG
   if(id != elist.GetNext(elist.GetPrev(id))){
     printf("%d is already removed. \n", id);
@@ -41,10 +42,9 @@ int Graph::RemoveEdge(int id, int x){
 #endif
   int u = elist[id].from, v = elist[id].to, res;
   if(u > v)std::swap(u, v);
-  if(x == u)res = G[u].GetPrev(edge2vertex[id].first);
-  if(x == v)res = G[v].GetPrev(edge2vertex[id].second);
-  G[u].remove(edge2vertex[id].first);
-  G[v].remove(edge2vertex[id].second);
+  res = G[u].GetPrev(pos[id].first);
+  G[u].remove(pos[id].first);
+  RevG[v].remove(pos[id].second);
   elist.remove(id);
   current_edge_size--;
   next[id] = head;
@@ -52,14 +52,11 @@ int Graph::RemoveEdge(int id, int x){
   return res;
 }
 
-int Graph::RemoveVertex(int id){
-  for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
-    int u = G[id][i].from ,v = G[id][i].to;
-    int eid = G[id][i].id;
-    int maxi = std::max(edge2vertex[eid].first, edge2vertex[eid].second);
-    int mini = std::min(edge2vertex[eid].first, edge2vertex[eid].second);
-    if(u == id)G[v].remove(maxi);
-    else G[u].remove(mini);
+int Digraph::RemoveVertex(int id){
+  for (int i = RevG[id].begin(); i != RevG[id].end(); i = RevG[id].GetNext(i)) {
+    int u = RevG[id][i].from ,v = RevG[id][i].to;
+    int eid = RevG[id][i].id;
+    G[v].remove(pos[eid].first);
     elist.remove(eid);
     current_edge_size--;
   }
@@ -69,7 +66,7 @@ int Graph::RemoveVertex(int id){
   return vlist.GetPrev(id);
 }
 
-void Graph::undo(){
+void Digraph::undo(){
   int u, v;
   if(head >= m){
     int id = head - m;
@@ -90,7 +87,7 @@ void Graph::undo(){
   head = next[head];
 }
 
-void Graph::print(){
+void Digraph::print(){
   for (int i = vlist.begin(); i != vlist.end(); i = vlist.GetNext(i)) {
     std::cout << "i:" << i << std::endl;
     for (int j = G[i].begin(); j != G[i].end(); j = G[i].GetNext(j)) {

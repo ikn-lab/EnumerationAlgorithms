@@ -16,14 +16,14 @@ void Graph::init(std::vector<std::vector<edge> > _G){
   m /= 2;
   current_edge_size = m;
   std::vector<edge> ve(m);
-  edge2vertex.resize(m);
+  pos.resize(m);
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < _G[i].size(); j++) {
       if(_G[i][j].from != i)std::swap(_G[i][j].from, _G[i][j].to);
       int id = _G[i][j].id;
       ve[id] = _G[i][j];
-      edge2vertex[id].first = edge2vertex[id].second;
-      edge2vertex[id].second = j;
+      pos[id].first = pos[id].second;
+      pos[id].second = j;
     }
   }
   elist.init(ve);
@@ -41,10 +41,10 @@ int Graph::RemoveEdge(int id, int x){
 #endif
   int u = elist[id].from, v = elist[id].to, res;
   if(u > v)std::swap(u, v);
-  if(x == u)res = G[u].GetPrev(edge2vertex[id].first);
-  if(x == v)res = G[v].GetPrev(edge2vertex[id].second);
-  G[u].remove(edge2vertex[id].first);
-  G[v].remove(edge2vertex[id].second);
+  if(x == u)res = G[u].GetPrev(pos[id].first);
+  if(x == v)res = G[v].GetPrev(pos[id].second);
+  G[u].remove(pos[id].first);
+  G[v].remove(pos[id].second);
   elist.remove(id);
   current_edge_size--;
   next[id] = head;
@@ -56,8 +56,8 @@ int Graph::RemoveVertex(int id){
   for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
     int u = G[id][i].from ,v = G[id][i].to;
     int eid = G[id][i].id;
-    int maxi = std::max(edge2vertex[eid].first, edge2vertex[eid].second);
-    int mini = std::min(edge2vertex[eid].first, edge2vertex[eid].second);
+    int maxi = std::max(pos[eid].first, pos[eid].second);
+    int mini = std::min(pos[eid].first, pos[eid].second);
     if(u == id)G[v].remove(maxi);
     else G[u].remove(mini);
     elist.remove(eid);
