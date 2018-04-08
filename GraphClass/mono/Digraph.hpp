@@ -12,7 +12,7 @@ public:
   Digraph(){};
   Digraph(std::vector<std::vector<edge> > _G){init(_G);};
   void init(std::vector<std::vector<edge> > _G);
-  inline int size(){return n;}
+  inline int size(){return vlist.size();}
   inline int edgeSize(){return current_edge_size;}
   inline List<edge>& operator[](const int id){return G[id];}
   int RemoveEdge(int id);
@@ -26,8 +26,7 @@ public:
   inline int GetOutDeg(int id){return G[id].size();};
   inline edge GetEdge(int id){return elist[id];};
   void print();
-  // int begin(){return G[n]}
-private:
+protected:
   int n, m, current_edge_size = 0, head;
   std::vector<List<edge> > G, RevG;
   List<int> vlist;

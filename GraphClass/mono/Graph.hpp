@@ -26,7 +26,7 @@ public:
   inline edge GetEdge(int id){return elist[id];};
   void print();
   // int begin(){return G[n]}
-private:
+protected:
   int n, m, current_edge_size = 0, head;
   std::vector<List<edge> > G;
   List<int> vlist;

@@ -11,6 +11,7 @@ public:
   AddibleList(std::vector<T> elem, int multi = 1){init(elem, multi);};
   AddibleList(int size, int multi = 1){init(size, multi);};
   ~AddibleList(){};
+  AddibleList(const AddibleList<T> &&x){};
   void init(std::vector<T> elem, int multi = 1);
   void init(int size, int multi = 1);
   inline T& operator[](const int id){return list[id];};
@@ -26,6 +27,7 @@ public:
   inline int begin(int type = 0){return next[sentinel[type]];};
   inline int GetNumList(){return num_list;};
   inline bool empty(int type = 0){return begin(type) == end(type);};
+  inline bool member(int id){return not removed[id];};
 private:
   std::unique_ptr<T[]> list;
   std::unique_ptr<int[]> next, prev, s_next, sentinel, _size, tail;
@@ -57,14 +59,10 @@ void AddibleList<T>::init(std::vector<T> elem, int multi){
     sentinel[i] = i + num_elem;
     next[i + num_elem] = prev[i + num_elem] = i + num_elem;
   } 
-#ifdef DEBUG
   removed = std::make_unique<bool[]>(num_elem);
-#endif
   for (int i = 0; i < num_elem; i++) {
     list[i] = elem[i];
-#ifdef DEBUG    
     removed[i] = true;
-#endif    
   }
 }
 
@@ -90,10 +88,8 @@ void AddibleList<T>::init(int s, int multi) {
     sentinel[i] = i + num_elem;
     next[i + num_elem] = prev[i + num_elem] = i + num_elem;
   }
-#ifdef DEBUG
   removed = std::make_unique<bool[]>(num_elem);
   for (int i = 0; i < num_elem; i++) removed[i] = true;
-#endif    
 }
 
 
@@ -104,8 +100,8 @@ int AddibleList<T>::add(int id, int type){
     printf("addible: %d is already added. ", id);
     std::exit(1);
   }
-  removed[id] = false;
 #endif
+  removed[id] = false;
   _size[type]++;
   s_next[id] = head;
   head = id;
@@ -123,8 +119,8 @@ int AddibleList<T>::remove(int id, int type){
     printf("addble: %d is already removed. \n", id);
     std::exit(1);
   }
-  removed[id] = true;
 #endif
+  removed[id] = true;
   _size[type]--;
   prev[next[id]] = prev[id];
   next[prev[id]] = next[id];
@@ -141,8 +137,8 @@ void AddibleList<T>::undo(){
     printf("addble:stack is empty. ");
     std::exit(1);
   }
-  removed[id] = not removed[id];
 #endif
+  removed[id] = not removed[id];
   if(id == next[prev[id]]){//add
     _size[next[id] - num_elem]--;
     head = s_next[id];
@@ -156,5 +152,4 @@ void AddibleList<T>::undo(){
     next[prev[id]] = id;
   }
 }
-
 #endif // __ADDIBLELIST__

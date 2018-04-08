@@ -1,12 +1,12 @@
 #include<iostream>
 #include<vector>
 
-#include"Graph.hpp"
+#include"AddibleGraph.hpp"
 #include"AddibleList.hpp"
 #include"Element.hpp"
 // #define DEBUG
 
-void Graph::init(std::vector<std::vector<edge> > _G){
+void AddibleGraph::init(std::vector<std::vector<edge> > _G){
   n = _G.size(), m = 0;
   G.resize(n);
   std::vector<int> tmp(n);
@@ -31,7 +31,7 @@ void Graph::init(std::vector<std::vector<edge> > _G){
   next.resize(n + m);
 }
 
-int Graph::RemoveEdge(int id, int x){
+int AddibleGraph::RemoveEdge(int id, int x){
 #ifdef DEBUG
   if(id != elist.GetNext(elist.GetPrev(id))){
     printf("%d is already removed. \n", id);
@@ -39,6 +39,8 @@ int Graph::RemoveEdge(int id, int x){
   }
 #endif
   int u = elist[id].from, v = elist[id].to, res;
+  if(G[u].size() == 1)vlist.remove(u);
+  if(G[v].size() == 1)vlist.remove(v);
   if(u > v)std::swap(u, v);
   if(x == u)res = G[u].GetPrev(pos[id].first);
   if(x == v)res = G[v].GetPrev(pos[id].second);
@@ -51,7 +53,7 @@ int Graph::RemoveEdge(int id, int x){
   return res;
 }
 
-int Graph::AddEdge(int id, int x){
+int AddibleGraph::AddEdge(int id, int x){
 #ifdef DEBUG
   if(id == elist.GetNext(elist.GetPrev(id))){
     printf("%d is already added. \n", id);
@@ -59,6 +61,8 @@ int Graph::AddEdge(int id, int x){
   }
 #endif
   int u = elist[id].from, v = elist[id].to, res;
+  if(G[u].size() == 0)vlist.add(u);
+  if(G[v].size() == 0)vlist.add(v);
   if(u > v)std::swap(u, v);
   G[u].add(pos[id].first);
   G[v].add(pos[id].second);
@@ -66,12 +70,12 @@ int Graph::AddEdge(int id, int x){
   current_edge_size--;
   next[id] = head;
   head = id;
-  if(x == u) res = pos[G[x].back().id].first;
-  if(x == v) res = pos[G[x].back().id].second;
+  if(x == u) res = G[x].GetNext(pos[G[x].back().id].first);
+  if(x == v) res = G[x].GetNext(pos[G[x].back().id].second);
   return res;
 }
 
-int Graph::RemoveVertex(int id){
+int AddibleGraph::RemoveVertex(int id){
   for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
     int eid = G[id][i].id;
     int u = elist[id].from ,v = elist[id].to;
@@ -89,7 +93,7 @@ int Graph::RemoveVertex(int id){
   return vlist.GetPrev(id);
 }
 
-int Graph::AddVertex(int id){
+int AddibleGraph::AddVertex(int id){
   for (int i = 0; i < G[id].end(); i++) {
     int eid = G[id][i].id;
     int u = elist[id].from, v = elist[id].to;
@@ -97,18 +101,23 @@ int Graph::AddVertex(int id){
     if(u > v)std::swap(u, v);
     int mini = std::min(pos[eid].first, pos[eid].second);
     int maxi = std::max(pos[eid].first, pos[eid].second);
-    if(u == id)G[v].remove(mini);
-    else G[u].remove(maxi);
+    if(u == id){
+      if(G[v].size() == 0)vlist.add(v);
+      G[v].add(mini); 
+    }else{
+      if(G[u].size() == 0)vlist.add(u);
+      G[u].add(maxi);
+    } 
     elist.add(eid);
     current_edge_size++;
   }
   vlist.add(id);
   next[id] = head;
   head = id + m;
-  return vlist.GetPrev(id);
+  return vlist.GetNext(id);
 }
 
-void Graph::undo(){
+void AddibleGraph::undo(){
   int u, v;
   if(head >= m){
     int id = head - m;
@@ -116,20 +125,24 @@ void Graph::undo(){
       u = G[id][i].from, v = G[id][i].to;
       if(u == id)G[v].undo();
       else G[u].undo();
+      if(G[v].size() == 0)vlist.undo();
       elist.undo();
       current_edge_size++;
     }
+    vlist.undo();
   }else{
     u = elist[head].from, v = elist[head].to;
     G[u].undo();
     G[v].undo();
+    if(G[u].size() == 0)vlist.undo();
+    if(G[v].size() == 0)vlist.undo();
     elist.undo();
     current_edge_size++;
   }
   head = next[head];
 }
 
-void Graph::print(){
+void AddibleGraph::print(){
   for (int i = vlist.begin(); i != vlist.end(); i = vlist.GetNext(i)) {
     std::cout << "i:" << i << std::endl;
     for (int j = G[i].begin(); j != G[i].end(); j = G[i].GetNext(j)) {

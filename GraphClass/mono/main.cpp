@@ -2,7 +2,7 @@
 #include<vector>
 
 #include"List.hpp"
-#include"Graph.hpp"
+#include"Digraph.hpp"
 
 int main(){
   int n, m;
@@ -15,13 +15,15 @@ int main(){
     e.cost = 1;
     e.id = i;
     G[e.from].push_back(e);
-    G[e.to].push_back(edge(e.to, e.from, i, e.cost));
   }
-  Graph H(G);
+  Digraph H(G);
   H.print();
   for (int i = 0; i < 4; i++) {
     H.RemoveEdge(i*2);
   }
+  // H.print();
+  for (int i = 0; i < 4; i++)H.undo();
+    
   H.print();
   return 0;
 }

@@ -1,5 +1,5 @@
-#ifndef __GRAPH__
-#define __GRAPH__
+#ifndef __ADDIBLEGRAPH__
+#define __ADDIBLEGRAPH__
 #include<vector>
 
 #include"AddibleList.hpp"
@@ -7,15 +7,15 @@
 
 using pii = std::pair<int, int>;
 
-class Graph{
+class AddibleGraph{
 public:
-  Graph(){};
-  Graph(std::vector<std::vector<edge> > _G){init(_G);};
+  AddibleGraph(){};
+  AddibleGraph(std::vector<std::vector<edge> > _G){init(_G);};
   void init(std::vector<std::vector<edge> > _G);
-  void RemoveEdge(int id, int x = -1);
-  void AddEdge(int id);
-  void RemoveVertex(int id);
-  void AddVertex(int id);
+  int RemoveEdge(int id, int x = -1);
+  int AddEdge(int id, int x = -1);
+  int RemoveVertex(int id);
+  int AddVertex(int id);
   void undo();
   inline int size(){return n;}
   inline int edgeSize(){return current_edge_size;}
@@ -27,7 +27,6 @@ public:
   inline int GetDeg(int id){return G[id].size();};
   inline edge GetEdge(int id){return elist[id];};
   void print();
-  // int begin(){return G[n]}
 private:
   int n, m, current_edge_size = 0, head = -1;
   std::vector<AddibleList<edge> > G;
