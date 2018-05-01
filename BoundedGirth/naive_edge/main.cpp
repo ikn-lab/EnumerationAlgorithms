@@ -32,13 +32,13 @@ int main(int argc, char *argv[]){
   std::string tmp;
   getline(ist, tmp);
   int n, m = 0, k = std::stoi(argv[2]);
-  sscanf(tmp.data(), "%d", &n);
+  sscanf(tmp.data(), "%d %d", &n, &m);
   Graph g(n, k);
   while(getline(ist, tmp)){
     int u, v;
     sscanf(tmp.data(), "%d %d", &u, &v);
     g.AddEdge(u, v);
-    m++;
+    // m++;
   }
   // g.print();
   std::cout << "n:" << g.size() << std::endl;
