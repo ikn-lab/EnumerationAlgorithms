@@ -32,7 +32,7 @@ public:
   inline bool empty(){return tail == head;};
   inline bool clear(){tail = head = 0; return true;};
   inline int size(){return (tail - head < 0)?tail + vt.size() - head:tail - head;};
-  // inline int end(){return tail;}
+  inline int end(){return tail;}
   inline T operator[](const int p){return vt[p];}
 private:
   std::vector<T> vt;

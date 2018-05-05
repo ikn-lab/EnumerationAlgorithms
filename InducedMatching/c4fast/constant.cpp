@@ -22,6 +22,7 @@ std::vector<bigint> EIMMain(Graph &g) {
   std::cout << res << std::endl;
   return ans;
 }
+
 bigint RecIM(Graph &g, int size, int marge) { 
   ans[size] += marge;
   int cnt = 0;

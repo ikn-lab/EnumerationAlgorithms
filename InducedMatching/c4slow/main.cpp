@@ -9,6 +9,8 @@
 #include<iostream>
 #include<vector>
 #include<fstream>
+#include<chrono>
+
 #include"constant.hpp"
 #include"graph.hpp"
 #include <boost/multiprecision/cpp_int.hpp>
@@ -48,8 +50,12 @@ int main(int argc, char *argv[]){
   g.MakeVlist();
 
   std::vector<bigint> ans(n/2, 0);
-  bigint hoge = EnumIMatch(g, ans);
-  std::cout << "the number of induced matching:" << (hoge) << std::endl;
+  auto start = std::chrono::system_clock::now();
+  bigint solution = EnumIMatch(g, ans);
+  auto end = std::chrono::system_clock::now();
+  auto diff = end - start;
+  printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
+  std::cout << "the number of induced matching:" << (solution) << std::endl;
   bigint sum = 0;
   for(int i = 0; i < ans.size(); i++) {
     if(ans[i] == 0)break;
@@ -57,9 +63,9 @@ int main(int argc, char *argv[]){
     std::cout << (ans[i]) << std::endl;
     sum += ans[i];
   }
-  if(hoge != sum){
+  if(solution != sum){
     std::cout << "error" << std::endl;
-    std::cout << "hoge:" << (hoge) << std::endl;
+    std::cout << "solution:" << (solution) << std::endl;
     std::cout << " sum:" << (sum) << std::endl;
   }
   std::cout << "density:" << (double)m/n << std::endl;
