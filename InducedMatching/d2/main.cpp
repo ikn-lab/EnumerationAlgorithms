@@ -25,7 +25,8 @@ int main(int argc, char *argv[]){
   std::string tmp;
   getline(ist, tmp);
   int n, m = 0;
-  sscanf(tmp.data(), "%d", &n);
+  sscanf(tmp.data(), "%d %d", &n, &m);
+  m = 0;
   Graph g(n);
   for (int i = 0; i < n; i++) {
     g[i].push_back(edge());

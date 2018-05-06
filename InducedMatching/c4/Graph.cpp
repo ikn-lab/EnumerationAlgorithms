@@ -28,14 +28,13 @@ void sort(std::vector<std::vector<edge> > &_G, std::vector<int> &sorted, std::ve
 }
 
 void Graph::init(std::vector<std::vector<edge> > _G){
-  n = _G.size(), m = 0;
+  n = _G.size(), m = 0, isolated = 0;
   G.resize(n);
   std::vector<int> sorted(n), rev(n);
   sort(_G, sorted, rev);
-  deg = _G[0].size();
-  std::vector<int> tmp(n + deg + 1);
-  for (int i = 0; i < n + deg + 1; i++) tmp[i] = i;
-  vlist.init(tmp);
+  org_deg = deg = _G[0].size();
+  vlist.init(n + deg + 1);
+  for (int i = 0; i < n + deg + 1; i++) vlist.set(i, i);
   std::vector<int> boundary(deg + 1, 0);
   for (int i = 0; i < n; i++) {
     m += _G[i].size();
@@ -46,7 +45,13 @@ void Graph::init(std::vector<std::vector<edge> > _G){
 
   vlist.move(n + deg, vlist.end());
   for (int i = deg - 1; i >= 0; i--) {
-    vlist.move(n + i, boundary[i] - 1);
+    if(boundary[i + 1] == boundary[i]){
+      vlist.move(n + i, n + i + 1);
+    }else{
+      vlist.move(n + i, boundary[i] - 1);
+    }
+    
+      
   }
   m /= 2;
   current_edge_size = m;
@@ -96,11 +101,23 @@ int Graph::RemoveVertex(int id){
     elist.remove(eid);
     current_edge_size--;
     
-    if(v < u) G[v].remove(pos[eid].first);
+    // if(GetDeg(v) == deg and
+    //    vlist.GetNext(n + deg) == vlist.GetPrev(n + deg - 1))
+    //   deg--;
+    if(vlist.GetNext(deg + n) > n)
+      deg = vlist.GetPrev(GetNext(deg + n)) - n;
+      if(v < u) G[v].remove(pos[eid].first);
     else G[v].remove(pos[eid].second);
     vlist.move(v, GetDeg(v) + n);
+    if(GetDeg(v) == 0)isolated++;
   }
+  if(GetDeg(id) == 0)isolated--;
+  // if(GetDeg(id) == deg and
+  //    vlist.GetNext(n + deg) == vlist.GetPrev(n + deg - 1))
+  //   deg = vlist.GetPrev(GetNext(id)) - n;
   vlist.remove(id);
+  if(vlist.GetNext(deg + n) > n)
+    deg = vlist.GetPrev(GetNext(deg + n)) - n;
   next[id] = head;
   head = id + m;
   return GetPrev(id);
@@ -111,13 +128,17 @@ void Graph::undo(){
   if(head >= m){
     int id = head - m;
     for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
-      u = G[id][i].from, v = G[id][i].to;
+      v = G[id][i].to;
       G[v].undo();
       elist.undo();
       current_edge_size++;
       vlist.move(v, GetDeg(v) + n);
+      deg = std::max(GetDeg(v), deg);
+      if(GetDeg(v) == 1)isolated--;
     }
+    if(GetDeg(id) == 0)isolated++;
     vlist.undo();
+    deg = std::max(GetDeg(id), deg);
     head = next[id];
   }else{
     u = elist[head].from, v = elist[head].to;

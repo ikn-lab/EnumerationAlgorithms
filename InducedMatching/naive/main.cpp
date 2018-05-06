@@ -26,8 +26,8 @@ int main(int argc, char *argv[]){
   }
   std::string tmp;
   getline(ist, tmp);
-  int n;
-  sscanf(tmp.data(), "%d", &n);
+  int n, gomi;
+  sscanf(tmp.data(), "%d %d", &n, &gomi);
   Graph g(n);
   int u, v, id = 0;
   std::vector<edge> m;

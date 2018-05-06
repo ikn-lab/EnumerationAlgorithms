@@ -13,14 +13,14 @@
 
 #include"constant.hpp"
 #include"graph.hpp"
-#include <boost/multiprecision/cpp_int.hpp>
+// #include <boost/multiprecision/cpp_int.hpp>
 
-typedef boost::multiprecision::cpp_int bigint;
-// typedef long long int bigint;
+// typedef boost::multiprecision::cpp_int bigint;
+typedef long long int bigint;
 
 int main(int argc, char *argv[]){
-  if(argc != 2){
-    std::cerr << "Error : The number of input file is not 2" <<std::endl;
+  if(argc != 3){
+    std::cerr << "Error : The number of input file is not 3" <<std::endl;
     return 0;
   }
   
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]){
     std::cerr << "can't open input file: " << argv[1] << std::endl;
     return 0;
   }
-  int n, m = 0, id = 0;
+  int n, m = 0, k = std::atoi(argv[2]), id = 0;
   std::string tmp;
   getline(ist, tmp);
   sscanf(tmp.data(), "%d %d", &n, &m);
@@ -43,11 +43,10 @@ int main(int argc, char *argv[]){
   Graph G(_G);
   std::vector<bigint> ans(n/2, 0);
   auto start = std::chrono::system_clock::now();
-  bigint solution = EIM(G, ans);
+  bigint solution = EIM(G, ans, k);
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
   printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
-  
   std::cout << "the number of induced matching:" << (solution) << std::endl;
   bigint sum = 0;
   for(int i = 0; i < ans.size(); i++) {

@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
   for(int i = 0; i < ans.size(); i++) {
     sum += ans[i];
   }
-  std::cout << sum << std::endl;
+  std::cout << "the number of induced matching:" << (sum) << std::endl;
   for(int i = 0; i < ans.size(); i++) {
     if(ans[i] == 0)break;
     printf("%2d ", i);
@@ -64,3 +64,4 @@ int main(int argc, char *argv[]){
   std::cout << "density:" << (double)m/n << std::endl;
   return 0;
 }
+

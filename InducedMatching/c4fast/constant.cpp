@@ -18,8 +18,6 @@ std::vector<bigint> EIMMain(Graph &g) {
   incident.resize(2*g.size() + 10);
   ans.resize(g.size()/2);
   RecIM(g);
-  
-  std::cout << res << std::endl;
   return ans;
 }
 
