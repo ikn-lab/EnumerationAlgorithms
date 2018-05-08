@@ -1,6 +1,6 @@
 SRCS	 = main.cpp graph.cpp constant.cpp
-CXX		 = g++-6
-CXXFLAGS = -std=c++11 -O3 -I ~/boost_1_63_0
+CXX		 = g++-8
+CXXFLAGS = -std=c++17 -fdiagnostics-color -O3 -I ~/boost_1_63_0
 EXE		 = EIM
 
 EIM:$(SRCS)

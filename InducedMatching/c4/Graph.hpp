@@ -35,26 +35,20 @@ public:
       GetPrev(vlist.GetPrev(id)):vlist.GetPrev(id);};
   inline int GetDeg(int id){return G[id].size();};
   inline edge GetEdge(int id){return elist[id];};
+  inline int GetDegNum(int id){return degDistribution[id];};
   inline int MaximumDeg(){return begin();};
   inline int MinimumDeg(){return GetPrev(n);};
   void print();
   // int begin(){return G[n]}
   std::vector<int> dist;
-  int n, m, current_edge_size = 0, head, org_deg, deg, isolated;
-  void printVlist(){
-    std::cout << "print vlist" << std::endl;
-    for (int i = vlist.begin(); i != vlist.end(); i = vlist.GetNext(i)) {
-      std::cout << vlist[i] << " ";
-    }
-    std::cout << std::endl;
-  }
-  
 protected:
+  int n, m, current_edge_size = 0, head;
+  int org_deg, deg, isolated;
   std::vector<List<edge> > G;
   List<int> vlist;
   List<edge> elist;
   std::vector<pii> pos; //min(from, to): first, max(from, to):second
-  std::vector<int> next;
+  std::vector<int> next, degDistribution;
 };
 
 #endif // __GRAPH__

@@ -19,17 +19,18 @@
 typedef long long int bigint;
 
 int main(int argc, char *argv[]){
-  if(argc != 3){
-    std::cerr << "Error : The number of input file is not 3" <<std::endl;
+  if(argc != 3 and argc != 2){
+    std::cerr << "Error : The number of input file is not 2 or 3" <<std::endl;
     return 0;
   }
-  
+
   std::ifstream ist(argv[1], std::ios::in);
   if(!ist){
     std::cerr << "can't open input file: " << argv[1] << std::endl;
     return 0;
   }
-  int n, m = 0, k = std::atoi(argv[2]), id = 0;
+  int n, m = 0, k = 0, id = 0;
+  if(argc == 3) k = std::atoi(argv[2]), id = 0;
   std::string tmp;
   getline(ist, tmp);
   sscanf(tmp.data(), "%d %d", &n, &m);

@@ -6,7 +6,7 @@
 #include<set>
 #include<string>
 
-#include"graph.hpp"
+#include"Graph.hpp"
 #include"constant.hpp"
 #include"basicDataStructure.hpp"
 using pii = std::pair<int, int>;
@@ -18,7 +18,6 @@ bigint EIMRec(Graph &G,
               int k, 
               int size = 0,
               int marge = 1);
-              
 
 bigint CallAllChildren(Graph &G,
                        std::vector<bigint> &ans,
@@ -81,6 +80,7 @@ bigint CallAllChildren(Graph &G,
   G.undo();
   return res;
 }
+
 bigint EIMRec(Graph &G,
               std::vector<bigint> &ans,
               FixedQueue<pii> &update,
@@ -89,11 +89,21 @@ bigint EIMRec(Graph &G,
               int size,
               int marge){
   // std::cout << "pivot:" << G.MaximumDeg() << std::endl;
-  int tmp = 2*G.GetDeg(G.MinimumDeg());
-  if(G.size() == 0 or G.size() < (k - size - 1)*tmp){
+  int maxi = G.GetDeg(G.MaximumDeg()),
+    mini = G.GetDeg(G.MinimumDeg());
+  // if(maxi == 1 and mini == 1 and G.edgeSize() + size < k){
+  //   ans[size] += marge;
+  //   return marge;
+  // }
+  if(G.size() == 0 or
+     G.size() - maxi < (k - size - 1)*mini or 
+     (maxi == 1 and mini == 1 and G.edgeSize() + size < k) or 
+     (maxi == 2 and mini == 1 and G.GetDegNum(2) + 1 < 3*(k - size - (G.GetDegNum(1)>>1))) or
+     (maxi == 2 and mini == 2 and G.edgeSize() < 3*(k - size))){
     ans[size] += marge;
     return marge;
   }
+
   return CallAllChildren(G, ans, update, stack_V, k, size, marge);
 }
 
