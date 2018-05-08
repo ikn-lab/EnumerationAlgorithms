@@ -95,11 +95,13 @@ bigint EIMRec(Graph &G,
   //   ans[size] += marge;
   //   return marge;
   // }
+  
   if(G.size() == 0 or
      G.size() - maxi < (k - size - 1)*mini or 
      (maxi == 1 and mini == 1 and G.edgeSize() + size < k) or 
      (maxi == 2 and mini == 1 and G.GetDegNum(2) + 1 < 3*(k - size - (G.GetDegNum(1)>>1))) or
-     (maxi == 2 and mini == 2 and G.edgeSize() < 3*(k - size))){
+     (maxi == 2 and mini == 2 and G.edgeSize() < 3*(k - size)) or
+     (maxi == 3 and 3*(3*G.GetDegNum(3) + G.GetDegNum(1)) + 2*G.GetDegNum(2) + 2 < 6*(k - size))){
     ans[size] += marge;
     return marge;
   }
