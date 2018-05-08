@@ -58,7 +58,7 @@ void List<T>::init(int size) {
   next    = std::make_unique<int[]>(tail + 1);
   prev    = std::make_unique<int[]>(tail + 1);
   removed = std::make_unique<bool[]>(tail);
-  for (int i = 0; i <= tail; i++) {
+  for (int i = 0; i < tail; i++) {
     next[i] = i + 1;
     prev[i] = i - 1;
     removed[i] = false;
