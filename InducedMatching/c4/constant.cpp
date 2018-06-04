@@ -10,22 +10,23 @@
 #include"constant.hpp"
 #include"basicDataStructure.hpp"
 using pii = std::pair<int, int>;
+using bigint = long long int;
 
 bigint EIMRec(Graph &G,
               std::vector<bigint> &ans,
               FixedQueue<pii> &update,
               FixedStack<int> &stack_V,
               int k, 
-              int size = 0,
-              int marge = 1);
+              bigint size = 0,
+              bigint marge = 1);
 
 bigint CallAllChildren(Graph &G,
                        std::vector<bigint> &ans,
                        FixedQueue<pii> &update,
                        FixedStack<int> &stack_V, 
                        int k, 
-                       int size,
-                       int marge){
+                       bigint size,
+                       bigint marge){
   int v = G.MaximumDeg();
   //for bfs, vertex, distance
   int SVsize = stack_V.size(), cnt = 0;
@@ -86,8 +87,8 @@ bigint EIMRec(Graph &G,
               FixedQueue<pii> &update,
               FixedStack<int> &stack_V,
               int k, 
-              int size,
-              int marge){
+              bigint size,
+              bigint marge){
   // std::cout << "pivot:" << G.MaximumDeg() << std::endl;
   int maxi = G.GetDeg(G.MaximumDeg()),
     mini = G.GetDeg(G.MinimumDeg());
@@ -111,7 +112,7 @@ bigint EIMRec(Graph &G,
 
 
 bigint EIM(Graph &G, std::vector<bigint> &ans, int k){
-  FixedQueue<pii> update(2*G.size() + 10);
-  FixedStack<int> stack_V(2*G.edgeSize() + 10);
+  FixedQueue<pii> update(20*G.size() + 10);
+  FixedStack<int> stack_V(20*G.edgeSize() + 10);
   return EIMRec(G, ans, update, stack_V, k);
 }

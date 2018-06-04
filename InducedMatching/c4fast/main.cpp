@@ -48,20 +48,21 @@ int main(int argc, char *argv[]){
   std::vector<bigint> ans = EIMMain(g);
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
-  printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
+  printf("%lld\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
   
   bigint sum = 0;
   for(int i = 0; i < ans.size(); i++) {
     sum += ans[i];
   }
-  std::cout << "the number of induced matching:" << (sum) << std::endl;
-  for(int i = 0; i < ans.size(); i++) {
-    if(ans[i] == 0)break;
-    printf("%2d ", i);
-    std::cout << (ans[i]) << std::endl;
-    sum += ans[i];
-  }
-  std::cout << "density:" << (double)m/n << std::endl;
+  // std::cout << "the number of induced matching:" << (sum) << std::endl;
+  std::cout << (sum) << std::endl;
+  // for(int i = 0; i < ans.size(); i++) {
+  //   if(ans[i] == 0)break;
+  //   printf("%2d ", i);
+  //   std::cout << (ans[i]) << std::endl;
+  //   sum += ans[i];
+  // }
+  // std::cout << "density:" << (double)m/n << std::endl;
   return 0;
 }
 

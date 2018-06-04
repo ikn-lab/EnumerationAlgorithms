@@ -4,6 +4,9 @@
 #include<stack>
 #include"d2.hpp"
 
+#include <boost/multiprecision/cpp_int.hpp>
+typedef boost::multiprecision::cpp_int bigint;
+
 void EdgeList::RemoveEdge(int id){
   edge &e  = list[id];
   st.push(id);
@@ -22,7 +25,7 @@ void EdgeList::RestoreEdge(){
   list[id + e.next].prev = e.next;
 }
 
-int EnumIMatch(EdgeList &addlist, Graph &g, int p, std::vector<int> &ans, int size){
+bigint EIMMain(EdgeList &addlist, Graph &g, int p, std::vector<bigint> &ans, int size){
   if(p >= addlist.size() - 1){
     ans[size]++;
     return 1;
@@ -51,7 +54,7 @@ int EnumIMatch(EdgeList &addlist, Graph &g, int p, std::vector<int> &ans, int si
       g.st.push(e.to);
     }
   }
-  int res = EnumIMatch(addlist, g, next, ans, size + 1);
+  bigint res = EIMMain(addlist, g, next, ans, size + 1);
   while(g.st.size() > ssize){
     int v = g.st.top();
     g.st.pop();
@@ -61,6 +64,6 @@ int EnumIMatch(EdgeList &addlist, Graph &g, int p, std::vector<int> &ans, int si
     g[v].RestoreEdge();
     addlist.RestoreEdge();
   }
-  res += EnumIMatch(addlist, g, p + addlist[p].next, ans, size);
+  res += EIMMain(addlist, g, p + addlist[p].next, ans, size);
   return res;
 }

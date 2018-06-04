@@ -33,13 +33,15 @@ int main(int argc, char *argv[]){
   if(argc == 3) k = std::atoi(argv[2]), id = 0;
   std::string tmp;
   getline(ist, tmp);
-  sscanf(tmp.data(), "%d %d", &n, &m);
+  sscanf(tmp.data(), "%d", &n);
+  // sscanf(tmp.data(), "%d %d", &n, &m);
   std::vector<std::vector<edge> > _G(n);
   while(getline(ist, tmp)){
     int u, v;
     sscanf(tmp.data(), "%d %d", &u, &v);
     _G[u].push_back(edge(u, v, id));
     _G[v].push_back(edge(v, u, id++));
+    m++;
   }
   Graph G(_G);
   std::vector<bigint> ans(n/2, 0);
@@ -47,21 +49,23 @@ int main(int argc, char *argv[]){
   bigint solution = EIM(G, ans, k);
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
-  printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
-  std::cout << "the number of induced matching:" << (solution) << std::endl;
+  // printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
+  printf("%lld\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
+  // std::cout << "the number of induced matching:" << (solution) << std::endl;
+  std::cout << (solution) << std::endl;
   bigint sum = 0;
-  for(int i = 0; i < ans.size(); i++) {
-    if(ans[i] == 0)break;
-    printf("%2d ", i);
-    std::cout << (ans[i]) << std::endl;
-    sum += ans[i];
-  }
-  if(solution != sum){
-    std::cout << "error" << std::endl;
-    std::cout << "solution:" << (solution) << std::endl;
-    std::cout << "     sum:" << (sum) << std::endl;
-  }
-  std::cout << "density:" << (double)m/n << std::endl;
+  // for(int i = 0; i < ans.size(); i++) {
+  //   if(ans[i] == 0)break;
+  //   printf("%2d ", i);
+  //   std::cout << (ans[i]) << std::endl;
+  //   sum += ans[i];
+  // }
+  // if(solution != sum){
+  //   std::cout << "error" << std::endl;
+  //   std::cout << "solution:" << (solution) << std::endl;
+  //   std::cout << "     sum:" << (sum) << std::endl;
+  // }
+  // std::cout << "density:" << (double)m/n << std::endl;
   return 0;
 }
 

@@ -8,14 +8,22 @@
 using bigint = long long int;
 
 EDS::EDS(std::vector<std::vector<edge> > _G){
-  G.init(_G), C.init(_G), FW.init(_G), domList.init(_G);
+  ordering(_G);
+  G.init(_G), C.init(_G), domList.init(_G);
+  for (int i = 0; i < _G.size(); i++) {
+    for (int j = 0; j < _G[i].size(); j++) {
+      if(_G[i][j].to > i )continue;
+      _G[i].erase(G[i].begin() + j, G[i].end());
+    }
+  }
+  FW.init(_G);
   std::vector<int> tmp;
   for (int i = 0; i < G.size(); i++) tmp.push_back(i);
   solution.init(tmp), cand.init(tmp);
-  diff.init(tmp, tmp.size());
-  result    = std::make_unique<bigint[]>(G.size() + 1);
-  dominated = std::make_unique<int[]>(G.size());
-  for (int i = 0; i <= G.size(); i++) result[i] = 0;
+  result.resize(G.size() + 1, 0);
+  dominated.resize(G.size());
+  counter.resize(G.size(), 0);
+  diff.resize(G.size());
   for (int i = 0; i < G.size(); i++)dominated[i] = _G[i].size() + 1;
 }
 
@@ -43,13 +51,12 @@ void EDS::Enumerate(){
     int v = i;
     i = cand.remove(v);
     tmp = updateCand(v);
-    dom_cnt = updateDomList(v);
+    dom_cnt = updateDomList(v, diff[depth] - tmp);
     depth++;
     Enumerate();
     depth--;
     for (int j = 0; j < tmp; j++) cand.undo();
     for (int j = 0; j < dom_cnt; j++) domList.undo();
-    for (int j = 0; j < prev; j++) diff.undo();
     prev = tmp;
     for (int j = C[v].begin(); v < j; j = C[v].GetNext(j)) {
       j = C.RemoveEdge(C[v][j].id);
@@ -57,35 +64,42 @@ void EDS::Enumerate(){
   }
   for (int i = 0; i < FW_cnt; i++) FW.undo();
   for (int i = 0; i < cand_cnt; i++) cand.undo();
-  for (int i = 0; i < prev; i++) diff.undo();
 }
 
 int EDS::updateCand(int v){
   int res = 0;
-  for (int i = FW[v].begin(); i != FW[v].end(); i = FW[v].GetNext(i)){
-    int u = FW[v][i].to;
+  //forward
+  for (int i = G[v].begin(); i > v; i = G[v].GetNext(i)){
+    int u = G[v][i].to;
     if(solution.member(u))continue;
     if(not domList[u].empty() or C[u].size() != 2)continue;
     cand.remove(C[u].back().to);
-    if(not diff.member(u))diff.add(u, depth);
-    else diff.remove(u, depth);
+    diff[depth].push(C[u].back().to);
+    counter[C[u].back().to] = (counter[C[u].back().to] + 1)&1;
     res++;
   }
-  
+  //back
   for (int i = C[v].GetPrev(C[v].end()); C[v][i].to < v; i = C[v].GetPrev(i)){
     int u = C[v][i].to;
     if(not domList[u].empty() or FW.size() != 0)continue;
     cand.remove(u);
-    if(not diff.member(u))diff.add(u, depth);
-    else diff.remove(u, depth);
+    diff[depth].push(u);
+    counter[u] = (counter[u] + 1)&1;
     res++;
   }
   return res;
 }
 
-int EDS::updateDomList(int v){
+int EDS::updateDomList(int v, int cnt){
   int res = 0;
-  for (int u = diff.begin(); u != diff.end(); u = diff.GetNext(u)) {
+  for (int i = 0; i < cnt; i++) {
+    int u = diff[depth].front();
+    diff[depth].pop();
+    counter[u]--;
+    if(counter[u] == -1){
+      counter[u] = 1;
+      continue;
+    }
     for (int w = G[u].begin(); u < G[u][w].to; w = G[u].GetNext(u)) {
       edge e = G[u][w];
       int pos = domList.rev(e.id, e.from);

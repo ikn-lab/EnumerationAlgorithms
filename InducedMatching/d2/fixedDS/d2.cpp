@@ -1,5 +1,6 @@
 #include<vector>
 #include<unordered_set>
+#include<queue>
 
 #include"d2.hpp"
 #include"basicDataStructure.hpp"
@@ -37,7 +38,16 @@ bigint RecIM(EdgeList &addlist, Graph &g, std::vector<bigint> &ans, int p = 1, i
   int ssize =  st.size();
   que.push(pii(0, addlist[p].from));
   que.push(pii(0 ,addlist[p].to));
+  g.dist[addlist[p].from] = 0;
+  g.dist[addlist[p].to  ] = 0;
+  std::queue<int> visited;
+  visited.push(addlist[p].from);
+  visited.push(addlist[p].to);
   int next = p + addlist[p].next;
+  int u = addlist[p].to;
+  for (int i = g[u][0].next; i < g[u].size() - 1; i+=g[u][i].next) {
+    if(g[u][i].to == addlist[p].from)g[u].RemoveEdge(i), g[g[u][i].to].RemoveEdge(g[u][i].rev);
+  }
   while(que.size() > qsize){
     int v = que.front().second;
     int dist = que.front().first;
@@ -45,7 +55,10 @@ bigint RecIM(EdgeList &addlist, Graph &g, std::vector<bigint> &ans, int p = 1, i
     if(dist >= 2)continue;
     for (int i = g[v][0].next; i < g[v].size() - 1; i+=g[v][i].next) {
       edge &e = g[v][i];
+      if(g.dist[e.to] <= dist)continue;
+      g.dist[e.to] = dist;
       que.push(pii(dist + 1, e.to));
+      visited.push(e.to);
       g[v].RemoveEdge(i);
       g[e.to].RemoveEdge(e.rev);
       addlist.RemoveEdge(e.id);
@@ -56,17 +69,25 @@ bigint RecIM(EdgeList &addlist, Graph &g, std::vector<bigint> &ans, int p = 1, i
       st.push(e.to);
     }
   }
+  while(not visited.empty())g.dist[visited.front()] = 1e9, visited.pop();
   bigint res = RecIM(addlist, g, ans, next, size + 1);
+  // std::cout << "hoge " << p << " " << ssize << " " << st.size() << std::endl;
   while(st.size() > ssize){
+    // std::cout << st.size() << std::endl;
     int v = st.top();
     st.pop();
+    // std::cout << "v:" << v << std::endl;
     g[v].RestoreEdge();
     v = st.top();
+    // std::cout << "u:" << v << std::endl;
     st.pop();
     g[v].RestoreEdge();
     addlist.RestoreEdge();
   }
+  // std::cout << "fuga" << std::endl;
   res += RecIM(addlist, g, ans, p + addlist[p].next, size);
+  g[addlist[p].from].RestoreEdge();
+  g[addlist[p].to  ].RestoreEdge();
   return res;
 }
 

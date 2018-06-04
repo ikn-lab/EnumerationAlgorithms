@@ -72,6 +72,7 @@ void Graph::init(std::vector<std::vector<edge> > _G){
   }
   elist.init(ve);
   for (int i = 0; i < n; i++) G[i].init(_G[i]);
+  for (int i = 0; i < n; i++) isolated += (GetDeg(i) == 0);
   next.resize(n + m);
   dist.resize(n, 1e9);
 }
@@ -109,7 +110,7 @@ int Graph::RemoveVertex(int id){
 
     if(vlist.GetNext(deg + n) > n)
       deg = vlist.GetPrev(GetNext(deg + n)) - n;
-      if(v < u) G[v].remove(pos[eid].first);
+    if(v < u) G[v].remove(pos[eid].first);
     else G[v].remove(pos[eid].second);
     vlist.move(v, GetDeg(v) + n);
     if(GetDeg(v) == 0)isolated++;

@@ -1,6 +1,7 @@
 #ifndef __ENUM__
 #define __ENUM__
 #include<memory>
+#include<queue>
 
 #include"Graph.hpp"
 #include"AddibleList.hpp"
@@ -17,17 +18,17 @@ public:
   void Enumerate();
   void print();
 private:
-  Graph FW;//for any v \in C(X), N(v)^{v<} \cap X
+  Graph FW;//For any v \in C(X), N(v)^{v<} \cap X
   Graph C;//G[C(X)]
   Graph G;//Input Graph
-  AddibleGraph domList;// N(v)^{v<} \cap (X \ C(X)) or N(v) \cap (X \ C(X))
-  std::unique_ptr<int[]> dominated;
+  AddibleGraph domList;//For any v \in X, N(v)^{v<} \cap (X \ C(X)). Otherewise, N(v) \cap (X \ C(X))
+  std::vector<int> dominated, counter;
+  std::vector<bigint> result;
   int depth = 0;
-  AddibleList<int> diff;
+  std::vector<std::queue<int> >diff;
   List<int> solution, cand;
-  std::unique_ptr<bigint[]> result;
   int updateCand(int v);
-  int updateDomList(int v);
+  int updateDomList(int v, int cnt);
   void restore(int cand_cnt, int dom_del);
 };
 #endif // __ENUM__

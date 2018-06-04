@@ -1,0 +1,257 @@
+50
+3
+elapsed time = 87 msec.
+the number of induced matching:3613564
+ 0 1
+ 1 42
+ 2 723
+ 3 6756
+ 4 38476
+ 5 143234
+ 6 375748
+ 7 756601
+ 8 1283218
+ 9 717916
+10 241947
+11 45444
+12 3458
+density:1
+
+real	0m0.092s
+user	0m0.082s
+sys	0m0.004s 
+time: 0.10017490387
+50
+3
+elapsed time = 125 msec.
+the number of induced matching:3103874
+ 0 1
+ 1 67
+ 2 1520
+ 3 15287
+ 4 77339
+ 5 223090
+ 6 437110
+ 7 711495
+ 8 1063828
+ 9 448582
+10 110111
+11 14653
+12 791
+density:1.5
+
+real	0m0.129s
+user	0m0.114s
+sys	0m0.003s 
+time: 0.131133079529
+50
+1
+elapsed time = 99 msec.
+the number of induced matching:2014897
+ 0 1
+ 1 91
+ 2 2554
+ 3 27641
+ 4 122214
+ 5 259643
+ 6 376596
+ 7 475416
+ 8 592511
+ 9 141720
+10 15872
+11 638
+density:2
+
+real	0m0.103s
+user	0m0.096s
+sys	0m0.001s 
+time: 0.105172157288
+50
+0
+elapsed time = 225 msec.
+the number of induced matching:3951000
+ 0 1
+ 1 117
+ 2 4059
+ 3 51592
+ 4 258229
+ 5 565235
+ 6 745375
+ 7 903802
+ 8 1124794
+ 9 265073
+10 31303
+11 1401
+12 19
+density:2.5
+
+real	0m0.229s
+user	0m0.220s
+sys	0m0.002s 
+time: 0.231445074081
+50
+0
+elapsed time = 68 msec.
+the number of induced matching:615425
+ 0 1
+ 1 141
+ 2 4884
+ 3 51079
+ 4 155545
+ 5 160998
+ 6 98925
+ 7 71428
+ 8 69218
+ 9 3189
+10 17
+density:3
+
+real	0m0.072s
+user	0m0.064s
+sys	0m0.002s 
+time: 0.0740730762482
+50
+0
+elapsed time = 65 msec.
+the number of induced matching:471762
+ 0 1
+ 1 166
+ 2 6287
+ 3 64450
+ 4 160022
+ 5 101621
+ 6 50085
+ 7 42943
+ 8 44013
+ 9 2158
+10 16
+density:3.5
+
+real	0m0.070s
+user	0m0.062s
+sys	0m0.002s 
+time: 0.0721440315247
+50
+0
+elapsed time = 41 msec.
+the number of induced matching:212297
+ 0 1
+ 1 192
+ 2 7007
+ 3 60116
+ 4 100756
+ 5 30773
+ 6 5750
+ 7 3898
+ 8 3759
+ 9 45
+density:4
+
+real	0m0.046s
+user	0m0.038s
+sys	0m0.001s 
+time: 0.0479238033295
+50
+0
+elapsed time = 14 msec.
+the number of induced matching:63647
+ 0 1
+ 1 40
+ 2 2749
+ 3 27994
+ 4 30053
+ 5 2410
+ 6 152
+ 7 128
+ 8 120
+density:4.5
+
+real	0m0.018s
+user	0m0.016s
+sys	0m0.001s 
+time: 0.0200800895691
+50
+0
+elapsed time = 28 msec.
+the number of induced matching:102563
+ 0 1
+ 1 240
+ 2 9507
+ 3 59628
+ 4 31649
+ 5 1371
+ 6 69
+ 7 49
+ 8 49
+density:5
+
+real	0m0.032s
+user	0m0.025s
+sys	0m0.001s 
+time: 0.0342800617218
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+ 0 1
+density:5.5
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.001s 
+time: 0.00565910339355
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+ 0 1
+density:6
+
+real	0m0.004s
+user	0m0.002s
+sys	0m0.001s 
+time: 0.00670289993286
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+ 0 1
+density:6.5
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.001s 
+time: 0.00551891326904
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+ 0 1
+density:7
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.001s 
+time: 0.00639796257019
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+ 0 1
+density:7.5
+
+real	0m0.004s
+user	0m0.001s
+sys	0m0.001s 
+time: 0.00616192817688
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+ 0 1
+density:8
+
+real	0m0.003s
+user	0m0.001s
+sys	0m0.001s 
+time: 0.005450963974

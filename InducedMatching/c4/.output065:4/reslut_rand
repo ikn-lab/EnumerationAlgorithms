@@ -1,0 +1,135 @@
+50
+3
+elapsed time = 69 msec.
+the number of induced matching:3613564
+error
+solution:3613564
+     sum:0
+density:1 
+time: 0.0753362178802
+50
+3
+elapsed time = 106 msec.
+the number of induced matching:3103874
+error
+solution:3103874
+     sum:0
+density:1.5 
+time: 0.111953020096
+50
+1
+elapsed time = 97 msec.
+the number of induced matching:2014897
+error
+solution:2014897
+     sum:0
+density:2 
+time: 0.10279583931
+50
+0
+elapsed time = 221 msec.
+the number of induced matching:3951000
+error
+solution:3951000
+     sum:0
+density:2.5 
+time: 0.227439165115
+50
+0
+elapsed time = 60 msec.
+the number of induced matching:615425
+error
+solution:615425
+     sum:0
+density:3 
+time: 0.0658268928528
+50
+0
+elapsed time = 58 msec.
+the number of induced matching:471762
+error
+solution:471762
+     sum:0
+density:3.5 
+time: 0.063581943512
+50
+0
+elapsed time = 35 msec.
+the number of induced matching:212297
+error
+solution:212297
+     sum:0
+density:4 
+time: 0.0406420230865
+50
+0
+elapsed time = 14 msec.
+the number of induced matching:63647
+error
+solution:63647
+     sum:0
+density:4.5 
+time: 0.0245299339294
+50
+0
+elapsed time = 23 msec.
+the number of induced matching:102563
+error
+solution:102563
+     sum:0
+density:5 
+time: 0.0292000770569
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+error
+solution:1
+     sum:0
+density:5.5 
+time: 0.00593400001526
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+error
+solution:1
+     sum:0
+density:6 
+time: 0.00784587860107
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+error
+solution:1
+     sum:0
+density:6.5 
+time: 0.00535082817078
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+error
+solution:1
+     sum:0
+density:7 
+time: 0.00740003585815
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+error
+solution:1
+     sum:0
+density:7.5 
+time: 0.00658178329468
+50
+0
+elapsed time = 0 msec.
+the number of induced matching:1
+error
+solution:1
+     sum:0
+density:8 
+time: 0.00770616531372

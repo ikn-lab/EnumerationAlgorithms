@@ -1,0 +1,61 @@
+10 9
+i:0
+0 1
+0 2
+0 3
+0 4
+0 5
+0 6
+0 7
+0 8
+0 9
+
+i:1
+1 0
+
+i:2
+2 0
+
+i:3
+3 0
+
+i:4
+4 0
+
+i:5
+5 0
+
+i:6
+6 0
+
+i:7
+7 0
+
+i:8
+8 0
+
+i:9
+9 0
+
+rec enum
+rec enum
+rec enum
+rec enum
+rec enum
+rec enum
+rec enum
+rec enum
+rec enum
+rec enum
+print solution. 
+0
+
+end solution. 
+rec enum
+rec enum
+print solution. 
+0
+9
+
+end solution. 
+addible: 0 is already added. 

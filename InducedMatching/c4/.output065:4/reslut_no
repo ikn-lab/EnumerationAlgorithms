@@ -1,0 +1,135 @@
+50
+4
+elapsed time = 87 msec.
+the number of induced matching:3978745
+error
+solution:3978745
+     sum:0
+density:1 
+time: 0.0932860374451
+50
+3
+elapsed time = 246 msec.
+the number of induced matching:6608888
+error
+solution:6608888
+     sum:0
+density:1.5 
+time: 0.252707958221
+50
+0
+elapsed time = 368 msec.
+the number of induced matching:9913246
+error
+solution:9913246
+     sum:0
+density:2 
+time: 0.374144792557
+50
+0
+elapsed time = 654 msec.
+the number of induced matching:9421576
+error
+solution:9421576
+     sum:0
+density:2.5 
+time: 0.659870147705
+50
+0
+elapsed time = 404 msec.
+the number of induced matching:4322494
+error
+solution:4322494
+     sum:0
+density:3 
+time: 0.409986972809
+50
+0
+elapsed time = 163 msec.
+the number of induced matching:1093230
+error
+solution:1093230
+     sum:0
+density:3.5 
+time: 0.168663978577
+50
+0
+elapsed time = 100 msec.
+the number of induced matching:552387
+error
+solution:552387
+     sum:0
+density:4 
+time: 0.106547117233
+50
+0
+elapsed time = 111 msec.
+the number of induced matching:513637
+error
+solution:513637
+     sum:0
+density:4.04 
+time: 0.118395805359
+50
+0
+elapsed time = 102 msec.
+the number of induced matching:490550
+error
+solution:490550
+     sum:0
+density:4.04 
+time: 0.109795093536
+50
+0
+elapsed time = 154 msec.
+the number of induced matching:929867
+error
+solution:929867
+     sum:0
+density:3.76 
+time: 0.160501003265
+50
+0
+elapsed time = 115 msec.
+the number of induced matching:616521
+error
+solution:616521
+     sum:0
+density:3.84 
+time: 0.123745918274
+50
+0
+elapsed time = 165 msec.
+the number of induced matching:1166254
+error
+solution:1166254
+     sum:0
+density:3.46 
+time: 0.174065113068
+50
+0
+elapsed time = 84 msec.
+the number of induced matching:321040
+error
+solution:321040
+     sum:0
+density:4.54 
+time: 0.0966560840607
+50
+0
+elapsed time = 96 msec.
+the number of induced matching:335396
+error
+solution:335396
+     sum:0
+density:4.54 
+time: 0.107571840286
+50
+0
+elapsed time = 4 msec.
+the number of induced matching:1
+error
+solution:1
+     sum:0
+density:4.64 
+time: 0.0125889778137
