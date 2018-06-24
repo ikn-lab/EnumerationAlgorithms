@@ -45,7 +45,7 @@ int main(int argc, char *argv[]){
     _G[u].push_back(edge(u, v, cnt));
     _G[v].push_back(edge(v, u, cnt++));
   }
-  std::cout << n << " " << m << std::endl;
+  std::cout << "vertices:" << n << " edges:" << m << std::endl;
   // if(not isBipartite(_G)){
   //   std::cerr << "The input graph is not bipartite grpah. " << std::endl;
   //   return 0;

@@ -120,7 +120,7 @@ int Graph::RemoveVertex(int id){
   vlist.remove(id);
   if(vlist.GetNext(deg + n) > n)
     deg = vlist.GetPrev(GetNext(deg + n)) - n;
-  next[id] = head;
+  next[id + m] = head;
   head = id + m;
   return GetPrev(id);
 }
@@ -146,15 +146,14 @@ void Graph::undo(){
     vlist.undo();
     vlist.move(id, GetDeg(id) + n);
     deg = std::max(GetDeg(id), deg);
-    head = next[id];
   }else{
     u = elist[head].from, v = elist[head].to;
     G[u].undo();
     G[v].undo();
     elist.undo();
     current_edge_size++;
-    head = next[head];
   }
+  head = next[head];
 }
 
 void Graph::print(){

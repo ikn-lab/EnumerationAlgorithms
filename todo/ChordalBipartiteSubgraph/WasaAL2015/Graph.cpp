@@ -1,9 +1,11 @@
 #include<iostream>
+#include<algorithm>
 #include<vector>
 
 #include"Graph.hpp"
 #include"List.hpp"
 #include"Element.hpp"
+#define INF 1e9
 // #define DEBUG
 
 void Graph::init(std::vector<std::vector<edge> > _G){
@@ -56,8 +58,10 @@ int Graph::RemoveVertex(int id){
   for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
     int u = G[id][i].from ,v = G[id][i].to;
     int eid = G[id][i].id;
-    if(v < u) G[v].remove(pos[eid].first);
-    else G[v].remove(pos[eid].second);
+    int maxi = std::max(pos[eid].first, pos[eid].second);
+    int mini = std::min(pos[eid].first, pos[eid].second);
+    if(u == id)G[v].remove(maxi);
+    else G[u].remove(mini);
     elist.remove(eid);
     current_edge_size--;
   }
@@ -96,5 +100,34 @@ void Graph::print(){
     }
     std::cout << std::endl;
   }
+}
+
+
+void Graph::ordering(std::vector<std::vector<edge> > &_G) {
+  int n = _G.size();
+  std::vector<int> deg(n, 0);
+  for (int i = 0; i < n; i++) deg[i] = _G[i].size();
+  std::vector<int> ord(n), reverse(n);
+  for (int i = 0; i < n; i++) {
+    int v = -1, tmp = INF;
+    for (int j = 0; j < n; j++) {
+      if(deg[j] < tmp) v = j, tmp = deg[j];
+    }
+    ord[i] = v;
+    reverse[v] = i;
+    degeneracy = std::max(degeneracy, deg[v]);
+    deg[v] = INF;
+    for (int j = 0; j < _G[v].size(); j++) deg[_G[v][j].to]--;
+  }
+  std::vector<std::vector<edge> > H(n);
+  for (int i = 0; i < n; i++) {
+    int v = ord[i];
+    H[i] = _G[v];
+  }
+  for (int i = 0; i < n; i++){
+    std::sort(H[i].begin(), H[i].end());
+    std::reverse(H[i].begin(), H[i].end());
+  }
+  _G = H;
 }
 
