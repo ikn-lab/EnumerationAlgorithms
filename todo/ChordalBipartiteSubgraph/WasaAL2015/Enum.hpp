@@ -34,6 +34,7 @@ private:
   std::vector<bigint> ans;
   // AddibleList<int> solution;
   AddibleList<int> cand;
-  std::stack<std::tuple<int, int, int, int>> stack;
+  std::stack<log> stack;
 };
 #endif // __ENUM__
+

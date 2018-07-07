@@ -14,7 +14,7 @@ void AddibleGraph::init(std::vector<std::vector<edge> > _G){
   vlist.init(tmp);
   for (int i = 0; i < n; i++) m += _G[i].size();
   m /= 2;
-  current_edge_size = m;
+  current_edge_size = 0;
   std::vector<edge> ve(m);
   pos.resize(m);
   for (int i = 0; i < n; i++) {
@@ -61,12 +61,13 @@ int AddibleGraph::AddEdge(int id, int x){
   }
 #endif
   int u = elist[id].from, v = elist[id].to, res;
-  if(vlist.vertexRemoved(u) or vlist.vertexRemoved(v)){
+  if(vlist.elementRemoved(u) or vlist.elementRemoved(v)){
     printf("%d or %d is already removed from G. ", u, v);
     exit(1);
   }
-  if(not vlist.useVertex(u))vlist.add(u);
-  if(not vlist.useVertex(v))vlist.add(v);
+  // if u or v is deleted, an error occurs. 
+  if(not vlist.useElement(u))vlist.add(u);
+  if(not vlist.useElement(v))vlist.add(v);
   if(u > v)std::swap(u, v);
   G[u].add(pos[id].first);
   G[v].add(pos[id].second);
@@ -100,6 +101,7 @@ int AddibleGraph::AddVertex(int id){
   for (int i = 0; i < G[id].end(); i++) {
     int eid = G[id][i].id;
     int v = elist[eid].to;
+    if(v == id)v = elist[eid].from;
     if(not vlist.member(v))continue;
     int mini = std::min(id, v), maxi = std::max(id, v);
     G[mini].add(pos[eid].first);
@@ -151,7 +153,9 @@ void AddibleGraph::undo(){
   head = next[head];
 }
 
+
 void AddibleGraph::print(){
+  std::cout << "vertex:" << currentSize() << " edge:" << current_edge_size << std::endl;
   for (int i = vlist.begin(); i != vlist.end(); i = vlist.GetNext(i)) {
     std::cout << "i:" << i << std::endl;
     for (int j = G[i].begin(); j != G[i].end(); j = G[i].GetNext(j)) {

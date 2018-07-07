@@ -17,7 +17,7 @@ public:
   int RemoveVertex(int id);
   int AddVertex(int id);
   void undo();
-  inline int size(){return n;}
+  inline int size(){return vlist.size();}
   inline int currentSize(){return vlist.size();};
   inline int edgeSize(){return current_edge_size;}
   inline AddibleList<edge>& operator[](const int id){return G[id];}
@@ -27,7 +27,7 @@ public:
   inline int GetPrev(int id){return vlist.GetPrev(id);};
   inline int GetDeg(int id){return G[id].size();};
   inline edge GetEdge(int id){return elist[id];};
-  inline bool useVertex(int id){return vlist.useVertex(id);};
+  inline bool useVertex(int id){return vlist.useElement(id) and not vlist.elementRemoved(id);};
   void print();
 private:
   int n, m, current_edge_size = 0, head = -1;

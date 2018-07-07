@@ -106,15 +106,15 @@ void ECIB::dfs(std::vector<bool> &visited, int v){
 }
 
 void ECIB::RecEnum(){
-  // std::cout << "print solution.  ";
-  // for (int i = solution.begin(); i != solution.end(); i = solution.GetNext(i)) {
-  //   std::cout << solution[i] << " ";
-  // }
-  // std::cout << std::endl;
   if(current_node == n) {
-    if(not isConnected()) return;
-    if(not isCB()) return;
-    ans[solution.size()]++;
+    ans[solution.size()] += (isConnected() and isCB());
+    // if(isConnected() and isCB()){
+    //   for (int i = solution.begin(); i != solution.end(); i = solution.GetNext(i)) {
+    //     std::cout << solution[i] << " ";
+    //   }
+    //   std::cout << std::endl;
+    // }
+    
     return; 
   }
   solution.add(current_node++);

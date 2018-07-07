@@ -9,7 +9,7 @@ void ECIB::init(std::vector<std::vector<edge>> _G){
   G.init(_G);
   ans.resize(n + 1, 0);
   for (int i = 0; i < n; i++) {
-    delta = std::max(delta, (int)_G[i].size());
+    delta = std::max(delta, G[i].size());
   }
   cand.init(n);
   for (int i = 0; i < n; i++) cand.set(i, i);
@@ -27,13 +27,16 @@ void ECIB::init(std::vector<std::vector<edge>> _G){
 
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < _G[i].size(); j++) {
+      int u = _G[i][j].to;
       for (int k = 0; k < _G[i].size(); k++) {
-        int u = _G[i][j].to, w = _G[i][k].to;
+        int w = _G[i][k].to;
+        // if(u == w)continue;
+        // if(u > w)std::swap(u, w);
         for (int l = 0; l < n + 2; l++) {
           tp[i][u][w][l] = l;
         }
         for (int l = 0; l < _G[i].size(); l++) {
-          tp[i][u][w][_G[i][l].to] = DELETED;
+          tp[i][u][w][G[i][l].to] = DELETED;
         }
         for (int l = 0; l < _G[u].size(); l++) {
           tp[i][u][w][_G[u][l].to] = n;
@@ -43,6 +46,7 @@ void ECIB::init(std::vector<std::vector<edge>> _G){
           if(tp[i][u][w][y] == n)tp[i][u][w][y] = DELETED;
           else tp[i][u][w][y] = n + 1;
         }
+        tp[i][u][w][i] = DELETED;
       }
     }
   }
@@ -60,8 +64,7 @@ void ECIB::Enumerate(){
     for (int j = 0; j < cntCand; j++){
       cand.undo();
     }
-    // G.undo();
-    G.RemoveVertex(i);
+    G.undo();
   }
 }
 
@@ -76,6 +79,7 @@ int ECIB::updateCand(int u){
   for (int i = 0; i < G[u].end(); i++) {
     res += (cand.add(G[u][i].to) != -1);
   }
+  
   for (int i = cand.begin(); i != cand.end(); i = cand.GetNext(i)) {
     bool esc = false;
     for (int j = 0; not esc and j < G[i].end(); j++) {
@@ -85,28 +89,6 @@ int ECIB::updateCand(int u){
         int y = G[i][k].to;
         if(not G.useVertex(y))continue;
         if(GetConnect(i, x, y, n, n + 1)){
-          // std::cout << "print graph. " << std::endl;
-          // G.print();
-          // printf("removed: i:%d x:%d y:%d Pn:%d Pn+1:%d\n", i, x, y, GetParent(i, x, y, n), GetParent(i, x, y, n + 1));
-          // for (int j = 0; j < 17; j++) {
-          //   printf("j: %d, %d\n", j, tp[i][x][y][j]);
-          // }
-          // std::stack<log> tmp;
-          // while(not stack.empty()){
-          //   log l = stack.top();
-          //   std::cout << std::get<0>(l) << " "
-          //             << std::get<1>(l) << " "
-          //             << std::get<2>(l) << " "
-          //             << std::get<3>(l) << " "
-          //             << std::get<4>(l) << " "
-          //             << std::get<5>(l) << std::endl;
-          //   tmp.push(l);
-          //   stack.pop();
-          // }
-          // while(not tmp.empty()){
-          //   stack.push(tmp.top());
-          //   tmp.pop();
-          // }
           i = cand.remove(i);
           esc = true;
           res++;
@@ -122,7 +104,6 @@ int ECIB::updateParent(int v, int x, int y, int u){
   int init = stack.size(), root = GetParent(v, x, y, u);
   if(root == DELETED) return 0;
   for (int i = 0; i < G[u].end(); i++) {
-    if(not G.useVertex(G[u][i].to))continue;
     int w = GetParent(v, x, y, G[u][i].to);
     if(w == DELETED)continue;
     stack.push(log(v, x, y, w));
@@ -171,22 +152,18 @@ bool ECIB::GetConnect(int v, int x, int y, int u, int w){
 }
 
 void ECIB::RecEnum(){
+  // std::cout << "print solution.  ";
+  // for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) {
+  //   std::cout << i << " ";
+  // }
+  // std::cout << std::endl;
+  // std::cout << "print candidate. ";
+  // for (int i = cand.begin(); i != cand.end(); i = cand.GetNext(i)) {
+  //   std::cout << cand[i] << " ";
+  // }
+  // std::cout << std::endl;
+  // std::cout << std::endl;
   if(cand.empty()){
-    // std::cout << "print solution.  ";
-    std::vector<int> tmp;
-    for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) {
-      tmp.push_back(i);
-    }
-    // std::sort(tmp.begin(), tmp.end());
-    // for (int i:tmp)std::cout << i << " ";
-    // std::cout << std::endl;
-    // std::cout << "print candidate. ";
-    // for (int i = cand.begin(); i != cand.end(); i = cand.GetNext(i)) {
-    //   std::cout << cand[i] << " ";
-    // }
-    // std::cout << std::endl;
-    // std::cout << std::endl;
-    
     ans[G.currentSize()]++;
     return; 
   }

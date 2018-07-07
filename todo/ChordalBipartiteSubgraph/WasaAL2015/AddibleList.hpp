@@ -31,8 +31,8 @@ public:
   inline int GetNumList(){return num_list;};
   inline bool empty(int type = 0){return begin(type) == end(type);};
   inline bool member(int id){return not removed[id];};
-  inline bool useVertex(int id){return s_next[id] != -1;};
-  inline bool vertexRemoved(int id){return useVertex(id) and not member(id);};
+  inline bool useElement(int id){return s_next[id] != -1;};
+  inline bool elementRemoved(int id){return useElement(id) and not member(id);};
 private:  
   std::unique_ptr<T[]> list;
   std::unique_ptr<int[]> next, prev, s_next, sentinel, _size, tail;
