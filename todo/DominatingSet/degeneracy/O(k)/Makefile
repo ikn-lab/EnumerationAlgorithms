@@ -1,4 +1,4 @@
-SRCS	 = main.cpp Graph.cpp Enum.cpp AddibleGraph.cpp
+SRCS	 = main.cpp Graph.cpp Enum.cpp AddibleGraph.cpp Digraph.cpp
 CXX		 = g++-7
 CXXFLAGS = -std=c++14 -O3
 EXE		 = EDS

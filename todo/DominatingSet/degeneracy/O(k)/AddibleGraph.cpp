@@ -80,11 +80,8 @@ int AddibleGraph::RemoveVertex(int id){
   for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
     int eid = G[id][i].id;
     int u = elist[id].from ,v = elist[id].to;
-    if(u > v)std::swap(u, v);
-    int mini = std::min(pos[eid].first, pos[eid].second);
-    int maxi = std::max(pos[eid].first, pos[eid].second);
-    if(u == id)G[v].remove(mini);
-    else G[u].remove(maxi);
+    if(v < u) G[v].remove(pos[eid].first);
+    else G[v].remove(pos[eid].second);
     elist.remove(eid);
     current_edge_size--;
   }
@@ -135,8 +132,8 @@ void AddibleGraph::undo(){
     u = elist[head].from, v = elist[head].to;
     G[u].undo();
     G[v].undo();
-    if(G[u].size() == 0)vlist.undo();
-    if(G[v].size() == 0)vlist.undo();
+    // if(G[u].size() == 0)vlist.undo();
+    // if(G[v].size() == 0)vlist.undo();
     elist.undo();
     current_edge_size++;
   }

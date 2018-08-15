@@ -10,8 +10,8 @@ using pii = std::pair<int, int>;
 class AddibleDigraph {
 public:
   AddibleDigraph(){};
-  AddibleDigraph(std::vector<std::vector<edge> > _G){init(_G);};
-  void init(std::vector<std::vector<edge> > _G);
+  AddibleDigraph(std::vector<std::vector<edge> > H){init(H);};
+  void init(std::vector<std::vector<edge> > H);
   inline int size(){return vlist.size();}
   inline int edgeSize(){return current_edge_size;}
   inline AddibleList<edge>& operator[](const int id){return G[id];}
@@ -33,7 +33,7 @@ protected:
   std::vector<AddibleList<edge> > G, RevG;
   AddibleList<int> vlist;
   AddibleList<edge> elist;
-  std::vector<pii> pos;//G:first, RevG:second
+  std::vector<pii> pos;//first: G, second:RevG
   std::vector<int> next;
 };
 #endif // __ADDIBLEDIGRAPH__

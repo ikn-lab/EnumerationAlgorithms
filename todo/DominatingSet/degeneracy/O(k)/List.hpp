@@ -48,6 +48,7 @@ void List<T>::init(std::vector<T> elem){
     removed[i] = false;
   }
   next[tail] = 0;
+  prev[tail] = tail - 1;
   prev[0] = tail;
 }
 

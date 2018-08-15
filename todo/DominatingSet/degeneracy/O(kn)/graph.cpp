@@ -44,7 +44,7 @@ void Graph::DegenerateOrder(){
       if(degree[j] < deg) v = j, deg = degree[j];
     }
     ordering[i] = v;
-    reverse[v] = i;
+   reverse[v] = i;
     degeneracy = std::max(degeneracy, degree[v]);
     degree[v] = INF;
     for (int j = 0; j < g[v].size(); j++) degree[g[v][j]]--;

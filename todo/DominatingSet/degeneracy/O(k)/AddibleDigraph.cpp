@@ -6,28 +6,28 @@
 #include"Element.hpp"
 // #define DEBUG
 
-void AddibleDigraph::init(std::vector<std::vector<edge> > _G){
-  n = _G.size(), m = 0;
+void AddibleDigraph::init(std::vector<std::vector<edge> > H){
+  n = H.size(), m = 0;
   G.resize(n), RevG.resize(n);
-  std::vector<std::vector<edge> > _RevG(n);
   std::vector<int> tmp(n);
+  std::vector<vector<edge> > RevH(n);
   for (int i = 0; i < n; i++) tmp[i] = i;
   vlist.init(tmp);
-  for (int i = 0; i < n; i++) m += _G[i].size();
+  for (int i = 0; i < n; i++) m += H[i].size();
   current_edge_size = m;
-  std::vector<edge> ve(m);
   pos.resize(m);
+  std::vector<edge> ve(m);
   for (int i = 0; i < n; i++) {
-    for (int j = 0; j < _G[i].size(); j++) {
-      edge e = _G[i][j];
-      ve[e.id] = _G[i][j];
+    for (int j = 0; j < H[i].size(); j++) {
+      edge e = H[i][j];
+      ve[e.id] = H[i][j];
+      RevH[e.to].push_back(edge(e.to, e.from, e.id));
       pos[e.id].first  = j;
-      pos[e.id].second = _RevG[e.to].size();
-      _RevG[e.to].push_back(edge(e.to, e.from, e.id));
+      pos[e.id].second = RevH[e.to].size() - 1;
     }
   }
   elist.init(ve);
-  for (int i = 0; i < n; i++) G[i].init(_G[i]), RevG[i].init(_RevG[i]);
+  for (int i = 0; i < n; i++) G[i].init(H[i]), RevG[i].init(RevH[i]);
   next.resize(n + m);
 }
 
@@ -52,9 +52,16 @@ int AddibleDigraph::RemoveEdge(int id){
 
 int AddibleDigraph::RemoveVertex(int id){
   for (int i = RevG[id].begin(); i != RevG[id].end(); i = RevG[id].GetNext(i)) {
-    int u = RevG[id][i].from ,v = RevG[id][i].to;
+    int u = RevG[id][i].to;
     int eid = RevG[id][i].id;
-    G[v].remove(pos[eid].first);
+    G[u].remove(pos[eid].first);
+    elist.remove(eid);
+    current_edge_size--;
+  }
+  for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
+    int u = G[id][i].to;
+    int eid = G[id][i].id;
+    RevG[u].remove(pos[eid].second);
     elist.remove(eid);
     current_edge_size--;
   }
@@ -66,28 +73,49 @@ int AddibleDigraph::RemoveVertex(int id){
 
 void AddibleDigraph::undo(){
   int u, v;
-  if(head >= m){//vertex
+  if(m <= head and head < n + m){//RemoveVertex
     int id = head - m;
     for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
-      u = G[id][i].from, v = G[id][i].to;
-      G[v].undo();
+      u = G[id][i].to;
       RevG[u].undo();
       elist.undo();
       current_edge_size++;
     }
+    for (int i = RevG[id].begin(); i != RevG[id].end(); i = RevG[id].GetNext(i)) {
+      u = G[id][i].to;
+      G[u].undo();
+      elist.undo();
+      current_edge_size++;
+    }
     vlist.undo();
-  }else{//edge
+  }else if(head < m){//RemoveEdge
     u = elist[head].from, v = elist[head].to;
     G[u].undo();
     RevG[v].undo();
-    if(G[u].size() == 0 and RevG[u].size() == 0)vlist.undo();
-    if(G[v].size() == 0 and RevG[v].size() == 0)vlist.undo();
+    // if(G[u].size() == 0 and RevG[u].size() == 0)vlist.undo();
+    // if(G[v].size() == 0 and RevG[v].size() == 0)vlist.undo();
     elist.undo();
     current_edge_size++;
+  }else if(n + m <= head and head < 2*m + n){//AddVertex
+    // int id = head - (n + m);
+    // for (int i = RevG[id].begin(); i != RevG[id].end(); i = RevG[id].GetNext[i]) {
+    //   int eid = G[id][i].id;
+    //   int u = elist[id].from, v = elist[id].to;
+    //   if(not vlist.member(v))continue;
+    //   G[u].add(pos[eid].first);
+    //   RevG[v].add(pos[eid].second);
+    //   elist.add(eid);
+    //   current_edge_size++;
+    // }
+  }else{//AddEdge
+    u = elist[head - (2*n + m)], v = elist[head - (2*n + m)];
+    G[u].undo();
+    RevG[v].undo();
+    elist.undo();
+    current_edge_size--;
   }
   head = next[head];
 }
-
 
 
 int AddibleDigraph::AddEdge(int id){
@@ -98,20 +126,29 @@ int AddibleDigraph::AddEdge(int id){
   }
 #endif
   int u = elist[id].from, v = elist[id].to, res;
-  if(G[u].size() == 0 and RevG[u].size() == 0)vlist.add(u);
-  if(G[v].size() == 0 and RevG[v].size() == 0)vlist.add(v);
+  // if(G[u].size() == 0 and RevG[u].size() == 0)vlist.add(u);
+  // if(G[v].size() == 0 and RevG[v].size() == 0)vlist.add(v);
   G[u].add(pos[id].first);
   RevG[v].add(pos[id].second);
   elist.add(id);
   current_edge_size++;
   next[id] = head;
-  head = id;
+  head = id + 2*m + n;
   res = G[u].GetNext(pos[G[u].back().id].first);
   return res;
 }
 
 int AddibleDigraph::AddVertex(int id){
-  for (int i = 0; i < G[id].end(); i++) {
+  for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
+    int eid = G[id][i].id;
+    int u = elist[id].from, v = elist[id].to;
+    if(not vlist.member(v))continue;
+    G[u].add(pos[eid].first);
+    RevG[v].add(pos[eid].second);
+    elist.add(eid);
+    current_edge_size++;
+  }
+  for (int i = RevG[id].begin(); i != RevG[id].end(); i = RevG[id].GetNext(i))  {
     int eid = G[id][i].id;
     int u = elist[id].from, v = elist[id].to;
     if(not vlist.member(v))continue;
@@ -122,7 +159,7 @@ int AddibleDigraph::AddVertex(int id){
   }
   vlist.add(id);
   next[id] = head;
-  head = id + m;
+  head = id + n + m;
   return vlist.GetPrev(id);
 }
 

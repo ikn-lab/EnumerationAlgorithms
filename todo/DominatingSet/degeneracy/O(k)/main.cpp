@@ -12,6 +12,7 @@
 #include<chrono>
 
 #include"Graph.hpp"
+#include"Digraph.hpp"
 #include"Enum.hpp"
 // #define DEBUG
 
@@ -32,15 +33,15 @@ int main(int argc, char *argv[]){
   std::string tmp;
   getline(ist, tmp);
   sscanf(tmp.data(), "%d %d", &n, &m);
-  std::vector<std::vector<edge> > _G(n);
+  std::vector<std::vector<edge> > H(n);
   while(getline(ist, tmp)){
     int u, v;
     sscanf(tmp.data(), "%d %d", &u, &v);
-    _G[u].push_back(edge(u, v, cnt));
-    _G[v].push_back(edge(v, u, cnt++));
+    H[u].push_back(edge(u, v, cnt));
+    H[v].push_back(edge(v, u, cnt++));
   }
   std::cout << n << " " << m << std::endl;
-  EDS eds(_G);
+  EDS eds(H);
   std::cout << "degeneracy:" << eds.GetDegeneracy() << std::endl;
   std::cout << "n:" << eds.size() << std::endl;
   
