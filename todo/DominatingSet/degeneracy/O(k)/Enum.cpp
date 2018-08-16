@@ -126,8 +126,8 @@ void EDS::Enumerate(){
     int v = i;
     solution.remove(v);
     i = cand.remove(v);
-    diff[depth].push(v);
-    counter[v]++;
+    // diff[depth].push(v);
+    // counter[v]++;
     int size = diff[depth].size();
     store   = updateCand(v);
     updateDomList(v, size);
@@ -299,12 +299,11 @@ int EDS::updateDomList(int v, int size){
     }
   }
   for (int i = G[v].begin(); v < G[v][i].to and i != G[v].end(); i = G[v].GetNext(i)) {
-    dominated[G[v][i].to]--;
+    if(counter[v] == 0)dominated[G[v][i].to]--;
     domLog.push(pii(-G[v][i].to - 1, -1));
-    if(not solution.member(G[v][i].to))continue;
     int rev = G.GetRev(G[v][i].id, v);
-    domList[v].add(i);
-    // if(domList[G[v][i].to].member(rev)) domList[G[v][i].to].remove(rev);
+    if(solution.member(G[v][i].to))domList[v].add(i);
+    if(domList[G[v][i].to].member(rev)) domList[G[v][i].to].remove(rev);
     domLog.push(pii(v, 0));
     // domLog.push(G[v][i].to);
     res++;
