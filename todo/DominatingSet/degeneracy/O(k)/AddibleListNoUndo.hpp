@@ -3,7 +3,7 @@
 #include<vector>
 #include<cstdio>
 #include<memory>
-// #define DEBUG
+#define DEBUG
 template<typename T>
 class AddibleListNoUndo{
 public:
