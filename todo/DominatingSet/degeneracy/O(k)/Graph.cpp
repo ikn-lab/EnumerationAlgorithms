@@ -101,14 +101,22 @@ void Graph::print(){
       std::cout  << G[i][j].to << " ";
     }
     std::cout << std::endl;
+    for (int j = G[i].begin(); j != G[i].end(); j = G[i].GetNext(j)) {
+      std::cout  << G[i][j].id << " ";
+    }
+    std::cout << std::endl;
+    std::cout << std::endl;
   }
 }
 
 
 int Graph::GetRev(int eid, int x){
   int u = elist[eid].from, v = elist[eid].to;
+  // std::cout << "GetRev:";
+  // if(x == std::min(u, v))std::cout << pos[eid].second << std::endl;
+  // else std::cout << pos[eid].first << std::endl;
   if(x == std::min(u, v)) return pos[eid].second;
-  else pos[eid].first;
+  else return pos[eid].first;
 }
 
 

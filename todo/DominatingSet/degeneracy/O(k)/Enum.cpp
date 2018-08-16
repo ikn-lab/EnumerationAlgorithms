@@ -14,17 +14,9 @@ using bigint = long long int;
 EDS::EDS(std::vector<std::vector<edge> > H){
   ordering(H);
   int n = H.size();
-  std::cout << "ordering:" << std::endl;
-  for (int i = 0; i < n; i++) {
-    printf("%2d ", i);
-  }
-  std::cout << std::endl;
-  for (int i = 0; i < n; i++) {
-    printf("%2d ", ord[i]);
-  }
-  std::cout << std::endl;
   G.init(H), C.init(H);
   domList.resize(H.size());
+  revDomList.resize(H.size());
   result.resize(G.size() + 1, 0);
   dominated.resize(G.size());
   counter.resize(G.size(), 0);
@@ -40,7 +32,6 @@ EDS::EDS(std::vector<std::vector<edge> > H){
     }
   }
   FW.init(tmpG);
-  // FW.print();
   std::vector<int> tmp;
   for (int i = 0; i < G.size(); i++) tmp.push_back(i);
   solution.init(tmp), cand.init(tmp);
@@ -52,6 +43,7 @@ EDS::EDS(std::vector<std::vector<edge> > H){
     }
     std::cout << std::endl;
   }
+  G.print();
 }
 
 void EDS::ordering(std::vector<std::vector<edge> > &H) {
@@ -103,34 +95,22 @@ bool checkDominatingSet(Graph &G, List<int> &solution){
 void EDS::Enumerate(){
   printSolution();
   printCand();
-  // printDomList();
-  // std::cout << "depth:" << depth << std::endl;
-  // std::cout << std::endl;
   result[solution.size()]++;
-  // if(solution.size() == 2)printSolution();
-  // printSolution();
-  // printCand();
   if(not checkDominatingSet(G, solution)){
-    std::cerr << "error. " << std::endl;
+    std::cerr << "error: not dominating set " << std::endl;
     printSolution();
     exit(1);
   }
   
   if(cand.size() == 0) {
-    // std::cout << "backtrack" << std::endl;
+    std::cout << "backtrack" << std::endl;
     return;
   }
-  // std::cout << "depth:" << depth << " solution size:" << solution.size() << std::endl;
-  // printCand();
   int FW_cnt = 0, cand_cnt = cand.size(), dom_cnt = 0, C_cnt = 0;
-  // std::cout << "FW" << std::endl;
-  // FW.print();
   for (int i = cand.begin(); i != cand.end(); i = cand.GetNext(i)) { 
-    // std::cout << "FW v:" << i << std::endl;
     for (int j = FW[i].begin(); j != FW[i].end(); j = FW[i].GetNext(j)) {
       int u = FW[i][j].to;
       if(solution.member(u))continue;
-      // std::cout <<  "remove i:" << i << " j:" << FW[i][j].to << std::endl;
       j = FW.RemoveEdge(FW[i][j].id);
       FW_cnt++;
     }
@@ -141,72 +121,75 @@ void EDS::Enumerate(){
       C_cnt++;
     }
   }
-  // FW.print();
-  // std::cout << std::endl;
-  // std::cout << "C" << std::endl;
-  // C.print();
-  // std::cout << "branching" << std::endl;
   int store, log = domLog.size();
   for (int i = cand.back(); i != cand.end();) {
     int v = i;
     solution.remove(v);
     i = cand.remove(v);
-    // diff[depth].push(u);
-    // counter[v]++;
-    // std::cout << "v:" << v << " i:" << i << std::endl;
+    diff[depth].push(v);
+    counter[v]++;
+    int size = diff[depth].size();
     store   = updateCand(v);
-    // std::cout << "bef" << std::endl;
-    // printDomList();
-    dom_cnt = updateDomList(v);
-    
-    // std::cout << "aft" << std::endl;
-    // printDomList();
+    updateDomList(v, size);
     depth++;
     Enumerate();
-    // printSolution();
-    // printCand();
     depth--;
     solution.undo();
     for (int j = 0; j < store; j++) cand.undo();
-    for (int j = 0; j < dom_cnt; j++) {
-      if(domLog.top().first < 0){
-        dominated[-domLog.top().first + 1] -= domLog.top().second;
-      }else{
-        domList[domLog.top().first].undo();
-        dominated[domLog.top().first] -= domLog.top().second;
-      }
-      domLog.pop();        
-    }
+    printSolution();
+    std::cout << "current vertex:" << v << std::endl;
+    printCand();
+    printDomList();
     for (int j = G[v].begin(); v < G[v][j].to and j != G[v].end(); j = G[v].GetNext(j)) {
       int rev = G.GetRev(G[v][j].id, v);
+      if(domList[v].member(j)) domList[v].remove(j);
       domList[G[v][j].to].add(rev);
-      domLog.push(pii(G[v][j].to, 0));
+      revDomList[v].push(j);
     }
+    for (int j = C[v].begin(); j != C[v].end(); j = C[v].GetNext(j)) {
+      if(domList[v].member(j)){
+        std::cout << "v:" << v << " memver:" << j << std::endl;
+        std::cout << "from:" << domList[v][j].from << " to:" << domList[v][j].to  << std::endl;
+        domList[v].remove(j);
+      }
+    }
+    std::cout << "endddd" << std::endl;
+    printDomList();
   }
   for (int i = 0; i < FW_cnt; i++) FW.undo();
   for (int i = 0; i < C_cnt; i++) C.undo();
   for (int i = 0; i < cand_cnt; i++) cand.undo();
-  for (int i = cand.begin(); i != cand.end(); i = cand.GetNext(i)) 
-    for (int j = G[i].begin(); i < G[i][j].to and j != G[i].end(); j = G[i].GetNext(j)) dominated[G[i][j].to]++;
-  
-  while(domLog.size() > log){
-    domList[domLog.top().first].undo();    
-    domLog.pop();
+  for (int i = cand.begin(); i != cand.end(); i = cand.GetNext(i)) {
+    for (int j = G[i].begin(); i < G[i][j].to and j != G[i].end(); j = G[i].GetNext(j)) {
+      dominated[G[i][j].to]++;
+      
+    }
+    for (int j = domList[i].begin(); j != domList[i].end(); j = domList[i].GetNext(j)) {
+      edge e = domList[i][j];
+      int tmp = G.GetRev(e.id, i);
+      if(domList[e.to].member(tmp))domList[e.to].remove(tmp);
+      if(domList[i].member(j))domList[i].remove(j);
+    }
+    // while(not revDomList[i].empty()) {
+    //   int j = revDomList[i].front();
+    //   int rev = G.GetRev(G[i][j].to, i);
+    //   domList[G[i][j].to].remove(rev);
+    //   revDomList[i].pop();
+    // } 
   }
-  // std::cout << "backtrack. " << std::endl;
+  std::cout << "backtrack. " << std::endl;
 }
 
 int EDS::updateCand(int v){
+  std::cout << "start updateCand" << std::endl;
+  printCand();
   int res = 0;
   //forward
-  // std::cout << "forward" << std::endl;
-  // std::cout << "updateCand:";
-  // printCand();
+  std::cout << "forward" << std::endl;
   bool v_dom = false;
   for (int i = G[v].begin(); v < G[v][i].to and i != G[v].end(); i = G[v].GetNext(i)){
     int u = G[v][i].to;
-    // std::cout << u << std::endl;
-    // std::cout << "forward:" << u << std::endl;
+    std::cout << "forward:" << u << std::endl;
     if(solution.member(u)){
       v_dom = true;
       continue; 
@@ -216,15 +199,14 @@ int EDS::updateCand(int v){
       std::cout << "remove: FW:" << u << " " << G[u].back().to << std::endl;
       cand.remove(G[u].back().to);
       diff[depth].push(G[u].back().to);
-      counter[C[u].back().to]++;
-      // counter[C[u].back().to] = (counter[C[u].back().to] + 1)&1;
+      counter[G[u].back().to]++;
       res++;
     }
   }
   //back
-  // std::cout << "back" << std::endl;
+  std::cout << "back" << std::endl;
   std::cout << "back v:" << v << std::endl;
-  printDomList();
+  std::cout << "C:" << std::endl;
   C.print();
   for (int i = C[v].GetPrev(C[v].end()); C[v][i].to < v and i != C[v].end(); i = C[v].GetPrev(i)){
     int u = C[v][i].to;
@@ -235,7 +217,6 @@ int EDS::updateCand(int v){
       cand.remove(u);  
       diff[depth].push(u);
       counter[u]++;
-      // counter[u] = (counter[u] + 1)&1;
       res++;
     }
   }
@@ -243,7 +224,6 @@ int EDS::updateCand(int v){
   //the vertex with v as a private vertex.
   if(not v_dom and C[v].size() == 1){
     if(cand.member(C[v][C[v].begin()].to)){
-      // std::cout << "vertex id:" << C[v][C[v].begin()].to << std::endl;
       cand.remove(C[v][C[v].GetPrev(C[v].end())].to);
       diff[depth].push(C[v][C[v].GetPrev(C[v].end())].to);
       counter[C[v][C[v].GetPrev(C[v].end())].to]++;
@@ -251,25 +231,70 @@ int EDS::updateCand(int v){
     }
   }
   // printCand();
+  std::cout << "end updateCand" << std::endl;
   return res;
 }
 
-int EDS::updateDomList(int v){
-  int res = 0, loop = diff[depth].size();
-  for (int l = 0; l < loop; l++) {
+int EDS::updateDomList(int v, int size){
+  std::cout << "start udpateDomlist" << std::endl;
+  printDomList();
+  int res = 0, hoge = diff[depth].size();
+  for (int i = 0; i < G.size(); i++) {
+    if(i == 0)std::cout << "counter: "; 
+    std::cout << counter[i] << " ";
+    if(i == G.size() - 1)std::cout << std::endl;
+  }
+  for (int i = 0; i < hoge; i++) {
+    if(i == 0)std::cout << "diff[" << depth << "]:";                
+    std::cout << diff[depth].front() << " ";
+    diff[depth].push(diff[depth].front());
+    diff[depth].pop();
+  }
+  std::cout << std::endl;
+  for (int s = 0; s < size; s++) {
     int u = diff[depth].front();
     diff[depth].pop();
+    std::cout << "counter[" << u << "]:" << counter[u] << std::endl;
     counter[u]--;
-    if(counter[u] != 0) {
-      diff[depth].push(u);
-      continue; 
+    if(counter[u] == 1)continue;
+    if(counter[u] != 0){
+      std::cout << "error: counter" << std::endl;
+      exit(1);
     }
     for (int i = G[u].begin(); u < G[u][i].to and i != G[u].end(); i = G[u].GetNext(i)) {
       edge e = G[u][i];
       int rev = G.GetRev(e.id, u);
-      // std::cout << "e.from:" << e.from <<  " e.to:" << e.to << " rev:" << rev << std::endl;
-      if(not cand.member(u)) domList[e.to].add(rev), dominated[e.to]--, domLog.push(pii(e.to, -1));
-      else domList[e.to].remove(rev), dominated[e.to]++, domLog.push(pii(e.to, 1));
+      std::cout << "e.from:" << e.from <<  " e.to:" << e.to << " rev:" << rev << std::endl;
+      if(domList[e.to].member(rev))
+        domList[e.to].remove(rev); 
+      dominated[e.to]++;
+      domLog.push(pii(e.to, 1));
+      res++;
+      // revDomList[u].push(i);
+    }
+  }
+  std::cout << "end size:udpateDomList" << std::endl;
+  int loop = diff[depth].size();
+  for (int l = 0; l < loop; l++) {
+    int u = diff[depth].front();
+    std::cout << "vertex:" << u << std::endl;
+    diff[depth].pop();
+    diff[depth].push(u);
+    if(counter[u] == 2){
+      counter[u]--;
+      continue;
+    }
+    std::cout << "vertex:" << u << std::endl;
+    for (int i = G[u].begin(); u < G[u][i].to and i != G[u].end(); i = G[u].GetNext(i)) {
+      edge e = G[u][i];
+      int rev = G.GetRev(e.id, u);
+      std::cout << "to:" << e.to << " rev:" << rev<< std::endl; 
+      std::cout << domList[e.to].size() << std::endl;
+      domList[e.to].add(rev);
+      std::cout << domList[e.to].size() << std::endl;
+      revDomList[u].push(i);
+      dominated[e.to]--;
+      domLog.push(pii(e.to, -1));
       res++;
     }
   }
@@ -277,13 +302,15 @@ int EDS::updateDomList(int v){
     dominated[G[v][i].to]--;
     domLog.push(pii(-G[v][i].to - 1, -1));
     if(not solution.member(G[v][i].to))continue;
-    // int rev = G.GetRev(G[v][i].id, v);
+    int rev = G.GetRev(G[v][i].id, v);
     domList[v].add(i);
-    // domList[G[v][i].to].add(rev);
+    // if(domList[G[v][i].to].member(rev)) domList[G[v][i].to].remove(rev);
     domLog.push(pii(v, 0));
     // domLog.push(G[v][i].to);
     res++;
   }
+  printDomList();
+  std::cout << "end updateDomList" << std::endl;
   return res;
 }
 
