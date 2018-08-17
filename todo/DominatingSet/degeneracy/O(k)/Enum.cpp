@@ -142,7 +142,7 @@ void EDS::Enumerate(){
     for (int j = 0; j < store; j++) cand.undo();
     for (int j = G[v].begin(); v < G[v][j].to and j != G[v].end(); j = G[v].GetNext(j)) {
       int rev = G.GetRev(G[v][j].id, v);
-      if(domList[v].member(j)) domList[v].remove(j);
+      domList[v].remove(j);
       domList[G[v][j].to].add(rev);
     }
   }
@@ -151,18 +151,17 @@ void EDS::Enumerate(){
   for (int i = 0; i < cand_cnt; i++) cand.undo();
   for (int i = cand.begin(); i != cand.end(); i = cand.GetNext(i)) {
     for (int j = G[i].begin(); i < G[i][j].to and j != G[i].end(); j = G[i].GetNext(j)) {
-      dominated[G[i][j].to]++;
       edge e =  G[i][j];
+      dominated[e.to]++;
       int rev = G.GetRev(e.id, i);
-      if(domList[e.to].member(rev))domList[e.to].remove(rev);
-      if(domList[i].member(j))domList[i].remove(j);
+      domList[e.to].remove(rev);
+      domList[i].remove(j);
     }
   }
-  // std::cout << "backtrack. " << std::endl;
 }
 
 int EDS::updateCand(int v){
-  int res = 0;
+  int res = cand.size();
   bool v_dom = false;
   for (int i = G[v].begin(); v < G[v][i].to and i != G[v].end(); i = G[v].GetNext(i)){
     int u = G[v][i].to;
@@ -174,7 +173,7 @@ int EDS::updateCand(int v){
       cand.remove(G[u].back().to);
       diff[depth].push(G[u].back().to);
       counter[G[u].back().to]++;
-      res++;
+      // res++;
     }
   }
   int C_back = 0;
@@ -185,7 +184,7 @@ int EDS::updateCand(int v){
       cand.remove(u);  
       diff[depth].push(u);
       counter[u]++;
-      res++;
+      // res++;
     }
   }
 
@@ -196,14 +195,13 @@ int EDS::updateCand(int v){
       cand.remove(e.to);
       diff[depth].push(e.to);
       counter[e.to]++;
-      res++;
+      // res++;
     }
   }
-  return res;
+  return res - cand.size();
 }
 
-int EDS::updateDomList(int v, int size){
-  int res = 0;
+void EDS::updateDomList(int v, int size){
   for (int s = 0; s < size; s++) {
     int u = diff[depth].front();
     diff[depth].pop();
@@ -212,10 +210,9 @@ int EDS::updateDomList(int v, int size){
     for (int i = G[u].begin(); u < G[u][i].to and i != G[u].end(); i = G[u].GetNext(i)) {
       edge e = G[u][i];
       int rev = G.GetRev(e.id, u);
-      if(domList[e.to].member(rev)) domList[e.to].remove(rev);
-      if(domList[u].member(i)) domList[u].remove(i);
+      domList[e.to].remove(rev);
+      domList[u].remove(i);
       dominated[e.to]++;
-      res++;
     }
   }
   int loop = diff[depth].size();
@@ -231,24 +228,21 @@ int EDS::updateDomList(int v, int size){
     for (int i = G[u].begin(); u < G[u][i].to and i != G[u].end(); i = G[u].GetNext(i)) {
       edge e = G[u][i];
       int rev = G.GetRev(e.id, u);
-      if(not domList[e.to].member(rev))domList[e.to].add(rev);
+      domList[e.to].add(rev);
       dominated[e.to]--;
-      res++;
     }
   }
-  bool f = false;
+  bool v_dom = false;
   for (int i = G[v].begin(); v < G[v][i].to and i != G[v].end(); i = G[v].GetNext(i)) {
-    f |= solution.member(G[v][i].to);
+    v_dom |= solution.member(G[v][i].to);
     dominated[G[v][i].to]--;
     int rev = G.GetRev(G[v][i].id, v);
     if(solution.member(G[v][i].to))domList[v].add(i);
-    if(domList[G[v][i].to].member(rev)) domList[G[v][i].to].remove(rev);
-    res++;
+    domList[G[v][i].to].remove(rev);
   }
-  if(dominated[v] == 1 and not f and not domList[v].member(C[v].GetPrev(C[v].end()))) {
+  if(dominated[v] == 1 and not v_dom) {
     domList[v].add(C[v].GetPrev(C[v].end())); 
   }
-  return res;
 }
 
 void EDS::print(){

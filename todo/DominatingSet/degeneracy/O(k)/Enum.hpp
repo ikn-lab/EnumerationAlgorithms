@@ -28,11 +28,10 @@ public:
   void printCand();
 private:
   Digraph FW;//For any v \in C(X), N(v)^{v<} \cap X
-  Graph C;//G[C(X)]
+  // Digraph C;//For any v \in C(X), N(v)^{<v} \cap C
+  Graph C;//  G[C(X)]
   Graph G;//Input Graph
   std::vector<AddibleListNoUndo<edge> > domList;// For any v \in X, N(v)^{<v} \cap (X \ C(X)). Otherewise, N(v) \cap (X \ C(X))
-  std::vector<std::queue<int> > revDomList;
-  std::stack<pii> domLog;// vertex, plus or minus
   std::vector<int> dominated; // the number of vertices such that |N(v)^{<v} \cap C|
   std::vector<int> counter; // counter[i] is the number of vertex i in diff[depth]
   std::vector<int> ord, reverse;
@@ -42,7 +41,6 @@ private:
   List<int> solution, cand;
   void ordering(std::vector<std::vector<edge> > &H);
   int  updateCand(int v);
-  int  updateDomList(int v, int size);
-  void restore(int cand_cnt, int dom_del);
+  void updateDomList(int v, int size);
 };
 #endif // __ENUM__
