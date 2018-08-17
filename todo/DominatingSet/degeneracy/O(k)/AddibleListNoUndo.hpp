@@ -3,7 +3,7 @@
 #include<vector>
 #include<cstdio>
 #include<memory>
-#define DEBUG
+// #define DEBUG
 template<typename T>
 class AddibleListNoUndo{
 public:
@@ -75,6 +75,7 @@ int AddibleListNoUndo<T>::add(int id){
     std::exit(1);
   }
 #endif
+  if(not removed[id])return id;
   removed[id] = false;
   _size++;
   next[id] = tail;
@@ -92,6 +93,7 @@ int AddibleListNoUndo<T>::remove(int id){
     std::exit(1);
   }
 #endif
+  if(removed[id])return prev[id];
   removed[id] = true;
   _size--;
   prev[next[id]] = prev[id];
@@ -99,3 +101,6 @@ int AddibleListNoUndo<T>::remove(int id){
   return prev[id];
 }
 #endif // __ADDIBLELISTNOUNDO__
+
+
+

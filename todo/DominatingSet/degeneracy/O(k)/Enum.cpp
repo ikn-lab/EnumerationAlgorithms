@@ -14,24 +14,29 @@ using bigint = long long int;
 EDS::EDS(std::vector<std::vector<edge> > H){
   ordering(H);
   int n = H.size();
-  G.init(H), C.init(H);
+  G.init(H);
   domList.resize(H.size());
   result.resize(G.size() + 1, 0);
   dominated.resize(G.size());
   counter.resize(G.size(), 0);
   diff.resize(G.size());
-  std::vector<std::vector<edge> > tmpG(G.size());
-  int num_edge = 0;
+  std::vector<std::vector<edge> > tmpFW(G.size()), tmpC(G.size());
+  int num_fw_edges = 0, num_c_edges = 0;
   for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) {
     diff[i].resize(n);
-    for (int j = G[i].begin(); j != G[i].end() and G[i][j].to > i; j = G.GetNext(j)) {
+    for (int j = G[i].begin(); j != G[i].end(); j = G.GetNext(j)) {
       edge e  = G[i][j];
-      e.id = num_edge++;
-      tmpG[i].push_back(e);
-      dominated[e.to]++;
+      if(i < G[i][j].to){
+        e.id = num_fw_edges++;
+        tmpFW[i].push_back(e);
+        dominated[e.to]++;
+      }else{
+        e.id = num_c_edges++;
+        tmpC[i].push_back(e);
+      }
     }
   }
-  FW.init(tmpG);
+  FW.init(tmpFW), C.init(tmpC);
   std::vector<int> tmp;
   for (int i = 0; i < G.size(); i++) tmp.push_back(i);
   solution.init(tmp), cand.init(tmp);
@@ -122,7 +127,7 @@ void EDS::Enumerate(){
     for (int j = C[i].begin(); j != C[i].end(); j = C[i].GetNext(j)) {
       int u = C[i][j].to;
       if(cand.member(u))continue;
-      j = C.RemoveEdge(C[i][j].id, i);
+      j = C.RemoveEdge(C[i][j].id);
       C_cnt++;
     }
   }
@@ -171,18 +176,17 @@ int EDS::updateCand(int v){
     }
     if((domList[u].size() + dominated[u]) == 2 and cand.member(G[u].back().to)) {
       cand.remove(G[u].back().to);
-      diff[depth].push(G[u].back().to);
+      if(counter[G[u].back().to] == 0) diff[depth].push(G[u].back().to);
       counter[G[u].back().to]++;
       // res++;
     }
   }
-  int C_back = 0;
-  for (int i = C[v].GetPrev(C[v].end()); C[v][i].to < v and i != C[v].end(); i = C[v].GetPrev(i), C_back++){
+  for (int i = C[v].begin(); i != C[v].end(); i = C[v].GetNext(i)){
     int u = C[v][i].to;
     if(G[u].back().to < u)continue;
     if(FW[u].size() == 1 and FW[u][FW[u].begin()].to == v and cand.member(u)){
       cand.remove(u);  
-      diff[depth].push(u);
+      if(counter[u] == 0) diff[depth].push(u);
       counter[u]++;
       // res++;
     }
@@ -193,7 +197,7 @@ int EDS::updateCand(int v){
     edge e = C[v].back();
     if(cand.member(e.to)){
       cand.remove(e.to);
-      diff[depth].push(e.to);
+      if(counter[e.to] == 0) diff[depth].push(e.to);
       counter[e.to]++;
       // res++;
     }
@@ -202,34 +206,33 @@ int EDS::updateCand(int v){
 }
 
 void EDS::updateDomList(int v, int size){
-  for (int s = 0; s < size; s++) {
-    int u = diff[depth].front();
-    diff[depth].pop();
-    if(counter[u] == 2)continue;
-    counter[u]--;
-    for (int i = G[u].begin(); u < G[u][i].to and i != G[u].end(); i = G[u].GetNext(i)) {
-      edge e = G[u][i];
-      int rev = G.GetRev(e.id, u);
-      domList[e.to].remove(rev);
-      domList[u].remove(i);
-      dominated[e.to]++;
-    }
-  }
   int loop = diff[depth].size();
   for (int l = 0; l < loop; l++) {
     int u = diff[depth].front();
     diff[depth].pop();
-    diff[depth].push(u);
     if(counter[u] == 2){
       counter[u]--;
+      diff[depth].push(u);
       continue;
     }
-    if(u == v)continue;
-    for (int i = G[u].begin(); u < G[u][i].to and i != G[u].end(); i = G[u].GetNext(i)) {
-      edge e = G[u][i];
-      int rev = G.GetRev(e.id, u);
-      domList[e.to].add(rev);
-      dominated[e.to]--;
+    // if(u == v)continue;//???
+    if(l < size){
+      counter[u]--;
+      for (int i = G[u].begin(); u < G[u][i].to and i != G[u].end(); i = G[u].GetNext(i)) {
+        edge e = G[u][i];
+        int rev = G.GetRev(e.id, u);
+        domList[e.to].remove(rev);
+        domList[u].remove(i);
+        dominated[e.to]++;
+      }
+    }else{
+      diff[depth].push(u);
+      for (int i = G[u].begin(); u < G[u][i].to and i != G[u].end(); i = G[u].GetNext(i)) {
+        edge e = G[u][i];
+        int rev = G.GetRev(e.id, u);
+        domList[e.to].add(rev);
+        dominated[e.to]--;
+      }
     }
   }
   bool v_dom = false;
@@ -264,6 +267,11 @@ void EDS::print(){
   std::cout << "dominated: ";
   for (int i = 0; i < dominated.size(); i++) {
     std::cout << dominated[i] << " ";
+  }
+  std::cout << std::endl;
+  std::cout << "counter  : ";
+  for (int i = 0; i < dominated.size(); i++) {
+    std::cout << counter[i] << " ";
   }
   std::cout << std::endl;
 }

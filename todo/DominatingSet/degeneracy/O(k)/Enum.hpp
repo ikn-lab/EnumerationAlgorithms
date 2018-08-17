@@ -24,12 +24,11 @@ public:
   void print();
   void printDomList();
   void printSolution();
-
   void printCand();
 private:
   Digraph FW;//For any v \in C(X), N(v)^{v<} \cap X
-  // Digraph C;//For any v \in C(X), N(v)^{<v} \cap C
-  Graph C;//  G[C(X)]
+  Digraph C;//For any v \in C(X), N(v)^{<v} \cap C
+  // Graph C;//  G[C(X)]
   Graph G;//Input Graph
   std::vector<AddibleListNoUndo<edge> > domList;// For any v \in X, N(v)^{<v} \cap (X \ C(X)). Otherewise, N(v) \cap (X \ C(X))
   std::vector<int> dominated; // the number of vertices such that |N(v)^{<v} \cap C|
