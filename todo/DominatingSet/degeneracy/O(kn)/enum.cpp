@@ -34,14 +34,14 @@ void RecDS(Graph &g, std::vector<bigint> &res, int size, int depth = 0){
       }
       std::cout << std::endl;
     }
-    if(not checkDominatingSet(g)){
-      std::cerr << "error. " << std::endl;
-      for (int i = 0; i < g.used.size(); i++) {
-        if(g.used[i])std::cout << i << " ";
-      }
-      std::cerr << std::endl;
-      exit(1);
-    };
+    // if(not checkDominatingSet(g)){
+    //   std::cerr << "error. " << std::endl;
+    //   for (int i = 0; i < g.used.size(); i++) {
+    //     if(g.used[i])std::cout << i << " ";
+    //   }
+    //   std::cerr << std::endl;
+    //   exit(1);
+    // };
     return;
   }
   int v = g.size() - depth - 1;

@@ -8,6 +8,7 @@
 #include"Digraph.hpp"
 // #include"AddibleList.hpp"
 #include"AddibleListNoUndo.hpp"
+#include"basicDataStructure.hpp"
 // #include"AddibleGraph.hpp"
 // #include"AddibleDigraph.hpp"
 #include"List.hpp"
@@ -37,7 +38,7 @@ private:
   std::vector<int> ord, reverse;
   std::vector<bigint> result;
   int depth = 0, degeneracy;
-  std::vector<std::queue<int> >diff;
+  std::vector<FixedQueue<int> >diff;
   List<int> solution, cand;
   void ordering(std::vector<std::vector<edge> > &H);
   int  updateCand(int v);
@@ -45,10 +46,3 @@ private:
   void restore(int cand_cnt, int dom_del);
 };
 #endif // __ENUM__
-
-
-
-
-
-
-
