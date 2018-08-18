@@ -13,31 +13,55 @@ typedef std::pair<int, pii> piii;
 
 std::mt19937 mt((int)time(0));
 
+bool isConnected(std::set<pii> &edge){
+  std::set<int> vertex;
+  for (auto e: edge){
+    vertex.insert(e.first);
+    vertex.insert(e.second);
+  }
+  for (auto e: edge) {
+    if(vertex.count(e.first) == 1 and
+       vertex.count(e.second) == 0){
+      vertex.erase(e.first);      
+    }else if(vertex.count(e.first) == 0 and
+             vertex.count(e.second) == 1){
+      vertex.erase(e.second);      
+    }else{
+      vertex.erase(e.first);
+    }
+  }
+  return vertex.size() == 1;
+}
+
 void randomGraph(std::ofstream &output_file, int n, double density = -1){
-  std::set<pii> edge;
   if(density == -1)density = sqrt(n)*n/2;
   int cnt = 0;
-  while((double)edge.size()/n < density){
-    if(cnt > 5000){
-      break;
+  std::set<pii> edge;
+  while(1){
+    edge.clear();
+    while((double)edge.size()/n < density){    
+      if(cnt > 5000){
+        break;
+      }
+      pii add = pii(mt()%n, mt()%n);
+      if(add.first == add.second){
+        cnt++;
+        continue;
+      }
+      pii rev = pii(add.second, add.first);
+      if(edge.find(add) != edge.end() or
+         edge.find(rev) != edge.end()){
+        cnt++;
+        continue;
+      }
+      edge.insert(add);
+      cnt = 0;
     }
-    pii add = pii(mt()%n, mt()%n);
-    if(add.first == add.second){
-      cnt++;
-      continue;
-    }
-    pii rev = pii(add.second, add.first);
-    if(edge.find(add) != edge.end() or
-       edge.find(rev) != edge.end()){
-      cnt++;
-      continue;
-    }
-    edge.insert(add);
-    cnt = 0;
+    if(isConnected(edge))break;
   }
   output_file << n << " " << edge.size() << std::endl;
   for (auto add: edge) {
-    output_file << add.first << " " << add.second << std::endl;
+    output_file << add.first << " " << add.second << " " << mt()%150 << std::endl;
   }
 }
 

@@ -22,7 +22,10 @@ public:
   void print();
 private:
   void RecEnum(int s, int t);
-  bool Reacable(int s, int t);
+  bool Reachable(int s, int t);
+  int nextStartPoint(int v);
+  int dfs(int v, int t);
+  
   Graph G;
   int n, m;
   AddibleList<int> solution;

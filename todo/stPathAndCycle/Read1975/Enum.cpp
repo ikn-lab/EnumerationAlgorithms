@@ -32,16 +32,43 @@ void ESTP::RecEnum(int s, int t){
   G.RemoveVertex(s);
   for (int i = G[s].begin(); i != G[s].end(); i = G[s].GetNext(i)) {
     int v = G[s][i].to;
-    if(Reacable(v, t)) {
-      solution.add(v);
+    if(Reachable(v, t)) {
+      int tmp = nextStartPoint(v);
       RecEnum(v, t);
-      solution.undo();
+      for (int i = 0; i < tmp; i++) solution.undo();
     } 
   }
   G.undo();
 }
 
-bool ESTP::Reacable(int s, int t){
+int ESTP::nextStartPoint(int v){
+  for (int i = 0; i < n; i++) used[i] = false;
+  used[v] = true;
+  return v;
+}
+// int ESTP::nextStartPoint(int v){
+//   for (int i = 0; i < n; i++) used[i] = false;
+//   used[v] = true;
+//   return dfs(v);
+// }
+
+// int dfs(int v, int t){
+//   if(v == t)return 1;
+//   int res = 0, cnt = 0, x;
+//   for (int i = G[v].begin(); i != G[v].end(); i = G[v].GetNext(i)) {
+//     int u = G[v][i].to;
+//     if(used[u])continue;
+//     cnt++;
+//     used[u] = true;
+//     x = dfs(u, t);
+//     cnt += (x != 0);
+//     res += x;
+//   }
+//   if(cnt > 1)return -1;
+//   else return res;
+// }
+
+bool ESTP::Reachable(int s, int t){
   if(s == t)return true;
   for (int i = 0; i < n; i++) used[i] = false;
   que.push(s);
@@ -70,3 +97,4 @@ void ESTP::print(){
     std::cout << i << ":" << ans[i] << std::endl;
   }
 }
+ 

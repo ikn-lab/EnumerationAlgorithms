@@ -130,17 +130,25 @@ void Graph::undo(){
   if(head >= m){
     int id = head - m;
     for (int i = G[id].begin(); i != G[id].end(); i = G[id].GetNext(i)) {
-      v = G[id][i].to;
-      G[v].undo();
+      u = G[id][i].from, v = G[id][i].to;
+      if(u == id){
+        G[v].undo(); 
+        degDistribution[GetDeg(v) - 1]--;
+        degDistribution[GetDeg(v)]++;
+        vlist.move(v, GetDeg(v) + n);
+        deg = std::max(GetDeg(v), deg);
+        if(GetDeg(v) == 1)isolated--;
+      }else{
+        G[u].undo();
+        degDistribution[GetDeg(u) - 1]--;
+        degDistribution[GetDeg(u)]++;
+        vlist.move(u, GetDeg(u) + n);
+        deg = std::max(GetDeg(u), deg);
+        if(GetDeg(u) == 1)isolated--;
+      }
       elist.undo();
       current_edge_size++;
-      degDistribution[GetDeg(v) - 1]--;
-      degDistribution[GetDeg(v)]++;
-      vlist.move(v, GetDeg(v) + n);
-      deg = std::max(GetDeg(v), deg);
-      if(GetDeg(v) == 1)isolated--;
     }
-
     degDistribution[GetDeg(id)]++;
     if(GetDeg(id) == 0)isolated++;
     vlist.undo();

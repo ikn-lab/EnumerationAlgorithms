@@ -44,10 +44,3 @@ int main(int argc, char *argv[]){
   std::cout << "the num of MIS:" << ans << std::endl;
   return 0;
 }
-
-
-
-
-
-
-

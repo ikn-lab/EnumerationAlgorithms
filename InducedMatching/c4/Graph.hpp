@@ -19,7 +19,6 @@ public:
   int RemoveEdge(int id, int x = -1);
   int RemoveVertex(int id);
   void undo();
-  void MakeVlist();
   inline bool member(int id){return vlist.member(id);};
   inline bool empty(){return vlist.empty();};
   inline int begin(){return GetNext(n + deg + 1);}
