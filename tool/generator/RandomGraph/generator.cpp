@@ -61,7 +61,8 @@ void randomGraph(std::ofstream &output_file, int n, double density = -1){
   }
   output_file << n << " " << edge.size() << std::endl;
   for (auto add: edge) {
-    output_file << add.first << " " << add.second << " " << mt()%150 << std::endl;
+    // output_file << add.first << " " << add.second << " " << mt()%150 << std::endl;
+    output_file << add.first << " " << add.second << std::endl;
   }
 }
 

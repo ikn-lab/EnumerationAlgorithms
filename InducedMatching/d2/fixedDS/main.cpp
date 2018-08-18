@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
   }
   g.dist.resize(n, 1e9);
 
-  std::vector<bigint> ans(n/2, 0);
+  std::vector<bigint> ans(n, 0);
   auto start = std::chrono::system_clock::now();
   std::cout << EIMMain(addlist, g, ans) << std::endl;
   auto end = std::chrono::system_clock::now();

@@ -1,6 +1,6 @@
 SRCS	 = main.cpp d2.cpp
 CXX		 = g++-6
-CXXFLAGS = -std=c++11 -O3 -I ~/boost_1_63_0
+CXXFLAGS = -std=c++14 -O3 -I ~/boost_1_63_0
 EXE		 = EIM
 
 EIM:$(SRCS)

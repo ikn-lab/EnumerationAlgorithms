@@ -30,16 +30,22 @@ FixedQueue<pii> que;
 FixedStack<int> st;
 
 bigint RecIM(EdgeList &addlist, Graph &g, std::vector<bigint> &ans, int p = 1, int size =  0){
+  // std::cout << "foo" << std::endl;
   if(p >= addlist.size() - 1){
+    // std::cout << "size:" << size << std::endl;
+    // std::cout << "ans[" << size << "]:" << ans[size] << std::endl;
     ans[size]++;
+    // std::cout << "size:" << size << std::endl;
     return 1;
   }
+  // std::cout << "fuga" << std::endl;
   int qsize = que.size();
   int ssize =  st.size();
   que.push(pii(0, addlist[p].from));
   que.push(pii(0 ,addlist[p].to));
   g.dist[addlist[p].from] = 0;
   g.dist[addlist[p].to  ] = 0;
+  // std::cout << "hoge" << std::endl;
   std::queue<int> visited;
   visited.push(addlist[p].from);
   visited.push(addlist[p].to);
@@ -70,7 +76,9 @@ bigint RecIM(EdgeList &addlist, Graph &g, std::vector<bigint> &ans, int p = 1, i
     }
   }
   while(not visited.empty())g.dist[visited.front()] = 1e9, visited.pop();
+  // std::cout << "traverse 1" << std::endl;
   bigint res = RecIM(addlist, g, ans, next, size + 1);
+  // std::cout << "rec 1" << std::endl;
   // std::cout << "hoge " << p << " " << ssize << " " << st.size() << std::endl;
   while(st.size() > ssize){
     // std::cout << st.size() << std::endl;
@@ -85,7 +93,9 @@ bigint RecIM(EdgeList &addlist, Graph &g, std::vector<bigint> &ans, int p = 1, i
     addlist.RestoreEdge();
   }
   // std::cout << "fuga" << std::endl;
+  // std::cout << "traverse 2" << std::endl;
   res += RecIM(addlist, g, ans, p + addlist[p].next, size);
+  // std::cout << "rec 2" << std::endl;
   g[addlist[p].from].RestoreEdge();
   g[addlist[p].to  ].RestoreEdge();
   return res;
@@ -96,7 +106,7 @@ bigint EIMMain(EdgeList &addlist, Graph &g, std::vector<bigint> &ans){
   for (int i = 0; i < n; i++) {
     d = std::max(d, g[i].size());
   }
-  que.resize(g.size()*d*d);
-  st.resize(g.size()*d*d);
+  que.resize(g.size()*d*d*3);
+  st.resize(g.size()*d*d*3);
   return RecIM(addlist, g, ans);
 }

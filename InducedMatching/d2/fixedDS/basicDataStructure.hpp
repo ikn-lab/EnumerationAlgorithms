@@ -2,102 +2,114 @@
 #define __BASICDATASTRUCTRUE__
 #include<vector>
 #include<iostream>
+#include<memory>
 
 template<typename T>
 class FixedStack{
 public:
   FixedStack(){};
-  FixedStack(int n){vt.resize(n);}
-  inline void resize(int n){vt.resize(n);}
+  FixedStack(int n):cap(n){stack = std::make_unique<T[]>(n);}
+  inline void resize(int n){cap = n, stack = std::make_unique<T[]>(n);}
   inline bool push(T item);
   inline T top();
   inline bool pop();
   inline bool empty(){return s == 0;};
+  inline bool clear(){s = 0; return true;};
   inline int size(){return s;};
 private:
-  std::vector<T> vt;
-  int s = 0;
+  std::unique_ptr<T[]> stack;
+  int s = 0, cap;
 };
 
 template<typename T>
 class FixedQueue{
 public:
   FixedQueue(){};
-  FixedQueue(int n){vt.resize(n);}
-  inline void resize(int n){vt.resize(n);}
+  FixedQueue(int n){que = std::make_unique<T[]>(n + 1), cap = n;}
+  inline void resize(int n){que = std::make_unique<T[]>(n + 1), cap = n;}
   inline bool push(T item);
   inline T front();
   inline bool pop();
-  inline bool empty(){return s == 0;};
-  inline bool clear(){s = start = 0;};
-  inline int size(){return s;};
+  inline bool empty(){return tail == head;};
+  inline bool clear(){tail = head = 0; return true;};
+  inline int size(){return (tail - head < 0)?tail + cap - head:tail - head;};
+  inline int end(){return tail;}
+  inline T operator[](const int p){return que[p];}
 private:
-  std::vector<T> vt;
-  int s = 0, start = 0;
+  std::unique_ptr<T[]> que;
+  int tail = 0, head = 0, cap;
 };
 
 
 
 template<typename T>
 bool FixedStack<T>::push(T item){
-  if(vt.size() == s){
-    std::cerr << "FixedStack size is over " << vt.size() << std::endl;
+#ifdef DEBUG
+  if(cap == s){
+    std::cerr << "FixedStack size is over " << cap << std::endl;
     return false;
   }
-  vt[s] = item;
-  s++;
+#endif
+  stack[s++] = item;
   return true;
 }
 
 template<typename T>
 T FixedStack<T>::top(){
+#ifdef DEBUG
   if(s == 0){
     std::cerr << "FixedStack is empty" << std::endl;
     exit(1);
   }
-  return vt[s - 1];
+#endif
+  return stack[s - 1];
 };
 
 template<typename T>
 bool FixedStack<T>::pop(){
-  if(vt.size() == 0){
+#ifdef DEBUG
+  if(cap == 0){
     std::cerr << "FixedStack size is zero" << std::endl;
     return false;
   }
-  s--;
+#endif
+  --s;
   return true;
 }
 
 template<typename T>
 bool FixedQueue<T>::push(T item){
-  if(vt.size() == s){
-    std::cerr << "FixedQueue size is over " << vt.size() << std::endl;
+#ifdef DEBUG
+  if(cap == size()){
+    std::cerr << "FixedQueue size is over " << cap << std::endl;
     return false;
   }
-  if(start + s > vt.size()) vt[start + s - vt.size()] = item;
-  else vt[start + s] = item;
-  s++;
+#endif
+  que[tail++] = item;
+  if(tail >= cap) tail = 0;
   return true;
 }
 
 template<typename T>
 T FixedQueue<T>::front(){
-  if(s == 0){
+#ifdef DEBUG
+  if(empty()){
     std::cerr << "FixedQueue is empty" << std::endl;
     exit(1);
   }
-  return vt[start];
+#endif
+  return que[head];
 };
 
 template<typename T>
 bool FixedQueue<T>::pop(){
-  if(vt.size() == 0){
+#ifdef DEBUG
+  if(empty()){
     std::cerr << "FixedQueue size is zero" << std::endl;
     return false;
   }
-  s--;
-  start++;
-  if(start > vt.size()) start -= vt.size();
+#endif
+  if(++head >= cap) head = 0;
   return true;
 }
 
