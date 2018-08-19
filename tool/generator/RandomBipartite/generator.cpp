@@ -65,21 +65,6 @@ void randomBipartite(std::ofstream &output_file, int n, double density = -1){
   }
 }
 
-void maxNoShortCycleGraph(std::ofstream &output_file, int n){
-  output_file << n << std::endl;
-  for (int i = 0; i < n - 1; i++) {
-    output_file << i << " " << i + 1 << std::endl;
-  }
-  int k = 7;
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n; j++) {
-      if(i + k - 1 + (k - 2)*j < n){
-        output_file << i << " " << i + k - 1 + (k - 2)*j << std::endl;
-      }
-    }
-  }
-}
-
 int main(int argc, char *argv[]){
   double density;
   std::string mode;
@@ -90,13 +75,13 @@ int main(int argc, char *argv[]){
     std::cerr << "enter the number of vertices and density." << std::endl;
     exit(1);
   }
-  std::string name = "random_bipartite_";
+  std::string name = "randomBipartite_";
   std::string s = name;
   for (int i = 1; i <= 7; i++) {
     char tmp[5];
     sprintf(tmp, "%02d", i);
     std::string id = tmp;
-    name = s + std::to_string(density).substr(0, 3) + "_" + std::to_string(n) + "_" + id + ".in";
+    name = s + std::to_string(n) + "_" + std::to_string(density).substr(0, 3) + "_" + id + ".in";
     std::cout << name << std::endl;
     std::ofstream output_file(name.c_str());
     randomBipartite(output_file, n, density);

@@ -81,7 +81,7 @@ int main(int argc, char *argv[]){
     char tmp[5];
     sprintf(tmp, "%02d", i);
     std::string id = tmp;
-    name = "random" + std::to_string(density).substr(0, 5) + "_" + id + ".in";
+    name = "random" + std::to_string(n).substr(0, 3) + "_" + std::to_string(density).substr(0, 3) + "_" + id + ".in";
     std::cout << name << std::endl;
     // std::cout << "generate random case" << std::endl;
     std::ofstream output_file(name.c_str());

@@ -8,6 +8,8 @@
 #include<fstream>
 #include<cstring>
 #include<ctime>
+
+#include"unionFind.hpp"
 typedef std::pair<int, int> pii;
 typedef std::pair<int, pii> piii;
 
@@ -27,31 +29,40 @@ bool isFourCycle(std::vector<std::vector<int> > &G){
   }
   return false;
 }
+
 void noFourCycleGraph(std::ofstream &output_file, int n, double density){
-  std::cout << n << std::endl;
   std::set<pii> edge;
-  std::vector<std::vector<int> > G(n);
-  output_file << n << std::endl;
   int cnt = 0;
-  while((double)edge.size()/n < density){
-    if(cnt > 5000)break;
-    cnt++;
-    pii add = pii(mt()%n, mt()%n);
-    pii rev = pii(add.second, add.first);
-    if(add.first == add.second)continue;
-    if(edge.find(add) == edge.end() and
-       edge.find(rev) == edge.end()){
-      G[add.first].push_back(add.second);
-      G[rev.first].push_back(rev.second);
-      if(isFourCycle(G) == false){
-        edge.insert(add);
-        cnt = 0;
-      }else{
-        G[add.first].pop_back();
-        G[rev.first].pop_back();
+  bool connected = false;
+  std::vector<std::vector<int> > G(n);
+  while(not connected){
+    for (int i = 0; i < n; i++) G[i].clear();
+    edge.clear();
+    connected = true;
+    UnionFind uf(n);
+    while((double)edge.size()/n < density){
+      if(cnt > 5000)break;
+      cnt++;
+      pii add = pii(mt()%n, mt()%n);
+      pii rev = pii(add.second, add.first);
+      if(add.first == add.second)continue;
+      if(edge.find(add) == edge.end() and
+         edge.find(rev) == edge.end()){
+        G[add.first].push_back(add.second);
+        G[rev.first].push_back(rev.second);
+        if(isFourCycle(G) == false){
+          edge.insert(add);
+          cnt = 0;
+          uf.unite(add.first, add.second);
+        }else{
+          G[add.first].pop_back();
+          G[rev.first].pop_back();
+        }
       }
     }
+    for (int i = 0; i < n; i++) connected &= uf.same(0, i);
   }
+  output_file << n << " " << edge.size() << std::endl;
   for (auto e:edge) {
     output_file << e.first << " " << e.second << std::endl;
   }
@@ -71,7 +82,7 @@ int main(int argc, char *argv[]){
     char tmp[5];
     sprintf(tmp, "%02d", i);
     std::string id = tmp;
-    name = "noCycleWithLengthFour" + std::to_string(density).substr(0, 5) + "_" + id + ".in";
+    name = "noCycleWithLengthFour" + std::to_string(n) + "_" + std::to_string(density).substr(0, 3) + "_" + id + ".in";
     std::cout << name << std::endl;
     std::ofstream output_file(name.c_str());
     noFourCycleGraph(output_file, n, density);

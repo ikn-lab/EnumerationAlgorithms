@@ -57,7 +57,7 @@ int main(int argc, char *argv[]){
     char tmp[5];
     sprintf(tmp, "%02d", i);
     std::string id = tmp;
-    name = "HighAveDegLowDegenerate" + std::to_string(degeneracy).substr(0, 5) + "_" + id + ".in";
+    name = "HighAveDegLowDegenerate" + std::to_string(n) + "_" + std::to_string(degeneracy).substr(0, 5) + "_" + id + ".in";
     std::cout << name << std::endl;
     // std::cout << "generate random case" << std::endl;
     std::ofstream output_file(name.c_str());
