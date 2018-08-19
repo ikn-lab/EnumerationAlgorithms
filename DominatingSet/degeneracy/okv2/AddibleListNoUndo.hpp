@@ -22,7 +22,7 @@ public:
   int add(int id);
   inline int size(){return _size;}
   inline int end(){return tail;};
-  inline T back(){return list[prev[end()]];};
+  inline T back(){return list[prev[tail]];};
   inline int begin(){return next[tail];};
   inline bool empty(){return begin() == end();};
   inline bool member(int id){return not removed[id];};

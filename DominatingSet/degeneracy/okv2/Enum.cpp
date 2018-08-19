@@ -12,8 +12,12 @@ using bigint = long long int;
 
 
 EDS::EDS(std::vector<std::vector<edge> > H){
+  //Hを縮退順に並び替える．  
   ordering(H);
+  
   int n = H.size();
+
+  //計算に必要な構造の初期化
   G.init(H);
   domList.resize(H.size());
   result.resize(G.size() + 1, 0);
@@ -58,25 +62,29 @@ EDS::EDS(std::vector<std::vector<edge> > H){
       }
     }
   }
-  std::cout << "C2FW:";
-  for (int i = 0; i < C2FW.size(); i++) {
-    std::cout <<  C2FW[i] << " ";
-  }
-  std::cout << std::endl;
-  std::vector<int> tmp;
-  for (int i = 0; i < G.size(); i++) tmp.push_back(i);
-  solution.init(tmp), cand.init(tmp);
-  for (int i = G.begin(); i != G.end(); i = G.GetNext(i))domList[i].init(H[i]);
-  std::cout << "FW: " << std::endl;
-  FW.print();
-  std::cout << "C : " << std::endl;
-  C.print();
   for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) {
     back[0][i] = G[i].back().to;
     back[1][i] = G[i][G[i].GetPrev(G[i].GetPrev(G[i].end()))].to;
   }
+  //初期化終了
+
+  //テスト用プリント関数
+  // std::cout << "C2FW:";
+  // for (int i = 0; i < C2FW.size(); i++) {
+  //   std::cout <<  C2FW[i] << " ";
+  // }
+  // std::cout << std::endl;
+  // std::vector<int> tmp;
+  // for (int i = 0; i < G.size(); i++) tmp.push_back(i);
+  // solution.init(tmp), cand.init(tmp);
+  // for (int i = G.begin(); i != G.end(); i = G.GetNext(i))domList[i].init(H[i]);
+  // std::cout << "FW: " << std::endl;
+  // FW.print();
+  // std::cout << "C : " << std::endl;
+  // C.print();
 }
 
+//Hを縮退順に並び替える関数: O(n^2)時間
 void EDS::ordering(std::vector<std::vector<edge> > &H) {
   int n = H.size();
   std::vector<int> deg(n, 0);
@@ -107,6 +115,7 @@ void EDS::ordering(std::vector<std::vector<edge> > &H) {
   H = tmp;
 }
 
+//solutionがGのdominating setかどうかのチェック関数．テスト用の関数
 bool checkDominatingSet(Graph &G, List<int> &solution){
   int n = G.size();
   std::vector<int> dom(n, 0);
@@ -129,40 +138,48 @@ bool checkDominatingSet(Graph &G, List<int> &solution){
   return true;
 }
 
+//列挙のメイン関数
 void EDS::Enumerate(){
+  //大きさがsolution.size()のdominating setの発見
   result[solution.size()]++;
-  int FW_cnt = 0, cand_cnt = cand.size(), dom_cnt = 0, C_cnt = 0;
-  int store;
+  
+  //FW_cnt  : updateDomListでFW中の削除した辺の本数
+  //cand_cnt: backtrackする際のcandをundoする回数
+  //C_cnt   : updateCandでcandがremoveされた回数
+  int FW_cnt = 0, cand_cnt = cand.size(), C_cnt = 0;
+  
   for (int i = cand.back(); i != cand.end();) {
     int v = i;
     solution.remove(v);
     i = cand.remove(v);
     int size = diff[depth].size();
-    store    = updateCand(v);
-    FW_cnt   = updateDomList(v, size);
-    depth++;
-    if(cand.size() != 0) Enumerate();
+    C_cnt  = updateCand(v);
+    FW_cnt = updateDomList(v, size);
+    if(cand.size() != 0) depth++, Enumerate(), depth--;
     else result[solution.size()]++;
-    depth--;
     solution.undo();
-    for (int j = 0; j < store; j++) cand.undo();
+    for (int j = 0; j < C_cnt; j++) cand.undo();
     for (int j = 0; j < FW_cnt; j++) FW.undo();
+
+    //Cの復元: この操作の後，C[u]はN(u)^{<u} \cap C(X)^{<v}と等しい
     for (int j = 0; j < diff[depth].size(); j++) {
-      int u = diff[depth].front();
-      diff[depth].pop();
-      diff[depth].push(u);
+      int u = diff[depth][j];
       // for (int k = FW[u].begin(); k != FW[u].end(); k = FW[u].GetNext(k)) {
       for (int k = 0; k < FW[u].maxSize(); k++) {
         edge e = FW[u][k];
         if(cand.member(e.to))C.AddEdge(FW2C[e.id]);
       }
     }
+    // domListの復元: この操作の後，domList[u]はu \in Xに対し，
+    // N(u)^{<u} \cap (X \ (cand \cup diff[depth]))と等しく，それ以外の頂点uでは
+    // N(u) \cap (X \ (cand \cup diff[depth]))と等しい
     for (int j = 0; j < FW[v].maxSize(); j++) {
       int rev = G.GetRev(G[v][j].id, v);
       domList[v].remove(j);
       domList[G[v][j].to].add(rev);
     }
   }
+  // backtrackの際の復元
   for (int i = 0; i < cand_cnt; i++) cand.undo();
   for (int i = cand.begin(); i != cand.end(); i = cand.GetNext(i)) {
     for (int j = 0; j < FW[i].maxSize(); j++) {
@@ -173,66 +190,50 @@ void EDS::Enumerate(){
       domList[i].remove(j);
     }
   }
+  
   // std::cout << "backtrack" << std::endl;
 }
 
 int EDS::updateCand(int v){
   int res = cand.size();
   bool v_dom = false;
-  // bool f = false;
-  // int c = 0;
+  // Del_2(X, v)の発見: vより番号の大きな支配集合に含まれない頂点uを参照する．
+  // uがX/C(X)に支配されず，N(u) \cap C(X) = {u, v}なら，uをcandから削除する．
   for (int i = 0; i < FW[v].maxSize(); i++) {
     int u = G[v][i].to;
-    // f = false;
-    // c = 0;
     if(solution.member(u)){
       v_dom = true;
       continue; 
     }
-    // for (int j = 0; j < G[u].size(); j++) {
-    //   f |= (solution.member(G[u][j].to) and not cand.member(G[u][j].to));
-    //   c += (cand.member(G[u][j].to));
-    // }
-    // if(not f and c == 1){
-    // if(cand.member(back[0][u]) and back[1][u] == v and
-    //    (domList[u].empty() or (domList[u].size() == 1 and (domList[u].back().to == v or domList[u].back().to == back[0][u])))){
     int a = domList[u].back().to;
     int b = domList[u][domList[u].GetPrev(domList[u].GetPrev(domList[u].end()))].to;
-    // std::cout << "a:" << a << " b:" << b << std::endl;
     int mini = std::min(a, b), maxi = std::max(a, b);
-    if(cand.member(back[0][u]) and back[1][u] == v and
+    
+    // N(u) \cap C(X) = {u, v}かどうかのチェック
+    // domList中に消しっぱなしになっている頂点があるので，
+    // domList[u]がemptyの場合，sizeが1もしくは2の場合の3パターンを試す必要がある．
+    if((cand.member(back[0][u]) and back[1][u] == v) and
        (domList[u].empty() or
-        (domList[u].size() == 2 and mini == back[0][u] and maxi == back[1][u]) or
-        (domList[u].size() == 1 and (domList[u].back().to == back[0][u] or domList[u].back().to == back[1][u])))){
-                                                           
+        (domList[u].size() == 1 and (a == back[0][u] or a == back[1][u])) or
+        (domList[u].size() == 2 and mini == back[0][u] and maxi == back[1][u]))){
       cand.remove(back[0][u]);
       if(counter[back[0][u]] == 0) diff[depth].push(back[0][u]);
       counter[back[0][u]]++;
     }
   }
+
+  // vより小さい順序を持つ頂点の情報を更新
   for (int i = C[v].begin(); i != C[v].end(); i = C[v].GetNext(i)){
     int u = C[v][i].to;
     if(back[0][u] < u)continue;
-    // f = false;
-    // c = 0;
-    // for (int j = 0; j < G[u].size(); j++) {
-    //   f |= (solution.member(G[u][j].to) and not cand.member(G[u][j].to));
-    //   c += (cand.member(G[u][j].to));
-    // }
-    // if(not f and c == 0){
     if(FW[u].size() == 1 and FW[u][FW[u].begin()].to == v and cand.member(u)){
       cand.remove(u);  
       if(counter[u] == 0) diff[depth].push(u);
       counter[u]++;
     }
   }
-  // f = false;
-  // c = 0;
-  // for (int j = 0; j < G[v].size(); j++) {
-  //   f |= (solution.member(G[v][j].to) and not cand.member(G[v][j].to));
-  //   c += (cand.member(G[v][j].to));
-  // }
-  // if(not f and c == 1){
+  
+  // vをprivate vertexとして持つ頂点が存在するかのチェック
   if(not v_dom and G[v].size() - FW[v].maxSize() == 1 and cand.member(back[0][v])){
     edge e = C[v].back();
     cand.remove(e.to);
@@ -243,52 +244,63 @@ int EDS::updateCand(int v){
 }
 
 int EDS::updateDomList(int v, int size){
-  int loop = diff[depth].size();
+  // diff内に含まれる頂点をチェックする．
+  // diff内に含まれる頂点はC(X)とC(X \ {v})の和が含まれる．
+  int loop = diff[depth].size(), cnt = 0;
   for (int l = 0; l < loop; l++) {
-    int u = diff[depth].front();
-    diff[depth].pop();
+    int u = diff[depth][l - cnt];
+
+    // counter[u]が2の場合，次の候補集合でも削除されているので，消しっぱなしにしておく
     if(counter[u] == 2){
-      counter[u]--;
+      diff[depth].pop();
       diff[depth].push(u);
+      cnt++;
+      counter[u]--;
       continue;
     }
-    if(l < size) counter[u]--;
-    else  diff[depth].push(u);
+    // l < sizeの時，頂点uを候補集合に戻す．
+    if(l < size) counter[u]--, diff[depth].pop(), cnt++;
     for (int i = 0; i < FW[u].maxSize(); i++) {
       edge e  = FW[u][i];
       int rev = G.GetRev(G[u][i].id, u);
       edge c_edge = C.GetEdge(FW2C[e.id]);
+      // uを候補集合に戻す．
       if(l < size){
         if(cand.member(c_edge.to))C.AddEdge(c_edge.id);
         domList[e.to].remove(rev);
         domList[u].remove(i);
         dominated[e.to]++;
       }else{
+        // uを候補集合から削除する．
         if(cand.member(c_edge.to))C.RemoveEdge(c_edge.id);
         domList[e.to].add(rev);
         dominated[e.to]--;
       }
     }
   }
+  // domList[v]の情報を更新する．
   for (int i = 0; i < FW[v].maxSize(); i++) {
-    edge e      = G[v][i];
+    edge e = G[v][i];
     dominated[e.to]--;
     if(solution.member(e.to))domList[v].add(i);
     int rev = G.GetRev(e.id, v);
     domList[e.to].remove(rev);
   }
   int res = 0;
+  // FWの情報を更新する．
   for (int i = C[v].begin(); i != C[v].end(); i = C[v].GetNext(i)) {
     edge e = FW.GetEdge(C2FW[C[v][i].id]);
-    // if(FW.member(e.id))FW.RemoveEdge(e.id), res++;//多分合っている
-    FW.RemoveEdge(e.id), res++;
+    // if(FW.member(e.id))FW.RemoveEdge(e.id), res++;
+    FW.RemoveEdge(e.id), res++;//if 文を入れないでも問題ないはず
   }
+  // vをprivate vertexとして持つ頂点がある場合の情報更新
   if((domList[v].size() + dominated[v]) == 1) {
     domList[v].add(C[v].GetPrev(C[v].end())); 
   }
   return res;
 }
 
+// テスト用プリント関数
 void EDS::print(){
   int sum = 0, n = G.size();
   for (int i = 0; i <= n; i++) sum += result[i];

@@ -34,7 +34,7 @@ public:
   inline bool clear(){tail = head = 0; return true;};
   inline int size(){return (tail - head < 0)?tail + cap - head:tail - head;};
   inline int end(){return tail;}
-  inline T operator[](const int p){return que[p];}
+  inline T operator[](const int p){return (cap <= head + p)?que[head + p - cap]:que[head + p];}
 private:
   std::unique_ptr<T[]> que;
   int tail = 0, head = 0, cap;

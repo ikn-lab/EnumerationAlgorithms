@@ -39,10 +39,10 @@ private:
   std::vector<int> counter; // counter[i] is the number of vertex i in diff[depth]
   std::vector<int> ord, reverse;
   std::vector<int> C2FW, FW2C;
-  std::vector<std::vector<int> > back;
+  std::vector<std::vector<int> > back; //0: a tail, 1: a next of a tail
   std::vector<bigint> result;
   int depth = 0, degeneracy;
-  std::vector<FixedQueue<int> > diff;//0: a tail, 1: a next of a tail
+  std::vector<FixedQueue<int> > diff;
   List<int> solution, cand;
   void ordering(std::vector<std::vector<edge> > &H);
   int  updateCand(int v);
