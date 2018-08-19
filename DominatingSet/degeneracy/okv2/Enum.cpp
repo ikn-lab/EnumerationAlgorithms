@@ -66,6 +66,10 @@ EDS::EDS(std::vector<std::vector<edge> > H){
     back[0][i] = G[i].back().to;
     back[1][i] = G[i][G[i].GetPrev(G[i].GetPrev(G[i].end()))].to;
   }
+  std::vector<int> tmp;
+  for (int i = 0; i < G.size(); i++) tmp.push_back(i);
+  solution.init(tmp), cand.init(tmp);
+  for (int i = G.begin(); i != G.end(); i = G.GetNext(i))domList[i].init(H[i]);
   //初期化終了
 
   //テスト用プリント関数
@@ -74,10 +78,6 @@ EDS::EDS(std::vector<std::vector<edge> > H){
   //   std::cout <<  C2FW[i] << " ";
   // }
   // std::cout << std::endl;
-  // std::vector<int> tmp;
-  // for (int i = 0; i < G.size(); i++) tmp.push_back(i);
-  // solution.init(tmp), cand.init(tmp);
-  // for (int i = G.begin(); i != G.end(); i = G.GetNext(i))domList[i].init(H[i]);
   // std::cout << "FW: " << std::endl;
   // FW.print();
   // std::cout << "C : " << std::endl;
@@ -142,12 +142,11 @@ bool checkDominatingSet(Graph &G, List<int> &solution){
 void EDS::Enumerate(){
   //大きさがsolution.size()のdominating setの発見
   result[solution.size()]++;
-  
+
   //FW_cnt  : updateDomListでFW中の削除した辺の本数
   //cand_cnt: backtrackする際のcandをundoする回数
   //C_cnt   : updateCandでcandがremoveされた回数
   int FW_cnt = 0, cand_cnt = cand.size(), C_cnt = 0;
-  
   for (int i = cand.back(); i != cand.end();) {
     int v = i;
     solution.remove(v);

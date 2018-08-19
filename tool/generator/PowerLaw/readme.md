@@ -1,11 +1,13 @@
 #PowerLaw generatorの仕様
 グラフの生成にはpythonのライブラリを使用している．
 networkxのpowerlaw_cluster_graphとrandom_powerlawtreeを使用している．
+graphディレクトリにはpythonのpowerlaw_cluster_graph関数を用いたgeneratorがあり，
+treeディレクトリにはrandom_powerlawtree関数を用いたgeneratorがある．
 
 ## 使い方
 
-- ./generator_HK_power.py
-- ./generator_power_tree.py
+- ./generator_HK_power.py 頂点数 
+- ./generator_power_tree.py 頂点数
 - 出力: 標準出力
 
 ## 生成方法

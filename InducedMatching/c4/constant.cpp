@@ -66,15 +66,15 @@ bigint CallAllChildren(Graph &G,
       stack_V.pop();
     }
     stack_V.pop();
-    // res += EIMRec(G, ans, update, stack_V, k, size + 1, marge);
+    res += EIMRec(G, ans, update, stack_V, k, size + 1, marge);
     // for counting
-    if(cnt > 0)res += EIMRec(G, ans, update, stack_V, k, size + 1, marge);
+    // if(cnt > 0)res += EIMRec(G, ans, update, stack_V, k, size + 1, marge);
     else empty_edge++;
     for (;cnt > 0; cnt--)G.undo();
   }
   //for counting
-  if(empty_edge > 0)
-    res += EIMRec(G, ans, update, stack_V, k, size + 1, marge*empty_edge);
+  // if(empty_edge > 0)
+  //   res += EIMRec(G, ans, update, stack_V, k, size + 1, marge*empty_edge);
   
   for (int i = 0; i < num_children; i++) G.undo();
   res += EIMRec(G, ans, update, stack_V, k, size, marge); // 0-child

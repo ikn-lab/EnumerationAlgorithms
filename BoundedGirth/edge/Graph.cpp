@@ -18,7 +18,7 @@ void Graph::init(std::vector<std::vector<edge> > _G){
   std::vector<edge> ve(m);
   edge2vertex.resize(m);
   for (int i = 0; i < n; i++) {
-    for (int j = 0; j < _G[i].size(); j++) {
+    for (int j = 0; j < (int)_G[i].size(); j++) {
       if(_G[i][j].from != i)std::swap(_G[i][j].from, _G[i][j].to);
       int id = _G[i][j].id;
       ve[id] = _G[i][j];

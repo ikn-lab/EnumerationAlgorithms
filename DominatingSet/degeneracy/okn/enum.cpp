@@ -61,9 +61,9 @@ std::vector<bigint> EDSMain(Graph &g){
   std::vector<bigint> res(g.size() + 1, 0);
   std::vector<int> count(g.size() + 1, 0);
   RecDS(g, res, count, g.size());
-  for (int i = 0; i < count.size(); i++) {
-    std::cout << "count[" << i << "]:";
-    std::cout << count[i] << std::endl;
-  }
+  // for (int i = 0; i < count.size(); i++) {
+  //   std::cout << "count[" << i << "]:";
+  //   std::cout << count[i] << std::endl;
+  // }
   return res;
 }

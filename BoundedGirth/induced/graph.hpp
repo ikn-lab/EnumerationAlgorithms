@@ -1,42 +1,38 @@
 #ifndef __GRAPH__
 #define __GRAPH__
-
 #include<vector>
-#include<stack>
-#include<tuple>
-#include<set>
-using bigint = long long int;
+
+#include"List.hpp"
+#include"Element.hpp"
+
+using pii = std::pair<int, int>;
 
 class Graph{
 public:
-  Graph(int n, int _k){
-    g.resize(n), used.resize(n, false), k = _k;
-    solution_size = 0;
-    m.resize(n, std::vector<int>(n, 1e9));
-    for (int i = 0; i < n; i++) m[i][i] = 0;
-    ms = m;
-  }
   Graph(){};
-  void AddEdge(int u, int v);
-  void NextCand(int v);
-  int size(){return g.size();};
-  int CurrentSolutionSize(){return solution_size;};
-  void erase(int v){used[v] = true;};
-  void restore(int v);
-  std::vector<int>& operator[](const int v){return g[v];};
-  std::set<int> cand, s;
+  Graph(std::vector<std::vector<edge> > _G){init(_G);};
+  void init(std::vector<std::vector<edge> > _G);
+  inline int size(){return n;}
+  inline int edgeSize(){return current_edge_size;}
+  inline List<edge>& operator[](const int id){return G[id];}
+  int RemoveEdge(int id, int x = -1);
+  int RemoveVertex(int id);
+  void undo();
+  inline int begin(){return vlist.GetNext(n);}
+  inline int end(){return n;}
+  inline int GetNext(int id){return vlist.GetNext(id);};
+  inline int GetPrev(int id){return vlist.GetPrev(id);};
+  inline int GetDeg(int id){return G[id].size();};
+  inline edge GetEdge(int id){return elist[id];};
   void print();
-  std::vector<bool> used;
-private:
-  int k, solution_size;
-  void update1(int v);
-  void update2(int v);
-  void updateCand(int v);
-  int findSecondMininum(int from, int to);
-  std::vector<std::vector<int> > g, m, ms;
-  std::stack<std::tuple<int, int, int> > st1, st2;
-  std::stack<int> stv;
-  // std::vector<bool> used;
+  // int begin(){return G[n]}
+protected:
+  int n, m, current_edge_size = 0, head;
+  std::vector<List<edge> > G;
+  List<int> vlist;
+  List<edge> elist;
+  std::vector<pii> pos;//min(from, to): first, max(from, to):second
+  std::vector<int> next;  
 };
 
 #endif // __GRAPH__
