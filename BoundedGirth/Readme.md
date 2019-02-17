@@ -1,7 +1,7 @@
 # Implemetations 
 n: the number of vertices, m: the number of edges. 
 
-- <font face="'Century Gothic', Computer Modern Typewriter">OSedge</font>: 
+- <font face='Impact','Century Gothic','Computer Modern Typewriter'>OSedge</font>: 
 	- Outputs: All subgraphs with girth k. 
 	- Complexity: amortized O(Poly(n)) time and O(Poly(n)) space. 
 - edge: 
