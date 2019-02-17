@@ -5,8 +5,8 @@
 using namespace std;
 
 void SwapAndStack::
-init(Graph &g){
-  G  = g;
+init(Graph &G_){
+  G  = G_;
   tp = topoSort(G);
 }
 

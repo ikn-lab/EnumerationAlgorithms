@@ -49,13 +49,12 @@ int main(int argc, char *argv[]){
   eds.Enumerate();
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
-  std::cout << "elapsed time = "
-            << std::chrono::duration_cast<std::chrono::milliseconds>(diff).count()
-            << " msec."
+  std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(diff).count()
             << std::endl;  
   eds.print();
   std::cout << "time:"
             << std::chrono::duration_cast<std::chrono::milliseconds>(eds.time).count()
             << std::endl;
+  //msec
   return 0;
 }

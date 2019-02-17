@@ -69,7 +69,7 @@ bigint CallAllChildren(Graph &G,
     res += EIMRec(G, ans, update, stack_V, k, size + 1, marge);
     // for counting
     // if(cnt > 0)res += EIMRec(G, ans, update, stack_V, k, size + 1, marge);
-    else empty_edge++;
+    // else empty_edge++;
     for (;cnt > 0; cnt--)G.undo();
   }
   //for counting
@@ -89,20 +89,28 @@ bigint EIMRec(Graph &G,
               int k, 
               bigint size,
               bigint marge){
+  // std::cout << size << std::endl;
   // std::cout << "pivot:" << G.MaximumDeg() << std::endl;
-  int maxi = G.GetDeg(G.MaximumDeg()),
-    mini = G.GetDeg(G.MinimumDeg());
+  // int maxi = G.GetDeg(G.MaximumDeg()),
+  //   mini = G.GetDeg(G.MinimumDeg());
   // if(maxi == 1 and mini == 1 and G.edgeSize() + size < k){
   //   ans[size] += marge;
   //   return marge;
   // }
-  
-  if(G.size() == 0 or
-     G.size() - maxi < (k - size - 1)*mini or 
-     (maxi == 1 and mini == 1 and G.edgeSize() + size < k) or 
-     (maxi == 2 and mini == 1 and G.GetDegNum(2) + 1 < 3*(k - size - (G.GetDegNum(1)>>1))) or
-     (maxi == 2 and mini == 2 and G.edgeSize() < 3*(k - size)) or
-     (maxi == 3 and 3*(3*G.GetDegNum(3) + G.GetDegNum(1)) + 2*G.GetDegNum(2) + 2 < 6*(k - size))){
+  // std::cout << G.size() << std::endl;
+  // G.print();
+  // std::cout << std::endl;
+  // std::cout << std::endl;
+  // std::cout << std::endl;
+  // std::cout << std::endl;
+  // std::cout << std::endl;
+  if(G.size() == 0) {
+  // if(G.size() == 0 or
+  //    G.size() - maxi < (k - size - 1)*mini or 
+  //    (maxi == 1 and mini == 1 and G.edgeSize() + size < k) or 
+  //    (maxi == 2 and mini == 1 and G.GetDegNum(2) + 1 < 3*(k - size - (G.GetDegNum(1)>>1))) or
+  //    (maxi == 2 and mini == 2 and G.edgeSize() < 3*(k - size)) or
+  //    (maxi == 3 and 3*(3*G.GetDegNum(3) + G.GetDegNum(1)) + 2*G.GetDegNum(2) + 2 < 6*(k - size))){
     ans[size] += marge;
     return marge;
   }
@@ -113,6 +121,6 @@ bigint EIMRec(Graph &G,
 
 bigint EIM(Graph &G, std::vector<bigint> &ans, int k){
   FixedQueue<pii> update(20*G.size() + 10);
-  FixedStack<int> stack_V(20*G.edgeSize() + 10);
+  FixedStack<int> stack_V(200*G.edgeSize() + 10);
   return EIMRec(G, ans, update, stack_V, k);
 }

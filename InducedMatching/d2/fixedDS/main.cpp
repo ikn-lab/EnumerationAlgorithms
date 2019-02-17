@@ -48,18 +48,18 @@ int main(int argc, char *argv[]){
     g[i].push_back(edge(-1,-1,-1,-1,0,1));
   }
   g.dist.resize(n, 1e9);
-
+  std::cout << n << " " << m << std::endl;
   std::vector<bigint> ans(n, 0);
   auto start = std::chrono::system_clock::now();
   std::cout << EIMMain(addlist, g, ans) << std::endl;
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
   printf("%lld\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
-  // for (int i = 0; i < n; i++) {
-  //   if(ans[i] == 0)break;
-  //   printf("%2d ", i);
-  //   std::cout << ans[i] << std::endl;
-  // }
+  for (int i = 0; i < n; i++) {
+    if(ans[i] == 0)break;
+    // printf("%2d ", i);
+    std::cout << ans[i] << std::endl;
+  }
   // std::cout << "density:" << (double)m/n << std::endl;
   return 0;
 }

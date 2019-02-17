@@ -13,7 +13,7 @@
 typedef std::pair<int, int> pii;
 typedef std::pair<int, pii> piii;
 
-std::mt19937 mt((int)time(0));
+std::mt19937 mt(114);
 
 void randomGraph(std::ofstream &output_file, int n, int degeneracy){
   int cnt = 0;

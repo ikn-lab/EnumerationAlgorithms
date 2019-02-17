@@ -39,5 +39,4 @@ Search(FILE *output_file){
   std::cout << counter << std::endl;
   return;
 }
-
 #endif

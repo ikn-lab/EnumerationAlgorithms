@@ -150,9 +150,10 @@ bool EBGIterator::next(bool isBackTrack) {
   // if(density.GetNume()*sol_size < solution.size()*density.GetDeno()){
   //   density = Fraction{solution.size(), sol_size};
   //   dense_solution_size = 0;
-  //   for (int i = solution.begin(); i != solution.end(); i = solution.GetNext(i))
-  //     dentist_solution[dense_solution_size++] = solution[i];
-  // }
+    // for (int i = solution.begin(); i != solution.end(); i = solution.GetNext(i))
+    //   std::cout << solution[i] << " ";
+    // std::cout << std::endl;
+  
   if(loop >= m)return false;//end
   //root iteration
   if(isBackTrack){

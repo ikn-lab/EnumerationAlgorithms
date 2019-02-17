@@ -41,20 +41,18 @@ int main(int argc, char *argv[]){
     // m++;
   }
   // g.print();
-  std::cout << "n:" << g.size() << std::endl;
-  
   auto start = std::chrono::system_clock::now();
   std::vector<bigint> ans = ELGMain(g);
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
-  printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
+  printf("%lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
   bigint sum = 0;
   for(int i = 0; i < (int)ans.size(); i++) {
     sum += ans[i];
   }
   std::cout << sum << std::endl;
   for(int i = 0; i < (int)ans.size(); i++) {
-    printf("%2d ", i);
+    // printf("%2d ", i);
     std::cout << ans[i] << std::endl;
     sum += ans[i];
   }

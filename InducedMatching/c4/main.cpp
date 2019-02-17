@@ -44,17 +44,18 @@ int main(int argc, char *argv[]){
     m++;
   }
   Graph G(_G);
-  std::vector<bigint> ans(n/2, 0);
+  std::vector<bigint> ans(n, 0);
   auto start = std::chrono::system_clock::now();
   bigint solution = EIM(G, ans, k);
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
-  printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
-  std::cout << "the number of induced matching:" << (solution) << std::endl;
+  printf("%lld\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
+  std::cout << (solution) << std::endl;
+  // std::cout << "the number of induced matching:" << (solution) << std::endl;
   bigint sum = 0;
   for(int i = 0; i < ans.size(); i++) {
     if(ans[i] == 0)break;
-    printf("%2d ", i);
+    // printf("%2d ", i);
     std::cout << (ans[i]) << std::endl;
     sum += ans[i];
   }

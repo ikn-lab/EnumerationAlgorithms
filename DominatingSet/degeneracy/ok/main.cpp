@@ -42,8 +42,8 @@ int main(int argc, char *argv[]){
   }
   std::cout << n << " " << m << std::endl;
   EDS eds(H);
-  std::cout << "degeneracy:" << eds.GetDegeneracy() << std::endl;
-  std::cout << "n:" << eds.size() << std::endl;
+  // std::cout << "degeneracy:" << eds.GetDegeneracy() << std::endl;
+  // std::cout << "n:" << eds.size() << std::endl;
   
   auto start = std::chrono::system_clock::now();
   eds.Enumerate();
@@ -53,16 +53,9 @@ int main(int argc, char *argv[]){
             << std::chrono::duration_cast<std::chrono::milliseconds>(diff).count()
             << " msec."
             << std::endl;  
-  eds.print();
-  std::cout << "time:"
-            << std::chrono::duration_cast<std::chrono::milliseconds>(eds.time).count()
-            << std::endl;
+  // eds.print();
+  // std::cout << "time:"
+  //           << std::chrono::duration_cast<std::chrono::milliseconds>(eds.time).count()
+  //           << std::endl;
   return 0;
 }
-
-
-
-
-
-
-

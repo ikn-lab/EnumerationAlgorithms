@@ -45,6 +45,7 @@ bigint RecIM(EdgeList &addlist, Graph &g, std::vector<bigint> &ans, int p = 1, i
   que.push(pii(0 ,addlist[p].to));
   g.dist[addlist[p].from] = 0;
   g.dist[addlist[p].to  ] = 0;
+
   // std::cout << "hoge" << std::endl;
   std::queue<int> visited;
   visited.push(addlist[p].from);
@@ -58,7 +59,7 @@ bigint RecIM(EdgeList &addlist, Graph &g, std::vector<bigint> &ans, int p = 1, i
     int v = que.front().second;
     int dist = que.front().first;
     que.pop();
-    if(dist >= 2)continue;
+    if(dist  >= 2)continue;
     for (int i = g[v][0].next; i < g[v].size() - 1; i+=g[v][i].next) {
       edge &e = g[v][i];
       if(g.dist[e.to] <= dist)continue;

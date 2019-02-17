@@ -5,62 +5,47 @@
 #include <boost/multiprecision/cpp_int.hpp>
 
 typedef boost::multiprecision::cpp_int bigint;
+using pii = std::pair<int, int>;
+using lli = long long int;
 
-std::unordered_set<int> id;
-std::queue<pii> que;
+bool checkIM(std::vector<edge> &m, Graph &G, std::vector<int> &solution, int size){
+  std::vector<int> start_point(G.size(), -1);
+  for (int i = 0; i < size; i++) {
+    int pos = solution[i];
+    edge e = m[pos];
+    if(start_point[e.from] >= 0 or
+       start_point[e.to  ] >= 0) return false;
+    start_point[e.from] = e.to;
+    start_point[e.to  ] = e.from;
+    pos++;
+  }
+  for (int i = 0; i < start_point.size(); i++) {
+    if(start_point[i] < 0)continue;
+    for (int j = 0; j < G[i].size(); j++) {
+      int u = G[i][j].to;
+      if(start_point[u] >= 0 and i != start_point[u]){
+        return false; 
+      }
+    }
+  }
+  return true;
+}
 
 bigint EnumIMatch(std::vector<edge> &m,
-                  std::vector<int> &addlist,
                   std::vector<int> &ans,
-                  Graph &g,
-                  size_t p,
-                  int IMsize){
-  if(p == addlist.size()){
-    ans[IMsize]++;
-    return 1;
-  }
-  
-  if(addlist[p] > 0){
-    return EnumIMatch(m, addlist, ans, g, p + 1, IMsize);
-  }
-  
-  que.push(pii(0, m[p].from));
-  que.push(pii(0 ,m[p].to));
-  while(not que.empty()){
-    int v = que.front().second;
-    int dist = que.front().first;
-    que.pop();
-    if(dist > 1)continue;
-    for (size_t i = 0; i < g[v].size(); i++) {
-      edge &e = g[v][i];
-      que.push(pii(dist + 1, e.to));
-      id.insert(e.id);
+                  Graph &G,
+                  std::vector<int> &solution,
+                  std::vector<int> &count,
+                  int size,
+                  int depth){
+  int res = 0;
+  for (lli i = 0; i < (1LL<<m.size()); i++) {
+    // std::cout << i << std::endl;
+    int size = 0;
+    for (lli j = 0; j < G.size(); j++) {
+      if((i&(1LL<<j)))solution[size++] = j;
     }
+    if(checkIM(m, G, solution, size)) ans[size]++, res++;;
   }
-  for (auto i:id) {
-    addlist[i]++;
-  }
-  id.clear();
-  bigint res = EnumIMatch(m, addlist, ans, g, p + 1, IMsize + 1);
-  que.push(pii(0, m[p].from));
-  que.push(pii(0 ,m[p].to));
-  while(not que.empty()){
-    int v = que.front().second;
-    int dist = que.front().first;
-    que.pop();
-    if(dist > 1)continue;
-    for (size_t i = 0; i < g[v].size(); i++) {
-      edge &e = g[v][i];
-      que.push(pii(dist + 1, e.to));
-      id.insert(e.id);
-    }
-  }
-  for (auto i:id) {
-    addlist[i]--;
-  }
-  id.clear();
-  addlist[m[p].id]++;
-  res += EnumIMatch(m, addlist, ans, g, p + 1, IMsize);
-  addlist[m[p].id]--;
   return res;
 }

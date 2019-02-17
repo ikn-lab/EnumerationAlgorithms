@@ -142,7 +142,7 @@ bool checkDominatingSet(Graph &G, List<int> &solution){
 void EDS::Enumerate(){
   //大きさがsolution.size()のdominating setの発見
   result[solution.size()]++;
-
+  
   //FW_cnt  : updateDomListでFW中の削除した辺の本数
   //cand_cnt: backtrackする際のcandをundoする回数
   //C_cnt   : updateCandでcandがremoveされた回数
@@ -303,29 +303,30 @@ int EDS::updateDomList(int v, int size){
 void EDS::print(){
   int sum = 0, n = G.size();
   for (int i = 0; i <= n; i++) sum += result[i];
-  std::cout << "sum:" << sum << std::endl;
-  std::cout << "size:" << std::endl;
+  std::cout << sum << std::endl;
+  // std::cout << "size:" << std::endl;
   for (int i = 0; i <= n; i++) {
-    std::cout << i << ":" << result[i] << std::endl;
-  }
-  std::cout << "Graph G" << std::endl;
-  for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) {
-    std::cout << i << ":";
-    for (int j = G[i].begin(); j != G[i].end(); j = G[i].GetNext(j)) {
-      std::cout <<  G[i][j].to << " ";
-    }
-    std::cout << std::endl;
-  }
-  std::cout << "dominated: ";
-  for (int i = 0; i < dominated.size(); i++) {
-    std::cout << dominated[i] << " ";
+    std::cout << result[i] << std::endl;
   }
   std::cout << std::endl;
-  std::cout << "counter  : ";
-  for (int i = 0; i < dominated.size(); i++) {
-    std::cout << counter[i] << " ";
-  }
-  std::cout << std::endl;
+  // std::cout << "Graph G" << std::endl;
+  // for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) {
+  //   std::cout << i << ":";
+  //   for (int j = G[i].begin(); j != G[i].end(); j = G[i].GetNext(j)) {
+  //     std::cout <<  G[i][j].to << " ";
+  //   }
+  //   std::cout << std::endl;
+  // }
+  // std::cout << "dominated: ";
+  // for (int i = 0; i < dominated.size(); i++) {
+  //   std::cout << dominated[i] << " ";
+  // }
+  // std::cout << std::endl;
+  // std::cout << "counter  : ";
+  // for (int i = 0; i < dominated.size(); i++) {
+  //   std::cout << counter[i] << " ";
+  // }
+  // std::cout << std::endl;
 }
 
 void EDS::printDomList(){

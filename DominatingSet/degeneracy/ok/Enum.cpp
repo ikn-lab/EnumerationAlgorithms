@@ -44,27 +44,27 @@ EDS::EDS(std::vector<std::vector<edge> > H){
   for (int i = 0; i < G.size(); i++) tmp.push_back(i);
   solution.init(tmp), cand.init(tmp);
   for (int i = G.begin(); i != G.end(); i = G.GetNext(i))domList[i].init(H[i]);
-  std::cout << "G      :" << std::endl;
-  for (int i = 0; i < n; i++) {
-    std::cout << i << " ";
-  }
-  std::cout << std::endl;
-  std::cout << "trans G:" << std::endl;
-  for (int i = 0; i < n; i++) {
-    std::cout << ord[i] << " ";
-  }
-  std::cout << std::endl;
-  for (int i = 0; i < n; i++) {
-    std::cout << ord[i] << ": ";
-    for (int j = G[i].begin(); j < G[i].end(); j = G[i].GetNext(j)) {
-      std::cout << ord[G[i][j].to] << " ";
-    }
-    std::cout << std::endl;
-  }
-  std::cout << "G: " << std::endl;
-  G.print();
-  std::cout << "FW: " << std::endl;
-  FW.print();
+  // std::cout << "G      :" << std::endl;
+  // for (int i = 0; i < n; i++) {
+  //   std::cout << i << " ";
+  // }
+  // std::cout << std::endl;
+  // std::cout << "trans G:" << std::endl;
+  // for (int i = 0; i < n; i++) {
+  //   std::cout << ord[i] << " ";
+  // }
+  // std::cout << std::endl;
+  // for (int i = 0; i < n; i++) {
+  //   std::cout << ord[i] << ": ";
+  //   for (int j = G[i].begin(); j < G[i].end(); j = G[i].GetNext(j)) {
+  //     std::cout << ord[G[i][j].to] << " ";
+  //   }
+  //   std::cout << std::endl;
+  // }
+  // std::cout << "G: " << std::endl;
+  // G.print();
+  // std::cout << "FW: " << std::endl;
+  // FW.print();
   for (int i = G.begin(); i != G.end(); i = G.GetNext(i)) {
     back[0][i] = G[i].back().to;
     back[1][i] = G[i][G[i].GetPrev(G[i].GetPrev(G[i].end()))].to;
@@ -125,6 +125,7 @@ bool checkDominatingSet(Graph &G, List<int> &solution){
 
 void EDS::Enumerate(){
   result[solution.size()]++;
+  sum++;
   // if(not checkDominatingSet(G, solution)){
   //   std::cout << "error. " << std::endl;
   //   printSolution();
@@ -171,8 +172,9 @@ void EDS::Enumerate(){
       Enumerate();
     }else{
       result[solution.size()]++;
-      // std::cout << "backtrack" << std::endl;
+      sum++;
     }
+    if(sum >= 1e5) return;
     depth--;
     solution.undo();
     for (int j = 0; j < store; j++) cand.undo();

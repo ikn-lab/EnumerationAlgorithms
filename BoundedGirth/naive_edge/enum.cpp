@@ -79,10 +79,10 @@ std::vector<bigint> ELGMain(Graph &g){
   ans.resize(m + 1, 0);
   for (int i = 1; i < (1LL<<m); i++) {
     int size = 0;
-    if(i == (1LL<<m)/16)std::cout << "1/16" << std::endl;
-    if(i == (1LL<<m)/8)std::cout << "1/8" << std::endl;
-    if(i == (1LL<<m)/4)std::cout << "1/4" << std::endl;
-    if(i == (1LL<<m)/2)std::cout << "1/2" << std::endl;
+    // if(i == (1LL<<m)/16)std::cout << "1/16" << std::endl;
+    // if(i == (1LL<<m)/8)std::cout << "1/8" << std::endl;
+    // if(i == (1LL<<m)/4)std::cout << "1/4" << std::endl;
+    // if(i == (1LL<<m)/2)std::cout << "1/2" << std::endl;
     for (int j = 0; j < m; j++) {
       pii p = g.edge_id[j].first;
       pii q = g.edge_id[j].second;

@@ -1,7 +1,7 @@
 #random grpah generatorの仕様
 
 ## コンパイル
-g++ generator.cpp -o generator
+g++ generator.cpp unionFind.cpp -o generator
 
 ## 使い方
 

@@ -59,7 +59,7 @@ int main(int argc, char *argv[]){
   ans = new bigint[m + 1];
   for (int i = 0; i <= m; i++) ans[i] = 0;
   EBGIterator EBG(G, k);
-  std::cout << "run" << std::endl;
+  // std::cerr << "run" << std::endl;
   if(prune == "-p"){
     std::cout << "prune. " << std::endl;
     while(EBG.next()) {
@@ -71,24 +71,27 @@ int main(int argc, char *argv[]){
       ans[EBG.solution.size()]++;
     }
   }else{
-    while(EBG.next()) ans[EBG.solution.size()]++;
+    while(EBG.next()){
+      ans[EBG.solution.size()]++;
+    }
   }
-  std::cout << "dentist solution" << std::endl;
-  EBG.density.print();
-  for (int i = 0; i < EBG.dense_solution_size; i++) {
-    std::cout << EBG.dentist_solution[i].from << " " <<
-              EBG.dentist_solution[i].to << std::endl;
-  }
+  // std::cout << "dentist solution" << std::endl;
+  // EBG.density.print();
+  // for (int i = 0; i < EBG.dense_solution_size; i++) {
+  //   std::cout << EBG.dentist_solution[i].from << " " <<
+  //             EBG.dentist_solution[i].to << std::endl;
+  // }
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
-  printf("elapsed time = %lld msec.\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
+  printf("%lld\n", std::chrono::duration_cast<std::chrono::milliseconds>(diff).count());
   bigint sum = 0;
   for(int i = 0; i < m + 1; i++) {
     sum += ans[i];
   }
   std::cout << sum << std::endl;
+  std::cout << m << std::endl;
   for(int i = 0; i < m + 1; i++) {
-    printf("%2d ", i);
+    fprintf(stdin, "%2d ", i);
     std::cout << ans[i] << std::endl;
     sum += ans[i];
   }

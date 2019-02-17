@@ -11,52 +11,50 @@
 
 #include"unionFind.hpp"
 typedef std::pair<int, int> pii;
-typedef std::pair<int, pii> piii;
+std::mt19937 mt(114);
 
-std::mt19937 mt((int)time(0));
-
-bool isFourCycle(std::vector<std::vector<int> > &G){
+bool isFourCycle(std::vector<std::vector<int> > &G, pii e){
   int n = G.size();
-  for (int i = 0; i < n; i++) {
-    for (int j = i + 1; j < n; j++) {
-      std::set<int> X, Y;
-      for (int k = 0; k < G[i].size(); k++) X.insert(G[i][k]);
-      for (int k = 0; k < G[j].size(); k++) Y.insert(G[j][k]);
-      int cnt = 0;
-      for (int v: X) cnt += Y.count(v);
-      if(cnt >= 2)return true;
+  std::vector<int> X, Y;
+  for (int i = 0; i < n; i++){
+    if(G[e.first ][i] == 1 and i != e.first and i != e.second) X.push_back(i);
+    if(G[e.second][i] == 1 and i != e.first and i != e.second) Y.push_back(i);
+  }
+  for (int i = 0; i < X.size(); i++) {
+    for (int j = 0; j < Y.size(); j++) {
+      if(X[i] == Y[j])continue;
+      if(G[X[i]][Y[j]] == 1) return true;
     }
   }
   return false;
 }
 
 void noFourCycleGraph(std::ofstream &output_file, int n, double density){
-  std::set<pii> edge;
+  std::vector<pii> edge;
   int cnt = 0;
   bool connected = false;
-  std::vector<std::vector<int> > G(n);
   while(not connected){
-    for (int i = 0; i < n; i++) G[i].clear();
+    std::vector<std::vector<int> > G(n, std::vector<int>(n, 0));
+    for (int i = 0; i < n; i++) G[i][i] = 1;
     edge.clear();
     connected = true;
     UnionFind uf(n);
     while((double)edge.size()/n < density){
-      if(cnt > 5000)break;
+      if(cnt > 10000)break;
       cnt++;
-      pii add = pii(mt()%n, mt()%n);
-      pii rev = pii(add.second, add.first);
-      if(add.first == add.second)continue;
-      if(edge.find(add) == edge.end() and
-         edge.find(rev) == edge.end()){
-        G[add.first].push_back(add.second);
-        G[rev.first].push_back(rev.second);
-        if(isFourCycle(G) == false){
-          edge.insert(add);
+      int x = mt()%n, y = mt()%n;
+      if(x == y) continue;
+      pii add = pii(std::min(x, y), std::max(x, y));
+      if(G[add.first][add.second] == 0) {
+        G[add.first][add.second] = 1;
+        G[add.second][add.first] = 1;
+        if(not isFourCycle(G, pii(x, y))){
+          edge.push_back(add);
           cnt = 0;
           uf.unite(add.first, add.second);
         }else{
-          G[add.first].pop_back();
-          G[rev.first].pop_back();
+          G[add.first][add.second] = 0;
+          G[add.second][add.first] = 0;
         }
       }
     }
@@ -78,7 +76,7 @@ int main(int argc, char *argv[]){
     exit(1);
   }
   std::string name;
-  for (int i = 1; i <= 7; i++) {
+  for (int i = 1; i <= 1; i++) {
     char tmp[5];
     sprintf(tmp, "%02d", i);
     std::string id = tmp;

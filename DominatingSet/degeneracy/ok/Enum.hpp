@@ -38,6 +38,7 @@ private:
   std::vector<int> ord, reverse;
   std::vector<std::vector<int> > back;
   std::vector<bigint> result;
+  bigint sum = 0;
   int depth = 0, degeneracy;
   std::vector<FixedQueue<int> > diff;//0: a tail, 1: a next of a tail
   List<int> solution, cand;

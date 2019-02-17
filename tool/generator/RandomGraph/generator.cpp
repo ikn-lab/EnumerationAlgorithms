@@ -8,60 +8,42 @@
 #include<fstream>
 #include<cstring>
 #include<ctime>
+
+#include"unionFind.hpp"
 typedef std::pair<int, int> pii;
-typedef std::pair<int, pii> piii;
 
-std::mt19937 mt((int)time(0));
+std::mt19937 mt(114);
 
-bool isConnected(std::set<pii> &edge){
-  std::set<int> vertex;
-  for (auto e: edge){
-    vertex.insert(e.first);
-    vertex.insert(e.second);
-  }
-  for (auto e: edge) {
-    if(vertex.count(e.first) == 1 and
-       vertex.count(e.second) == 0){
-      vertex.erase(e.first);      
-    }else if(vertex.count(e.first) == 0 and
-             vertex.count(e.second) == 1){
-      vertex.erase(e.second);      
-    }else{
-      vertex.erase(e.first);
-    }
-  }
-  return vertex.size() == 1;
-}
 
 void randomGraph(std::ofstream &output_file, int n, double density = -1){
   if(density == -1)density = sqrt(n)*n/2;
   int cnt = 0;
-  std::set<pii> edge;
-  while(1){
+  std::vector<pii> edge;
+  bool connected = false;
+  while(not connected){
+    connected = true;
+    UnionFind uf(n);
+    std::vector<std::vector<int> > G(n, std::vector<int>(n, 0));
+    for (int i = 0; i < n; i++) G[i][i] = 1;
     edge.clear();
-    while((double)edge.size()/n < density){    
-      if(cnt > 5000){
-        break;
-      }
-      pii add = pii(mt()%n, mt()%n);
-      if(add.first == add.second){
+    while(2*edge.size() < density*n){    
+      if(cnt > 5000) break;
+      int x = mt()%n, y = mt()%n;
+      pii add = pii(std::min(x, y), std::max(x, y));
+      if(G[add.first][add.second] == 1){
         cnt++;
         continue;
       }
-      pii rev = pii(add.second, add.first);
-      if(edge.find(add) != edge.end() or
-         edge.find(rev) != edge.end()){
-        cnt++;
-        continue;
-      }
-      edge.insert(add);
+      G[add.first][add.second] = 1;
+      G[add.second][add.first] = 1;
+      edge.push_back(add);
+      uf.unite(add.first, add.second);
       cnt = 0;
     }
-    if(isConnected(edge))break;
+    for (int i = 0; i < n; i++) connected &= uf.same(0, i);
   }
   output_file << n << " " << edge.size() << std::endl;
   for (auto add: edge) {
-    // output_file << add.first << " " << add.second << " " << mt()%150 << std::endl;
     output_file << add.first << " " << add.second << std::endl;
   }
 }
@@ -77,11 +59,11 @@ int main(int argc, char *argv[]){
   }
   std::string name;
   std::cout << "Generate random graphs." << std::endl;
-  for (int i = 1; i <= 7; i++) {
+  for (int i = 1; i <= 1; i++) {
     char tmp[5];
     sprintf(tmp, "%02d", i);
     std::string id = tmp;
-    name = "random" + std::to_string(n).substr(0, 3) + "_" + std::to_string(density).substr(0, 3) + "_" + id + ".in";
+    name = "randomGraph_" + std::to_string(n).substr(0, 3) + "_" + std::to_string(density).substr(0, 3) + "_" + id + ".in";
     std::cout << name << std::endl;
     // std::cout << "generate random case" << std::endl;
     std::ofstream output_file(name.c_str());

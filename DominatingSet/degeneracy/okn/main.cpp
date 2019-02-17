@@ -31,47 +31,49 @@ int main(int argc, char *argv[]){
   int n, m = 0;
   std::string tmp;
   getline(ist, tmp);
-  sscanf(tmp.data(), "%d %m", &n, &m);
+  sscanf(tmp.data(), "%d %d", &n, &m);
   Graph g(n);
+  m = 0;
   while(getline(ist, tmp)){
     int u, v;
     sscanf(tmp.data(), "%d %d", &u, &v);
     g.AddEdge(u, v);
+    m++;
   }
   // g.DegenerateOrder();
   for (int i = 0; i < g.size(); i++) {
     g.dominated[i] = g[i].size() + 1;
   }
   
-  std::cout << n << " " << m << std::endl;
   // g.print();
-  std::cout << "degeneracy:" << g.degeneracy << std::endl;
+  // std::cout << "degeneracy:" << g.degeneracy << std::endl;
   std::cout << "n:" << g.size() << std::endl;
-  std::cout << "dominated:";
-  for (int i = 0; i < n; i++) {
-    std::cout << g.dominated[i] << " ";
-  }
-  std::cout << std::endl;
+  std::cout << m << std::endl;
+  // std::cout << "dominated:";
+  // for (int i = 0; i < n; i++) {
+  //   std::cout << g.dominated[i] << " ";
+  // }
+  // std::cout << std::endl;
   // g.sort();
   
   auto start = std::chrono::system_clock::now();
   std::vector<bigint> ans = EDSMain(g);
   auto end = std::chrono::system_clock::now();
   auto diff = end - start;
-  std::cout << "elapsed time = "
-            << std::chrono::duration_cast<std::chrono::milliseconds>(diff).count()
-            << " msec."
+  // std::cout <<  std::chrono::duration_cast<std::chrono::milliseconds>(diff).count()
+  //           << std::endl;  
+  std::cout <<  "time:" << std::chrono::duration_cast<std::chrono::milliseconds>(diff).count()
             << std::endl;  
   bigint sum = 0;
   for(int i = 0; i < ans.size(); i++) {
     sum += ans[i];
   }
   std::cout << sum << std::endl;
-  for(int i = 0; i < ans.size(); i++) {
-    printf("%2d ", i);
-    std::cout << ans[i] << std::endl;
-    sum += ans[i];
-  }
-  g.print();
+  // for(int i = 0; i < ans.size(); i++) {
+  //   // printf("%2d ", i);
+  //   std::cout << ans[i] << std::endl;
+  //   sum += ans[i];
+  // }
+  // g.print();
   return 0;
 }

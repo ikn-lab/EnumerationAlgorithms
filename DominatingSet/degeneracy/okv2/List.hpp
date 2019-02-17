@@ -73,13 +73,13 @@ void List<T>::init(int size) {
 
 template<typename T>
 int List<T>::remove(int id){
+  if(removed[id])return prev[id];
 #ifdef DEBUG
   if(removed[id]){
     printf("%d is already removed.\n", id);
     std::exit(1);
   }
 #endif
-  if(removed[id])return prev[id];
   removed[id] = true;
   _size--;
   prev[next[id]] = prev[id];

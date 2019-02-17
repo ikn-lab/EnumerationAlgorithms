@@ -23,7 +23,7 @@ bool checkDominatingSet(Graph &G){
 }
 
 
-
+long long int sum = 0;
 void RecDS(Graph &g, std::vector<bigint> &res, std::vector<int> &count, int size, int depth = 0){
   count[depth]++;
   if(depth == g.size()){
@@ -32,8 +32,10 @@ void RecDS(Graph &g, std::vector<bigint> &res, std::vector<int> &count, int size
     //   exit(1);
     // }
     res[size]++;
+    sum++;
     return;
   }
+  if(sum >= 1e5)return;
   int v = g.size() - depth - 1;
   bool has_private = (g.dominated[v] == 1);
   for (int i = 0; i < g[v].size(); i++) {
@@ -61,9 +63,13 @@ std::vector<bigint> EDSMain(Graph &g){
   std::vector<bigint> res(g.size() + 1, 0);
   std::vector<int> count(g.size() + 1, 0);
   RecDS(g, res, count, g.size());
+  int sum = 0;
+  // for (int i = 0; i < count.size(); i++) sum += count[i];
+  // std::cout << sum << std::endl;
   // for (int i = 0; i < count.size(); i++) {
-  //   std::cout << "count[" << i << "]:";
+  //   // std::cout << "count[" << i << "]:";
   //   std::cout << count[i] << std::endl;
   // }
+  // std::cout << std::endl;
   return res;
 }

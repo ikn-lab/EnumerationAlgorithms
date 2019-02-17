@@ -24,7 +24,7 @@ double gettimeofday_sec(){
 
 
 int main(int argc, char *argv[]){
-  const int num_file = 5;
+  const int num_file = 3;
   if(argc != num_file){
     cerr << "Error : The number of input file is not " <<
       num_file << endl;
@@ -37,21 +37,14 @@ int main(int argc, char *argv[]){
     return 0;
   }
   //opening output files
-  FILE *naive, *rev, *swap;
-  if((naive = fopen(argv[2], "w")) == NULL){
+  FILE *output;
+  if((output = fopen(argv[2], "w")) == NULL){
     std::cerr << "can't write file open" << std::endl;
   }
-  if((rev = fopen(argv[3], "w")) == NULL){
-    std::cerr << "can't write file open" << std::endl;
-  }
-  if((swap = fopen(argv[4], "w")) == NULL){
-    std::cerr << "can't write file open" << std::endl;
-  }    
  
   int n, m;
   double t1, t2;//for time measurement
     
-  TopologicalOrderingEnumeration toe;
   SwapAndStack sas;
   Graph G;
 
@@ -66,33 +59,12 @@ int main(int argc, char *argv[]){
     G.AddEdge(to, from);
   }
   
-  toe.init(G);
   sas.init(G);
-  
-  std::cout << "initial state:" << std::endl;
-  toe.printState();
-
-  //naive calclation
-  std::cout << "naive enumeration" << std::endl;
-  t1 = gettimeofday_sec();
-  NaiveEnumeration(G, naive);
-  t2 = gettimeofday_sec();
-  std::cout << "time:" << t2 - t1 << std::endl;
-  std::cout << std::endl;
-
-
-  //reverse search
-  std::cout << "reverseSearch" << std::endl;
-  t1 = gettimeofday_sec();
-  toe.Search(rev);
-  t2 = gettimeofday_sec();
-  std::cout << "time:" << t2 - t1 << std::endl;
-  std::cout << std::endl;
 
   //O(1) enumeration 
   std::cout << "swapAndStack" << std::endl;
   t1 = gettimeofday_sec();
-  sas.Search(swap);
+  sas.Search(output);
   t2 = gettimeofday_sec();
   std::cout << "time:" << t2 - t1 << std::endl;
   std::cout << std::endl;
