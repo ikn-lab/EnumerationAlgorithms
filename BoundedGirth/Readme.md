@@ -1,10 +1,10 @@
 # Implemetations 
 n: the number of vertices, m: the number of edges. 
 
-- <font face="Courier">OSedge</font>: 
+- <font face="Computer Modern Typewriter">OSedge</font>: 
 	- Outputs: All subgraphs with girth k. 
 	- Complexity: amortized O(Poly(n)) time and O(Poly(n)) space. 
-- edge$: 
+- edge: 
 	- Outputs: All subgraphs with girth k. 
 	- Complexity: amortized O(n) time and O(n^3) space. 
 - induced:  
