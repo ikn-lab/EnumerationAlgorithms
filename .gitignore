@@ -1,4 +1,5 @@
 data
+*.xlsx
 *.DS_store
 *.out
 *.in
