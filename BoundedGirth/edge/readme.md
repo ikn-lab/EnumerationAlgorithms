@@ -1,6 +1,7 @@
 # README
 
-The implementation of enumeration algorithm for subgraphs with bounded girth. 
+The implementation of enumeration algorithm for subgraphs with bounded girth.   
+
 Publication: Kazuhiro Kurita, Kunihiro Wasa, Alessio Conte, Takeaki Uno, and Hiroki Arimura, "Efficient Enumeration of Subgraphs and Induced Subgraphs with Bounded Girth," The 29th International Workshop on Combinatorial Algorithm (IWOCA 2018), National University of Singapore, Singapore, Jul. 16-19, 2018. 
 
 * EBG: executable file
