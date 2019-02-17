@@ -1,7 +1,8 @@
+p.algo{font-family:sans-serif; }
 # Implemetations 
 n: the number of vertices, m: the number of edges. 
 
-- <font face="'Impact','Century Gothic','Computer Modern Typewriter'">OSedge</font>: 
+- <p class="algo">OSedge</class>: 
 	- Outputs: All subgraphs with girth k. 
 	- Complexity: amortized O(Poly(n)) time and O(Poly(n)) space. 
 - edge: 
