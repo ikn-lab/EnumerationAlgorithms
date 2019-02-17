@@ -1,5 +1,5 @@
-#Implemetations 
-$n$: the number of vertices, $m$: the number of edges. 
+# Implemetations 
+n: the number of vertices, m: the number of edges. 
 
 - $\texttt{OSedge}$: 
 	- Outputs: All subgraphs with girth $k$. 
