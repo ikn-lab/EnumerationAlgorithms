@@ -3,7 +3,6 @@
 The implementation of enumeration algorithm for subgraphs with bounded girth. 
 
 * EBG: executable file
-* 
 
 
 ## Run
