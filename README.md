@@ -1,1 +1,1 @@
-I upload implemented enumeration algorithms. 
+I uploaded implementations of enumeration algorithms. 
