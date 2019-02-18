@@ -1,11 +1,17 @@
-$\newcommand{\size}[1]{|#1|}$
-
-# EnumInducedMatching
-誘導マッチングを列挙するアルゴリズム．
-
-* naive:ならし$O(\size{E})$．中身は単純な二分法
-* d2: $O(d^2)$遅延時間 
-* catG7: ならし$O(1)$時間，ただし，入力グラフは内周が7以上である．
-* c4slow: ならし$O(1)$時間，ただし，入力グラフは$C_4$-freeグラフである．
-* c4fast: ならし$O(1)$時間，ただし，入力グラフは$C_4$-freeグラフである．効率良いメモリ管理を行っているので，定数倍が早い．**ただし，g++-8 (Homebrew GCC 8.1.0) 8.1.0でコンパイルするとセグメンテーションフォールトを起こす．g++-6 (Homebrew GCC 6.4.0_2) 6.4.0でコンパイルすると正しく動作する．**
-* c4: ならし$O(1)$時間，c4fastのバグを解決した．引数として整数値$k$を与えると$k$よりもサイズの大きな誘導マッチングはすべて発見し，それ以外の誘導マッチングは発見しないものが存在する．
+# Implementation 
+- *c4*
+  - Output: All induced matchings
+  - Complexity: amortized constant time for graphs without cycles with the length four and O(n + m) space. For general graphs, this implementation achieves amortized O(Δ^2) time. 
+  - Publication: Kazuhiro Kurita, Kunihiro Wasa, Takeaki Uno, and Hiroki Arimura, "Efficient Enumeration of Induced Matchings in a Graph without Cycles with Length Four," IEICE Transactions on Fundamentals of Electronics, Communications and Computer Sciences, Vol.E101.A, No.9, pp.1383-1391, 2018.
+- *c4initArray*, *c4fast*, *c4ptr*, and, *c4slow*
+	- The time and space complexity is same as c4.
+	- **Note**: *c4fast* has bugs. 
+- *d2*
+  - Output: All induced matchings
+  - Complexity: amortized O(Δ^2) time and O(n + m) space. 
+- *naive*
+  - Output: All induced matchings
+  - Complexity: O(2^m) total time and O(n + m) space. 
+- *onm*
+  - Output: All induced matchings
+  - Complexity: O(nm) total time and O(n + m) space. 
