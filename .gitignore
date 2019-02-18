@@ -3,3 +3,6 @@ data
 *.DS_store
 *.out
 *.in
+exp*
+*output
+*trash
